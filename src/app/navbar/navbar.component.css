@@ -1,0 +1,6 @@
+nav div {
+    margin: 0 1rem;
+}
+a.active-link {
+    color: darkred;
+}
