@@ -1,1 +1,31 @@
-<p>create-climberprofile works!</p>
+<div class="centeredComponent">
+    <form [formGroup]="profileForm"  >
+        <label for="name">Name: </label>
+        <input id="name" type="text" formControlName="name">
+
+
+
+        <label for="description">Profile Description: </label>
+        <input id="description" type="text" formControlName="description">
+
+ 
+
+        <label for="language">Language: </label>
+        <input id="language" type="text" formControlName="language">
+
+        <label for="gender">gender: </label>
+        <input id="gender" type="text" formControlName="gender">
+
+        <label for="notified">Want to be notified for a new Match: </label>
+        <input id="notified" type="text" formControlName="notified">
+
+        <label for="avatar">Avatar: </label>
+        <input id="avatar" type="text" formControlName="avatar">
+      </form>
+
+
+        <button type="button" class="button" (click)="cancel()">Cancel</button>
+        <button type="button" class="button" (click)="createProfile()">Create Profile</button>
+
+  </div>
+  

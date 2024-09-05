@@ -1,3 +1,23 @@
-<p>climberprofile works!</p>
-<br />
-<a routerLink="../contact" routerLinkActive="active-page">Contact Us</a>
+<div class="centeredComponent">
+    @if (this.climberProfile) {
+        <div >
+            <!--<p><strong>Climber id :</strong> {{this.climberProfile.id}}-->
+            <p><strong>name :</strong> {{this.climberProfile.name}}</p>
+            <p><strong>avatar :</strong> {{this.climberProfile.avatar}}</p>
+            <p><strong>genderId : </strong>{{this.climberProfile.genderId}}</p>
+            <p><strong>languageId : </strong>{{this.climberProfile.languageId}}</p>
+            <p><strong>climberUserId : </strong>{{this.climberProfile.climberUser}}</p>
+            <p><strong>notified : </strong>{{this.climberProfile.notified? "OUI": "NON"}}</p>
+            <p><strong>climberProfileDescription : </strong>{{this.climberProfile.climberProfileDescription}}</p>
+        </div>
+        <button class="button" (click)="openRubrique()" > Update Climber Profile</button> <br/>
+    }
+
+    @else{
+        <div > Va falloir creer un profile</div>
+        <button class="button" (click)="openRubrique()" > create Climber Profile</button> <br/>
+    }
+
+    
+    <a routerLink="../contact" routerLinkActive="active-page">Contact Us</a>
+</div>
