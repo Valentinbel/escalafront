@@ -1,13 +1,12 @@
 export class ClimberProfile {
     constructor(
         public id?: number,
-        public createdAt?: string,
-        public updatedAt?: string,
+        public name?: string, 
         public avatar?: string,
         public genderId?: number,
         public languageId?:number,
-        public climberUserId?: number,
-        public isNotified?: boolean,
-        public climberProfileDescription?: string
+        public climberUser?: Object, //////////////////
+        public notified?: boolean, // Pourquoi c'est pas isNotified qui fonctionne? 
+        public climberProfileDescription?: string, /// text
     ) {}
 }
