@@ -1,31 +1,53 @@
 <div class="centeredComponent">
-    <form [formGroup]="profileForm"  >
-        <label for="name">Name: </label>
-        <input id="name" type="text" formControlName="name">
+  <form [formGroup]="profileForm" (ngSubmit)="createProfile()">
+    
+    <div>
+      <label for="name">Name: </label>
+      <input id="name" type="text" formControlName="name" 
+      [ngClass]="{ 'is-invalid': submitted && field['name'].errors }"/>
+      @if (submitted && field['name'].errors) {
+        <div class="invalid-form">
+          @if (field['name'].errors['required']) {
+            <div>Username is required</div>
+            }
+          @if (field['name'].errors['minlength']) {
+            <div>Username must be at least 4 characters</div>
+            }
+          @if (field['name'].errors['maxlength']) {
+            <div>Username must not exceed 20 characters</div>
+            }
+        </div>
+      }
+    </div>
 
+    <div>
+      <label for="description">Profile Description: </label>
+      <input id="description" type="text" formControlName="description"/>
+    </div>
 
+    <div>
+      <label for="language">Language: </label>
+      <input id="language" type="text" formControlName="language"/>
+    </div>
 
-        <label for="description">Profile Description: </label>
-        <input id="description" type="text" formControlName="description">
+    <div>
+      <label for="gender">Gender: </label>
+      <input id="gender" type="text" formControlName="gender"/>
+    </div>
+    
+    <div>
+      <label for="notified">Want to be notified for a new Match: </label>
+      <input id="notified" type="text" formControlName="notified" />
+    </div>
+    
+    <div>
+      <label for="avatar">Avatar: </label>
+      <input id="avatar" type="text" formControlName="avatar"/>
+    </div>
 
- 
-
-        <label for="language">Language: </label>
-        <input id="language" type="text" formControlName="language">
-
-        <label for="gender">gender: </label>
-        <input id="gender" type="text" formControlName="gender">
-
-        <label for="notified">Want to be notified for a new Match: </label>
-        <input id="notified" type="text" formControlName="notified">
-
-        <label for="avatar">Avatar: </label>
-        <input id="avatar" type="text" formControlName="avatar">
-      </form>
-
-
-        <button type="button" class="button" (click)="cancel()">Cancel</button>
-        <button type="button" class="button" (click)="createProfile()">Create Profile</button>
-
-  </div>
-  
+    <div>
+      <button type="submit" class="button">Create Profile</button>
+      <button type="button" class="button" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</div>

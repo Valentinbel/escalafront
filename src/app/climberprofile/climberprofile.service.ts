@@ -9,8 +9,7 @@ import { ClimberProfile } from '../model/climberprofile.model';
 export class ClimberprofileService {
   private readonly baseUrl = 'http://localhost:8080/api/';
   private readonly urlGetAllClimberProfiles = this.baseUrl + 'climber-profiles';
-  private readonly urlgetClimberProfileById = this.baseUrl + 'climber-profile/';
-
+  private readonly urlClimberProfile = this.baseUrl + 'climber-profile/';
   constructor(private httpClient: HttpClient) { }
 
   getAllClimberProfiles(): Observable<ClimberProfile[]>{
@@ -18,6 +17,11 @@ export class ClimberprofileService {
   }
 
   getClimberProfileById(climberProfileId: number): Observable<ClimberProfile> {
-    return this.httpClient.get<ClimberProfile>(this.urlgetClimberProfileById + climberProfileId);
+    return this.httpClient.get<ClimberProfile>(this.urlClimberProfile + climberProfileId);
+  }
+
+  // verifier dans TIG que la nomenclature marche.
+  postClimberProfile(climberprofile: ClimberProfile) {
+    return this.httpClient.post<ClimberProfile>(this.urlClimberProfile, climberprofile);
   }
 }

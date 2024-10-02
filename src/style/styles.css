@@ -1,6 +1,6 @@
 /*HTML ELEMENTS*/
 body{
-    background-color: orange;
+    background-color: #F9B872;
 }
 
 input { 
@@ -14,12 +14,21 @@ input {
 .centeredComponent{
     max-width: 80rem;
     margin-inline: 2rem;
-	background-color: blue;
+	background-color: #B6E1E7;
 	padding-inline: 1rem;
 	border: 5px, solid, black;
 	padding: 1rem;
 }
+/* Forms*/
+.invalid-form {
+    color: red;
+}
 
+.is-invalid{
+    border-color: red;
+}
+
+/* Buttons*/
 .button {
 	background-color:#44c767;
 	border-radius:28px;
