@@ -4,11 +4,13 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators, AbstractControl
 import { ClimberprofileService } from './../../climberprofile/climberprofile.service';
 import { CommonModule } from '@angular/common';
 import { ClimberProfile } from '../../model/climberprofile.model';
+import { SnackBarService } from '../../shared/snack-bar/snack-bar.service';
+import { SnackBarComponent } from '../../shared/snack-bar/snack-bar.component';
 
 @Component({
   selector: 'app-create-climberprofile',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, SnackBarComponent],
   templateUrl: './create-climberprofile.component.html',
   styleUrl: './create-climberprofile.component.css'
 })
@@ -29,7 +31,8 @@ export class CreateClimberprofileComponent {
     private router: Router, 
     private route: ActivatedRoute, 
     private formBuilder: FormBuilder, 
-    private climberprofileService: ClimberprofileService) {}
+    private climberprofileService: ClimberprofileService, 
+    private snackBarService: SnackBarService) {}
 
   ngOnInit(){
     this.profileForm = this.formBuilder.group(
@@ -39,8 +42,8 @@ export class CreateClimberprofileComponent {
           Validators.minLength(4),
           Validators.maxLength(20)]
         ],
-        description: ['', Validators.required],
-        language:['', Validators.required],
+        description: [],
+        language:[],
         gender: [],
         notified:[],
         avatar:[]
@@ -54,61 +57,41 @@ export class CreateClimberprofileComponent {
 
   createProfile(): void{
     this.submitted = true;
-
-    if (this.profileForm.invalid) {
-      this.showErrors();
-      return;
-    } else {
-      console.log("victory");
-
-      // TODO: S'assurer que le profil sera rempli
-      this.saveProfile();
-      this.router.navigate(['../'], {relativeTo: this.route}); 
-    }
-    console.log(JSON.stringify(this.profileForm.value, null, 2));
+    this.profileForm.invalid ? 
+      this.showErrors() : this.saveProfile();
+    
+      console.log("Profile: " + JSON.stringify(this.profileForm.value, null, 2));
   }
 
-  private showErrors(): void {
-    let errorFields: string[] = [];
-
+   private showErrors(): void { 
     for(const value in this.field){
-      if(this.field[value].errors){
-        errorFields.push(value);
-        errorFields.length >0 ? errorFields.push(" \n"): "";
-        console.log("là c'est une erreur.  ", this.field[value].value);
-        console.log("const value: ", value);
-      }
-      
+      if(this.field[value].errors)
+        this.snackBarService.add(value, 4000, "error");
     };
-    // une alerte avec la liste des erreurs. 
-    // Tester avec plusieurs champs en erreur, ==> Enleve les required inutiles quand c'est ok
-    // ou plutot 
-    console.log("Salut les champs en erreur sont: " + errorFields);
   }
 
-  //TIG, on a des private dans les ts ?? 
-  // A mon avis on peut trouver mieux qu'un void ici
-  // REMPLIR LE climberProfile proprement pour l'envoyer dnas le service et creer un post propre
-  private saveProfile(): void{
-
+  private  saveProfile(){
     this.climberProfile = {
       name : this.field['name'].value, 
       avatar: this.field['avatar'].value,
-      genderId : this.field['genderId'].value, ///////////transformer en id
-      languageId : this.field['languageId'].value, ///////////transformer en id
+      genderId : this.field['gender'].value,
+      languageId : this.field['language'].value,
       notified : this.field['notified'].value,
       climberProfileDescription : this.field['description'].value,
     };
-
-    console.log("Le climberProfile en question: " + this.climberProfile);
-
-    // Appeler le post
-    //this.climberprofileService.postClimberProfile()
+    console.log("climberProfile to save: " + JSON.stringify(this.climberProfile));
+    
+     this.climberprofileService.postClimberProfile(this.climberProfile).subscribe(profile => {
+      if(profile) {
+        console.log(profile);
+        this.router.navigate(['../'], {relativeTo: this.route}); 
+      }
+    });
   }
 
-    cancel(): void {
-      this.router.navigate(['../'], {relativeTo: this.route});
-      //this.dialogRef.close(true);
-      alert("T'as cliqué sur cancel, tu vas être redirigé");
-    }
+  cancel(): void {
+    this.router.navigate(['../'], {relativeTo: this.route});
+    //this.dialogRef.close(true);
+    alert("T'as cliqué sur cancel, tu vas être redirigé");
+  }
 }
