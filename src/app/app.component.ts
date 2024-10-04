@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ClimberprofileService } from './climberprofile/climberprofile.service';
 import { NavbarComponent } from "./navbar/navbar.component";
+import { SnackBarComponent } from './shared/snack-bar/snack-bar.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ NavbarComponent, RouterModule ], //RouterOutlet
+  imports: [ NavbarComponent, RouterModule, SnackBarComponent ], //RouterOutlet
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

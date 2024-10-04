@@ -1,0 +1,8 @@
+<div class="snack-bar-container">
+<div *ngFor="let snack of snackBarService.snackBar; let i = index" class="snack-bar">
+    <!--{{ snack }}-->
+     <span class="snack-bar-status" [ngClass]="snack.type === 'success' ? 'snack-bar-success' : 'snack-bar-error'"></span>
+     <span class="snack-bar-message">{{ snack.message }}</span>
+    <span (click)="removeSnackBar(i)" class="snack-bar-close">X</span>
+  </div>
+</div>
