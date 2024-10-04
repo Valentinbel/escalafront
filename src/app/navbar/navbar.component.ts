@@ -10,4 +10,8 @@ import { RouterModule } from '@angular/router';
 })
 export class NavbarComponent {
 
+  logout() {
+    console.log("Il faut implémenter un logout ici ................................");
+  }
+
 }
