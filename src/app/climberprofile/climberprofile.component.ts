@@ -5,11 +5,12 @@ import { ClimberProfile } from '../model/climberprofile.model';
 import { Observable} from 'rxjs';
 import { state } from '@angular/animations';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-climberprofile',
   standalone: true,
-  imports: [ RouterModule, CommonModule],
+  imports: [ RouterModule, CommonModule, TranslateModule],
   templateUrl: './climberprofile.component.html',
   styleUrl: './climberprofile.component.css'
 })

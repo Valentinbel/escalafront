@@ -1,12 +1,12 @@
-<nav class="bg-gray-800 py-4 ">
-    <div class="container mx-auto flex justify-between items-center">
-      <a href="#" class="text-white text-2xl font-semibold">Logo</a>
-      <ul class="flex space-x-4 mr-8 ">
-        <!--<li><a routerLink="" routerLinkActive="active-link" ariaCurrentWhenActive="page">Home</a></li>-->
-        <li><a routerLink="climber-profile" routerLinkActive="active-link" ariaCurrentWhenActive="page">Profile</a></li>
-        <li><a routerLink="searches" routerLinkActive="active-link" ariaCurrentWhenActive="page">Searches</a></li>
-        <li><a routerLink="contact" routerLinkActive="active-link" ariaCurrentWhenActive="page">Contact</a></li> 
+<nav class="navbar">
+    <div class="navbar-container container">
+      
+      <ul class="menu-items">
+        <li><a routerLink="home" routerLinkActive="active-link" ariaCurrentWhenActive="page">{{ 'navbar.home'| translate }}</a></li>
+        <li><a routerLink="climber-profile" routerLinkActive="active-link" ariaCurrentWhenActive="page">{{ 'navbar.profile'| translate }}</a></li>
+        <li><a routerLink="searches" routerLinkActive="active-link" ariaCurrentWhenActive="page">{{ 'navbar.searches'| translate }}</a></li>
+        <li><a routerLink="contact" routerLinkActive="active-link" ariaCurrentWhenActive="page">{{ 'navbar.contact'| translate }}</a></li> 
       </ul>
+      <a routerLink="home" class="logo">Pinya</a>
     </div>
   </nav>
-<!--https://codepen.io/sanketbodke/pen/LYyzzYb-->

@@ -4,13 +4,19 @@ import { SearchComponent } from './search/search.component';
 import { ContactComponent } from './contact/contact.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CreateClimberprofileComponent } from './climberprofile/create-climberprofile/create-climberprofile.component';
+import { HomeComponent } from './home/home.component';
 
 
 export const routes: Routes = [
     {
         path: '', 
-        redirectTo: 'climber-profile', 
+        redirectTo: 'home', 
         pathMatch:'full'
+    },
+    {
+        path: 'home',
+        title: 'Home', 
+        component: HomeComponent
     },
     {
         path: 'climber-profile',

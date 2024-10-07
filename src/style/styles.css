@@ -1,4 +1,12 @@
 /*HTML ELEMENTS*/
+*,
+*::after,
+*::before{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
 body{
     background-color: #F9B872;
 }
@@ -12,8 +20,7 @@ input {
 
 /********************/
 .centeredComponent{
-    max-width: 80rem;
-    margin-inline: 2rem;
+    margin-inline: 3rem;
 	background-color: #B6E1E7;
 	padding-inline: 1rem;
 	border: 5px, solid, black;
