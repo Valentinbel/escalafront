@@ -13,7 +13,7 @@ body{
 
 input { 
 	display: block;
-	width: 60%;
+	width: 100%;
 	padding: 10px;
 	margin: 5px;
 }
@@ -27,6 +27,11 @@ input {
 	padding: 1rem;
 }
 /* Forms*/
+
+.label {
+    margin-left: 0.3rem;
+}
+
 .invalid-form {
     color: red;
 }

@@ -2,7 +2,7 @@
   <form [formGroup]="profileForm" (ngSubmit)="createProfile()">
     
     <div>
-      <label for="name">Name: </label>
+      <label class="label" for="name">Name: </label>
       <input id="name" type="text" formControlName="name" 
       [ngClass]="{ 'is-invalid': submitted && field['name'].errors }"/>
       @if (submitted && field['name'].errors) {
@@ -21,27 +21,31 @@
     </div>
 
     <div>
-      <label for="description">Profile Description: </label>
+      <label class="label" for="description">Profile Description: </label>
       <input id="description" type="text" formControlName="description"/>
     </div>
 
     <div>
-      <label for="language">Language: </label>
-      <input id="language" type="number" formControlName="language"/>
+      <label class="label" for="language">Language: </label>
+      <select formControlName="language" [ngModel]="selectedLanguage" name="languages" id="languages" (ngModelChange)="useLanguage($event)">
+        <option [ngValue]="i" *ngFor="let i of languageList">{{i.lang}}</option> 
+      </select>
+      {{selectedLanguage | json}}
+      {{ languageList}}
     </div>
 
     <div>
-      <label for="gender">Gender: </label>
+      <label class="label" for="gender">Gender: </label>
       <input id="gender" type="number" formControlName="gender"/>
     </div>
     
     <div>
-      <label for="notified">Want to be notified for a new Match: </label>
+      <label class="label" for="notified">Want to be notified for a new Match: </label>
       <input id="notified" type="checkbox" formControlName="notified" />
     </div>
     
     <div>
-      <label for="avatar">Avatar: </label>
+      <label class="label" for="avatar">Avatar: </label>
       <input id="avatar" type="text" formControlName="avatar"/>
     </div>
 

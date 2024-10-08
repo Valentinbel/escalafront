@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { ClimberprofileService } from './../climberprofile/climberprofile.service';
 import { RouterModule, ActivatedRoute, Router } from '@angular/router';
 import { ClimberProfile } from '../model/climberprofile.model';
-import { Observable} from 'rxjs';
-import { state } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -19,9 +17,9 @@ export class ClimberprofileComponent {
   climberProfile: ClimberProfile;
   
   constructor(
-    private climberprofileService: ClimberprofileService, 
-    private router: Router,
-    private route: ActivatedRoute){}
+    private readonly climberprofileService: ClimberprofileService, 
+    private readonly router: Router,
+    private readonly route: ActivatedRoute){}
 
   ngOnInit(){
     console.log("Salut ClimberprofileComponent");

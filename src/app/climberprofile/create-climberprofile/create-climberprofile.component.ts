@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators, AbstractControl, FormBuilder } from '@angular/forms';
+import {FormControl, FormGroup, ReactiveFormsModule, Validators, AbstractControl, FormBuilder, FormsModule } from '@angular/forms';
 import { ClimberprofileService } from './../../climberprofile/climberprofile.service';
 import { CommonModule } from '@angular/common';
 import { ClimberProfile } from '../../model/climberprofile.model';
 import { SnackBarService } from '../../shared/snack-bar/snack-bar.service';
 import { SnackBarComponent } from '../../shared/snack-bar/snack-bar.component';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create-climberprofile',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, SnackBarComponent],
+  imports: [ReactiveFormsModule, CommonModule, SnackBarComponent, TranslateModule, FormsModule ],
   templateUrl: './create-climberprofile.component.html',
   styleUrl: './create-climberprofile.component.css'
 })
@@ -27,12 +28,16 @@ export class CreateClimberprofileComponent {
   });
   submitted = false;
 
+  languageList = [{id:1, lang:'SELECT LANGUAGE'},{id:2, lang:'fr'}, {id:3,lang:'en'}];
+  selectedLanguage = this.languageList[0];
+
   constructor(
-    private router: Router, 
-    private route: ActivatedRoute, 
-    private formBuilder: FormBuilder, 
-    private climberprofileService: ClimberprofileService, 
-    private snackBarService: SnackBarService) {}
+    private readonly router: Router, 
+    private readonly route: ActivatedRoute, 
+    private readonly formBuilder: FormBuilder, 
+    private readonly climberprofileService: ClimberprofileService, 
+    private readonly snackBarService: SnackBarService, 
+    private readonly translate: TranslateService) {}
 
   ngOnInit(){
     this.profileForm = this.formBuilder.group(
@@ -93,5 +98,13 @@ export class CreateClimberprofileComponent {
     this.router.navigate(['../'], {relativeTo: this.route});
     //this.dialogRef.close(true);
     alert("T'as cliqué sur cancel, tu vas être redirigé");
+  }
+
+  useLanguage(language: any): void {
+    console.log(language);
+    
+    this.selectedLanguage = language;
+    if(language!== this.languageList[0] )
+      this.translate.use(language.lang);
   }
 }

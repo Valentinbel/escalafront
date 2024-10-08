@@ -16,11 +16,11 @@ import defaultLanguage from '../../public/i18n/en.json';
 export class AppComponent {
   title = 'escalafront';
 
-  constructor(private translate: TranslateService){
+  constructor(private readonly translate: TranslateService){
     this.translate.addLangs(['fr', 'en']);
     translate.setTranslation('en', defaultLanguage); // defaultLanguage as static to avoid loading glitches
     this.translate.setDefaultLang('en'); // fall-back language, that is used if a translation can not be found.
-    this.translate.use(this.translate.getBrowserLang() || "en"); // gives you the language set in the user's browser
+    this.translate.use(this.translate.getBrowserLang() ?? "en"); // gives you the language set in the user's browser
   }
 
   ngOnInit(){
