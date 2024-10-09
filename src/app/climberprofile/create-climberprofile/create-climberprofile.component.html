@@ -3,7 +3,7 @@
     
     <div>
       <label class="label" for="name">Name: </label>
-      <input id="name" type="text" formControlName="name" 
+      <input id="name" type="text" autocomplete="username" formControlName="name" 
       [ngClass]="{ 'is-invalid': submitted && field['name'].errors }"/>
       @if (submitted && field['name'].errors) {
         <div class="invalid-form">
@@ -27,11 +27,9 @@
 
     <div>
       <label class="label" for="language">Language: </label>
-      <select formControlName="language" [ngModel]="selectedLanguage" name="languages" id="languages" (ngModelChange)="useLanguage($event)">
-        <option [ngValue]="i" *ngFor="let i of languageList">{{i.lang}}</option> 
+      <select formControlName="language" name="languages" id="language" (ngModelChange)="useLanguage($event)">
+        <option [ngValue]="i" *ngFor="let i of languageList">{{i}}</option> 
       </select>
-      {{selectedLanguage | json}}
-      {{ languageList}}
     </div>
 
     <div>

@@ -5,6 +5,11 @@
         "searches": "Searches",
         "contact": "Contact"
     },
+    "lang": {
+        "select": "Select a language",
+        "en": "English",
+        "fr": "French"
+    },
     "home": {
         "welcomeMessage": "Hello climber", 
         "toSearches": "Searches"

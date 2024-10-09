@@ -7,6 +7,7 @@ import { ClimberProfile } from '../../model/climberprofile.model';
 import { SnackBarService } from '../../shared/snack-bar/snack-bar.service';
 import { SnackBarComponent } from '../../shared/snack-bar/snack-bar.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LanguageEnum  } from '../../model/enum/language.enum';
 
 @Component({
   selector: 'app-create-climberprofile',
@@ -17,6 +18,9 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 })
 export class CreateClimberprofileComponent {
   climberProfile: ClimberProfile;
+  languageList: string[] = [];
+  languageMap: Map<string, string>= new Map; 
+  languageId: number;
 
   profileForm: FormGroup = new FormGroup({
     name: new FormControl(''),  
@@ -27,9 +31,6 @@ export class CreateClimberprofileComponent {
     notified: new FormControl(''), 
   });
   submitted = false;
-
-  languageList = [{id:1, lang:'SELECT LANGUAGE'},{id:2, lang:'fr'}, {id:3,lang:'en'}];
-  selectedLanguage = this.languageList[0];
 
   constructor(
     private readonly router: Router, 
@@ -53,22 +54,50 @@ export class CreateClimberprofileComponent {
         notified:[],
         avatar:[]
       }
-    )
+    );
+    this.setLanguageList();
   }
 
   get field(): { [key: string]: AbstractControl } { // we can get name field in the template using field.name instead of form.controls.name
     return this.profileForm.controls;
   }
 
-  createProfile(): void{
-    this.submitted = true;
-    this.profileForm.invalid ? 
-      this.showErrors() : this.saveProfile();
+  private setLanguageList() {
+    this.languageList = []; 
+    this.languageMap.clear();
     
-      console.log("Profile: " + JSON.stringify(this.profileForm.value, null, 2));
+    for (let lang in LanguageEnum) {
+      if(isNaN(Number(lang))) {
+        this.translate.get('lang.'+lang.toLowerCase()).forEach(language => {
+          this.languageList.push(language);
+          this.languageMap.set(lang.toLowerCase(), language)
+        });
+      }
+    }
+    this.translate.get('lang.select').subscribe(el => this.languageList.unshift(el));
+  }
+   
+  useLanguage(language: any): void {
+    this.languageMap.forEach((label, code) => {
+      if(language === label){
+        this.translate.use(code);
+
+        for (let lang in LanguageEnum) {
+          if(lang === code.toUpperCase())
+            this.languageId = parseInt(LanguageEnum[lang]);
+        }
+      }
+    });
+      this.setLanguageList();
   }
 
-   private showErrors(): void { 
+  createProfile(): void{
+    this.submitted = true;
+    this.profileForm.invalid ? this.showErrors() : this.saveProfile();
+    console.log("Profile: " + JSON.stringify(this.profileForm.value, null, 2));
+  }
+
+  private showErrors(): void { 
     for(const value in this.field){
       if(this.field[value].errors)
         this.snackBarService.add(value, 4000, "error");
@@ -80,7 +109,7 @@ export class CreateClimberprofileComponent {
       name : this.field['name'].value, 
       avatar: this.field['avatar'].value,
       genderId : this.field['gender'].value,
-      languageId : this.field['language'].value,
+      languageId : this.languageId,
       notified : this.field['notified'].value,
       climberProfileDescription : this.field['description'].value,
     };
@@ -98,13 +127,5 @@ export class CreateClimberprofileComponent {
     this.router.navigate(['../'], {relativeTo: this.route});
     //this.dialogRef.close(true);
     alert("T'as cliqué sur cancel, tu vas être redirigé");
-  }
-
-  useLanguage(language: any): void {
-    console.log(language);
-    
-    this.selectedLanguage = language;
-    if(language!== this.languageList[0] )
-      this.translate.use(language.lang);
   }
 }

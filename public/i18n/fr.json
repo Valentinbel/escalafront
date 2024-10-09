@@ -5,6 +5,11 @@
         "searches": "Recherches",
         "contact": "Contact"
     },
+    "lang": {
+        "select": "Choisis une langue",
+        "en": "Anglais",
+        "fr": "Français"
+    },
     "home": {
         "welcomeMessage": "Salut grimpeur ! ", 
         "toSearches": "Recherches"
