@@ -27,7 +27,8 @@
 
     <div>
       <label class="label" for="language">Language: </label>
-      <select formControlName="language" name="languages" id="language" (ngModelChange)="useLanguage($event)">
+      <select formControlName="language" name="language" id="language" (ngModelChange)="useLanguage($event)">
+        <option [ngValue]="null" disabled selected hidden>{{selectedLang}}</option>
         <option [ngValue]="i" *ngFor="let i of languageList">{{i}}</option> 
       </select>
     </div>

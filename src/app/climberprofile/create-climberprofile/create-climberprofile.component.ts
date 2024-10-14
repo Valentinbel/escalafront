@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators, AbstractControl, FormBuilder, FormsModule } from '@angular/forms';
 import { ClimberprofileService } from './../../climberprofile/climberprofile.service';
@@ -18,9 +18,12 @@ import { LanguageEnum  } from '../../model/enum/language.enum';
 })
 export class CreateClimberprofileComponent {
   climberProfile: ClimberProfile;
+
   languageList: string[] = [];
   languageMap: Map<string, string>= new Map; 
   languageId: number;
+  selectedLang: string;
+  langPlaceHolder = signal(""); //try this
 
   profileForm: FormGroup = new FormGroup({
     name: new FormControl(''),  
@@ -65,23 +68,31 @@ export class CreateClimberprofileComponent {
   private setLanguageList() {
     this.languageList = []; 
     this.languageMap.clear();
+    //this.selectedLang = '';
     
     for (let lang in LanguageEnum) {
       if(isNaN(Number(lang))) {
         this.translate.get('lang.'+lang.toLowerCase()).forEach(language => {
           this.languageList.push(language);
-          this.languageMap.set(lang.toLowerCase(), language)
+          this.languageMap.set(lang.toLowerCase(), language);
+          if(lang.toLowerCase() === this.translate.currentLang){
+            this.selectedLang = this.translate.instant('lang.' + lang.toLowerCase());
+          }
         });
       }
     }
-    this.translate.get('lang.select').subscribe(el => this.languageList.unshift(el));
+    this.translate.get('lang.'+ this.translate.currentLang).subscribe(currentLanguage => {
+      this.selectedLang = currentLanguage;
+      console.log(this.selectedLang);
+    });
   }
    
   useLanguage(language: any): void {
     this.languageMap.forEach((label, code) => {
       if(language === label){
         this.translate.use(code);
-
+        this.selectedLang = this.translate.instant('lang.'+code);
+        console.log(this.selectedLang);
         for (let lang in LanguageEnum) {
           if(lang === code.toUpperCase())
             this.languageId = parseInt(LanguageEnum[lang]);
@@ -124,7 +135,7 @@ export class CreateClimberprofileComponent {
   }
 
   cancel(): void {
-    this.router.navigate(['../'], {relativeTo: this.route});
+    this.router.navigate(['../climber-profile'], {relativeTo: this.route});
     //this.dialogRef.close(true);
     alert("T'as cliqué sur cancel, tu vas être redirigé");
   }

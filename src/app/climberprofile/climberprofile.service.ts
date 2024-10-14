@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ClimberProfile } from '../model/climberprofile.model';
 
 @Injectable({
@@ -11,7 +11,7 @@ export class ClimberprofileService {
   private readonly urlAllClimberProfiles = this.baseUrl + 'climber-profiles';
   private readonly urlClimberProfile = this.baseUrl + 'climber-profile/';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private readonly httpClient: HttpClient) { }
 
   getAllClimberProfiles(): Observable<ClimberProfile[]>{
     return this.httpClient.get<ClimberProfile[]>(this.urlAllClimberProfiles);
