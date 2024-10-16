@@ -1,13 +1,13 @@
-import { Component, signal } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators, AbstractControl, FormBuilder, FormsModule } from '@angular/forms';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators, AbstractControl, FormBuilder, FormsModule } from '@angular/forms';
 import { ClimberprofileService } from './../../climberprofile/climberprofile.service';
 import { CommonModule } from '@angular/common';
 import { ClimberProfile } from '../../model/climberprofile.model';
 import { SnackBarService } from '../../shared/snack-bar/snack-bar.service';
 import { SnackBarComponent } from '../../shared/snack-bar/snack-bar.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { LanguageEnum  } from '../../model/enum/language.enum';
+import { LanguageEnum } from '../../model/enum/language.enum';
 
 @Component({
   selector: 'app-create-climberprofile',
@@ -22,8 +22,7 @@ export class CreateClimberprofileComponent {
   languageList: string[] = [];
   languageMap: Map<string, string>= new Map; 
   languageId: number;
-  selectedLang: string;
-  langPlaceHolder = signal(""); //try this
+  selectedLang: string;  
 
   profileForm: FormGroup = new FormGroup({
     name: new FormControl(''),  
@@ -59,7 +58,7 @@ export class CreateClimberprofileComponent {
       }
     );
     this.setLanguageList();
-  }
+  }  
 
   get field(): { [key: string]: AbstractControl } { // we can get name field in the template using field.name instead of form.controls.name
     return this.profileForm.controls;
