@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ClimberprofileService } from './climberprofile/climberprofile.service';
 import { NavbarComponent } from "./navbar/navbar.component";
 import { SnackBarComponent } from './shared/snack-bar/snack-bar.component';
-
+import { AuthStorageService } from './auth/auth-storage.service';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -13,14 +13,49 @@ import { SnackBarComponent } from './shared/snack-bar/snack-bar.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'escalafront';
+  title = 'pinya';
+  private roles: string[] = [];
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showModeratorBoard = false;
+  username?: string;
 
-  constructor(private readonly climberprofileService: ClimberprofileService){}
+  constructor(
+    private readonly authService: AuthService, 
+    private readonly authStorageService: AuthStorageService){}
 
-  ngOnInit(){
+  ngOnInit(): void {
+    this.isLoggedIn = this.authStorageService.isLoggedIn();
+
+    if (this.isLoggedIn) {
+      const user = this.authStorageService.getClimberUser();
+      this.roles = user.roles;
+      console.log("isLoggedIn == TRUE !! user : ", user);
+      console.log("roles : ", this.roles);
+
+
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+
+      this.username = user.username;
+    } else console.log("NOT LOGGED IN")
     /*console.log("Salut les amis");
     this.climberprofileService.getAllClimberProfiles().subscribe((climberProfile) => console.log("getAllClimberProfiles: " , climberProfile));
 
     this.climberprofileService.getClimberProfileById(1).subscribe((climberProfile) => console.log("getClimberProfileById(1): ", climberProfile));*/
+  }
+
+  logout(): void {
+    this.authService.logout().subscribe({
+      next: res => {
+        console.log(res);
+        this.authStorageService.clean();
+
+        window.location.reload();
+      },
+      error: err => {
+        console.log(err);
       }
+    });
+  }
 }

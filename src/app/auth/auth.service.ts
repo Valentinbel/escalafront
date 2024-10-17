@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 
-const AUTH_API = 'http://localhost:8080/api/auth/';
+const AUTH_API = 'http://localhost:8080/api/auth/'; // mettre en private readonly comme on sait faire
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -24,9 +24,6 @@ export class AuthService {
       }, httpOptions
     );
   }
-  //////////////////////// ATTENTION
-  /////////////////////// TROUVER LA MANIERE D'IMPORTER LES MODULES DEMANDÉS
-  
 
   register(userName: string, email: string, password: string): Observable<any> {
     return this.http.post(

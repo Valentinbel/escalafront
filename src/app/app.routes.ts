@@ -6,6 +6,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { CreateClimberprofileComponent } from './climberprofile/create-climberprofile/create-climberprofile.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { LoginComponent } from './auth/login/login.component';
 
 
 export const routes: Routes = [
@@ -44,6 +45,11 @@ export const routes: Routes = [
         path: 'register', 
         title: 'Register',
         component: RegisterComponent
+    },    
+    {
+        path: 'login', 
+        title: 'Login',
+        component: LoginComponent
     },
     { 
         path: '**', 

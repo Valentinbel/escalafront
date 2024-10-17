@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
+import { AuthStorageService } from '../auth/auth-storage.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,8 +12,21 @@ import { RouterModule } from '@angular/router';
 })
 export class NavbarComponent {
 
-  logout() {
-    console.log("Il faut implémenter un logout ici ................................");
+  constructor(
+    private readonly authService: AuthService, private readonly authStorageService: AuthStorageService){}
+
+  logout(): void {
+    this.authService.logout().subscribe({
+      next: res => {
+        console.log(res);
+        this.authStorageService.clean();
+
+        window.location.reload();
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
   }
 
 }

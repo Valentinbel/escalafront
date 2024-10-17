@@ -9,7 +9,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
             withCredentials:true,
         });
         console.log("ON est bien dans HttpRequestInterceptor")
-        return next.handle(req);
+        return next.handle(req);// meilleure implémentation dans tuto 5
     }
 }
 

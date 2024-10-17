@@ -24,11 +24,19 @@ export class RegisterComponent {
   errorMessage = '';
 
   constructor(private readonly authService: AuthService, private readonly testService: TestService) {
-    this.testService.getPublicContent().subscribe(
-      data => console.log("Coucou   " , data)
-      //{next:data => {console.log(data);}}
-    )
-   }
+    this.testService.getPublicContent().subscribe({
+      next:data => {console.log(data);
+      }, 
+      error: err => {
+        console.log(err);
+        if(err.error) {
+          console.log(JSON.parse(err.error).message)
+        } else {
+          console.log("Error with Status: ", err.status)
+        }
+      }
+    });
+  }
 
   onSubmit(): void {
     const { userName, email, password } = this.form;
