@@ -15,7 +15,7 @@ import { SnackBarComponent } from './shared/snack-bar/snack-bar.component';
 export class AppComponent {
   title = 'escalafront';
 
-  constructor(private climberprofileService: ClimberprofileService){}
+  constructor(private readonly climberprofileService: ClimberprofileService){}
 
   ngOnInit(){
     /*console.log("Salut les amis");

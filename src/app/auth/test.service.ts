@@ -6,9 +6,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TestService {
-  private apiUrl = 'http://localhost:8081/api/test/';  /// Changer par un private readonly comme dans TIG et climberprofile service pour voir si ca marche toujours
+  private readonly apiUrl = 'http://localhost:8081/api/test/';  /// Changer par un private readonly comme dans TIG et climberprofile service pour voir si ca marche toujours
   
-  constructor(private httpClient: HttpClient) { }
+  constructor(private readonly httpClient: HttpClient) { }
 
   getPublicContent(): Observable<any> {
     return this.httpClient.get(this.apiUrl + 'all', { responseType: 'text' });

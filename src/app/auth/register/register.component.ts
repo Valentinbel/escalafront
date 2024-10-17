@@ -23,7 +23,7 @@ export class RegisterComponent {
   isSignUpFailed = false;
   errorMessage = '';
 
-  constructor(private authService: AuthService, private testService: TestService) {
+  constructor(private readonly authService: AuthService, private readonly testService: TestService) {
     this.testService.getPublicContent().subscribe(
       data => console.log("Coucou   " , data)
       //{next:data => {console.log(data);}}
