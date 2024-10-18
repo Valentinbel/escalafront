@@ -31,8 +31,6 @@ export class AppComponent {
       const user = this.authStorageService.getClimberUser();
       this.roles = user.roles;
       console.log("isLoggedIn == TRUE !! user : ", user);
-      console.log("roles : ", this.roles);
-
 
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');

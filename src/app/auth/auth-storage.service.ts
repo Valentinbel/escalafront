@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-const USER_KEY = 'auth-user';
+const USER_KEY = 'auth-user'; // Clé symétrique? 
 
 @Injectable({
   providedIn: 'root'
