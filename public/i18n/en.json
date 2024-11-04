@@ -1,0 +1,33 @@
+{
+    "navbar":{
+        "home": "Home", 
+        "profile": "Profile",
+        "searches": "Searches",
+        "contact": "Contact"
+    },
+    "lang": {
+        "en": "English",
+        "fr": "French"
+    },
+    "home": {
+        "welcomeMessage": "Hello climber", 
+        "toSearches": "Searches"
+    }, 
+    "profile": {
+        "name": "Name: ",
+        "avatar": "Avatar: ",
+        "language": "Language: ",
+        "notified": "Notifications actived: ",
+        "climberProfileDescription": "Description: ",
+        "btn": {
+            "createProfile": "Create Profile",
+            "updateProfile": "Update Profile"
+        },
+        "txt": {
+           "createProfile": "Mhh, You still don't have any profile. You'll have to create one!"
+        },
+        "link": {
+            "contact": "Contact Us"
+        }
+    }
+}
