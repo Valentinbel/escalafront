@@ -4,13 +4,21 @@ import { SearchComponent } from './search/search.component';
 import { ContactComponent } from './contact/contact.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CreateClimberprofileComponent } from './climberprofile/create-climberprofile/create-climberprofile.component';
+import { HomeComponent } from './home/home.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { LoginComponent } from './auth/login/login.component';
 
 
 export const routes: Routes = [
     {
         path: '', 
-        redirectTo: 'climber-profile', 
+        redirectTo: 'home', 
         pathMatch:'full'
+    },
+    {
+        path: 'home',
+        title: 'home', 
+        component: HomeComponent
     },
     {
         path: 'climber-profile',
@@ -32,6 +40,16 @@ export const routes: Routes = [
         path: 'contact', 
         title: 'Contact',
         component: ContactComponent
+    },
+    {
+        path: 'register', 
+        title: 'Register',
+        component: RegisterComponent
+    },    
+    {
+        path: 'login', 
+        title: 'Login',
+        component: LoginComponent
     },
     { 
         path: '**', 
