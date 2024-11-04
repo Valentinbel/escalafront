@@ -28,8 +28,6 @@ export class LoginComponent {
     if (this.authStorageService.isLoggedIn()) {
       this.isLoggedIn = true;
       this.roles = this.authStorageService.getClimberUser().roles;
-      console.log("logged in: ", this.isLoggedIn);
-      console.log("roles: ", this.roles);
     }
   }
 
@@ -43,7 +41,6 @@ export class LoginComponent {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.authStorageService.getClimberUser().roles;
-        console.log("roles on Submit: ", this.roles);
         this.reloadPage();
       },
       error: err => {

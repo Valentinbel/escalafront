@@ -30,17 +30,17 @@ export class NavbarComponent {
 
   logout(): void {
     console.log("Logout function");
+    this.authStorageService.clean();
     this.authService.logout().subscribe({
       next: res => {
         console.log(res);
         this.authStorageService.clean();
-
-        window.location.reload();
       },
       error: err => {
         console.log(err);
       }
     });
+    window.location.reload();
   }
 
 }

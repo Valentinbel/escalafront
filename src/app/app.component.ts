@@ -30,7 +30,7 @@ export class AppComponent {
     if (this.isLoggedIn) {
       const user = this.authStorageService.getClimberUser();
       this.roles = user.roles;
-      console.log("isLoggedIn == TRUE !! user : ", user);
+      console.log(" user from Storage : ", user);
 
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
@@ -38,7 +38,7 @@ export class AppComponent {
       this.username = user.username;
     } else console.log("NOT LOGGED IN")
     /*console.log("Salut les amis");
-    this.climberprofileService.getAllClimberProfiles().subscribe((climberProfile) => console.log("getAllClimberProfiles: " , climberProfile));
+    this.climberprofileService.getClimberProfiles().subscribe((climberProfile) => console.log("getClimberProfiles: " , climberProfile));
 
     this.climberprofileService.getClimberProfileById(1).subscribe((climberProfile) => console.log("getClimberProfileById(1): ", climberProfile));*/
   }

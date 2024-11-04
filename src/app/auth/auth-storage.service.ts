@@ -16,7 +16,6 @@ export class AuthStorageService {
   public saveClimberUser(climberUser: any): void {
     window.sessionStorage.removeItem(USER_KEY);
     window.sessionStorage.setItem(USER_KEY, JSON.stringify(climberUser));
-    console.log("AuthStorageService> save> USER_KEY: ", USER_KEY, "- climberUser: ", climberUser);
   }
 
   public getClimberUser(): any {
