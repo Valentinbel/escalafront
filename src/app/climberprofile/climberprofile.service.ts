@@ -8,20 +8,19 @@ import { ClimberProfile } from '../model/climberprofile.model';
 })
 export class ClimberprofileService {
   private readonly baseUrl = 'http://localhost:8080/api/';
-  private readonly urlAllClimberProfiles = this.baseUrl + 'climber-profiles';
-  private readonly urlClimberProfile = this.baseUrl + 'climber-profile/';
+  private readonly urlClimberProfiles = this.baseUrl + 'climber-profiles';
 
   constructor(private readonly httpClient: HttpClient) { }
 
-  getAllClimberProfiles(): Observable<ClimberProfile[]>{
-    return this.httpClient.get<ClimberProfile[]>(this.urlAllClimberProfiles);
+  getClimberProfiles(): Observable<ClimberProfile[]> {
+    return this.httpClient.get<ClimberProfile[]>(this.urlClimberProfiles);
   }
 
-  getClimberProfileById(climberProfileId: number): Observable<ClimberProfile> {
-    return this.httpClient.get<ClimberProfile>(this.urlClimberProfile + climberProfileId);
+  getClimberProfileById(climberProfileId: number): Observable<ClimberProfile>{
+    return this.httpClient.get<ClimberProfile>(this.urlClimberProfiles + '/' +climberProfileId );
   }
 
   postClimberProfile(climberprofile: ClimberProfile): Observable<ClimberProfile> {
-    return this.httpClient.post<ClimberProfile>(this.urlClimberProfile, climberprofile);
+    return this.httpClient.post(this.urlClimberProfiles, climberprofile);
   }
 }

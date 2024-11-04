@@ -1,3 +1,4 @@
+
 <nav class="navbar">
     <div class="navbar-container container">
       
@@ -6,7 +7,15 @@
         <li><a routerLink="climber-profile" routerLinkActive="active-link" ariaCurrentWhenActive="page">{{ 'navbar.profile'| translate }}</a></li>
         <li><a routerLink="searches" routerLinkActive="active-link" ariaCurrentWhenActive="page">{{ 'navbar.searches'| translate }}</a></li>
         <li><a routerLink="contact" routerLinkActive="active-link" ariaCurrentWhenActive="page">{{ 'navbar.contact'| translate }}</a></li> 
+        <li><a (click)="logout()">Logout</a></li><!--seulement si looged In  sinoin ca plante-->
+        <li><a routerLink="register" routerLinkActive="active-link" ariaCurrentWhenActive="page">Register</a></li> 
+        <li><a routerLink="login" routerLinkActive="active" ariaCurrentWhenActive="page">Login</a></li>
       </ul>
       <a routerLink="home" class="logo">Pinya</a>
     </div>
   </nav>
+
+<!--https://codepen.io/sanketbodke/pen/LYyzzYb-->
+<!--Seulement un component parent pour se connecter-->
+<!--Mettre in if sur logout seuelemnt si loggedin.-->
+<!--mettre des if pour montrer ce qu'on a besoin, relier au router por que ca marche bien-->
