@@ -1,0 +1,33 @@
+{    
+    "navbar":{
+        "home": "Accueil", 
+        "profile": "Profil",
+        "searches": "Recherches",
+        "contact": "Contact"
+    },
+    "lang": {
+        "en": "Anglais",
+        "fr": "Français"
+    },
+    "home": {
+        "welcomeMessage": "Salut grimpeur ! ", 
+        "toSearches": "Recherches"
+    }, 
+    "profile": {
+        "name": "Nom : ",
+        "avatar": "Avatar : ",
+        "language": "Langue : ",
+        "notified": "Notifications actives : ",
+        "climberProfileDescription": "Description : ",
+        "btn": {
+            "createProfile": "Créer Profil",
+            "updateProfile": "Modifier profil"
+        },
+        "txt": {
+           "createProfile": "Mhh, Tu n'as pas de profil. Il va falloir en créer un !"
+        },
+        "link": {
+            "contact": "Contactez-nous"
+        }
+    }
+}

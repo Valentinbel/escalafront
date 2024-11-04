@@ -8,7 +8,6 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 
-
 export const routes: Routes = [
     {
         path: '', 
@@ -17,7 +16,7 @@ export const routes: Routes = [
     },
     {
         path: 'home',
-        title: 'home', 
+        title: 'Home', 
         component: HomeComponent
     },
     {

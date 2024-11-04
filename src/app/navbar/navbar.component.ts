@@ -4,11 +4,12 @@ import { AuthService } from '../auth/auth.service';
 import { AuthStorageService } from '../auth/auth-storage.service';
 import { Subscription } from 'rxjs';
 import { EventBusService } from '../shared/event-bus.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, TranslateModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })

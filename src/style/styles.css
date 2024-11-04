@@ -1,38 +1,83 @@
 /*HTML ELEMENTS*/
-body{
-    background-color: #F9B872;
+
+:root {
+	--pinya-color-orangeBackGround:  #F9B872;
+	--btn-color-greenBackGround: #44c767;
+	--btn-color-greenBorder: #18ab29;
+	/*rename that*/
+	--white: white;
+	--black: black;
+	--red-error: red;
+
+	/* 
+
+	++++++++++++++++++++
+	Ce n'est pas fini
+	++++++++++++++++++++
+	
+	*/
+
+	/* Font Sizes */
+	/* Font Weights */
+	/* Durations */
+	/* Shadows */
 }
 
-input { 
+*,
+*::after,
+*::before{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    background-color: var(--pinya-color-orangeBackGround);
+}
+
+h1, h2, h3, h4, h5, h6 { 
+	text-wrap: balance; 
+}
+
+p {
+	text-wrap: pretty;
+}
+input, select { 
 	display: block;
-	width: 60%;
+	width: 100%;
 	padding: 10px;
 	margin: 5px;
+	background-color: var(--white);
+	border: 1px solid ;
 }
 
 /********************/
 .centeredComponent{
-    max-width: 80rem;
-    margin-inline: 2rem;
+    margin-inline: 3rem;
 	background-color: #B6E1E7;
 	padding-inline: 1rem;
-	border: 5px, solid, black;
+	border: 1px solid var(--black);
 	padding: 1rem;
 }
 /* Forms*/
+
+.label {
+    margin-left: 0.3rem;
+}
+
 .invalid-form {
-    color: red;
+    color: var(--red-error);
 }
 
 .is-invalid{
-    border-color: red;
+    border-color: var(--red-error)
 }
 
 /* Buttons*/
 .button {
-	background-color:#44c767;
+	background-color: var(--btn-color-greenBackGround);
 	border-radius:28px;
-	border:1px solid #18ab29;
+	border:1px solid var(--btn-color-greenBorder); 
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
