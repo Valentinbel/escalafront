@@ -42,7 +42,7 @@ export class CreateClimberprofileComponent {
     private readonly snackBarService: SnackBarService, 
     private readonly translate: TranslateService) {}
 
-  ngOnInit(){
+  ngOnInit(): void{
     this.profileForm = this.formBuilder.group(
       {
         name: ['', 
@@ -129,7 +129,7 @@ export class CreateClimberprofileComponent {
       if(profile) {
         console.log(profile);
         this.router.navigate(['../'], {relativeTo: this.route}); 
-      }
+      } else console.log("Le post n'a pas marché");
     });
   }
 
