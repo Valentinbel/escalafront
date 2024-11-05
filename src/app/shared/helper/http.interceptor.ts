@@ -5,6 +5,7 @@ import { AuthStorageService } from "../../auth/auth-storage.service";
 import { EventBusService } from "../event-bus.service";
 import { EventData } from "../event.class";
 import { AuthService } from "../../auth/auth.service";
+import { Router } from "@angular/router";
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
@@ -14,22 +15,12 @@ export class HttpRequestInterceptor implements HttpInterceptor {
     constructor(
         private readonly authStorageService: AuthStorageService, 
         private readonly authService: AuthService,
-        private readonly eventBusService: EventBusService){}
+        private readonly eventBusService: EventBusService,
+        private readonly router: Router){}
     
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        let user = this.authStorageService.getClimberUser();
-        let token = user.accessToken;
-        
-      if(token){
-        req = req.clone({ 
-          withCredentials: true, 
-          setHeaders: { 'Authorization': 'Bearer ' + token 
-        }});
-      } else {
-        req = req.clone({ 
-          withCredentials: true, 
-         });
-      }
+       req = this.buildRequest(req);
+      console.log(req.headers);
          
         return next.handle(req).pipe(
           catchError((error) => {
@@ -43,6 +34,23 @@ export class HttpRequestInterceptor implements HttpInterceptor {
             return throwError(() => error);
           })
         );
+      }
+
+      // TODO: Tester un peu mieux
+      private buildRequest(req: HttpRequest<any>): HttpRequest<any> {
+        let user = this.authStorageService.getClimberUser();
+        let token = user.accessToken;
+        
+        if(token){
+          return req.clone({ 
+            withCredentials: true, 
+            setHeaders: { 'Authorization': 'Bearer ' + token 
+          }});
+        } else {
+          return req.clone({ 
+            withCredentials: true, 
+          });
+        }
       }
     
       private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
@@ -59,13 +67,13 @@ export class HttpRequestInterceptor implements HttpInterceptor {
                 console.log(error.status);
                 this.isRefreshing = false;
     
-                if (error.status == '403') {
+                if (error.status === 403) {
                   this.eventBusService.emit(new EventData('logout', null));
                   console.log("403 Forbidden, You are authenticated but can't access this one");                
                 }
-               /* if (error.status == '401') {
+                if (error.status === 401) {
                   this.authStorageService.clean();
-                  window.location.reload();
+                 // window.location.reload();
                   this.eventBusService.emit(new EventData('logout', null));
                   this.authService.logout().subscribe({
                     next: res => {
@@ -75,7 +83,9 @@ export class HttpRequestInterceptor implements HttpInterceptor {
                       console.log(err);
                     }
                   });
-                }*/
+                  this.router.navigateByUrl('/login'); ////////////// verifier que ca marche bien
+                  console.log("401.....................");
+                }
                 return throwError(() => error);
               })
             );

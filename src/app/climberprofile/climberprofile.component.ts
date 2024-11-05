@@ -22,7 +22,6 @@ export class ClimberprofileComponent {
     private readonly route: ActivatedRoute){}
 
   ngOnInit(){
-    console.log("Salut ClimberprofileComponent");
     //  récupérer le ClimberProfile grâce au User en amont. 
   
     this.getClimberProfileById(1);
@@ -35,15 +34,8 @@ export class ClimberprofileComponent {
     } );
   }
 
-  openRubrique() {
-    // this.matomoService.updateUrl('/rubrique');
-    //this.router.navigate(['/add-climber-profile'], { state: { contenu } });
-
-    this.router.navigate(
-      ['/add-climber-profile']
-      //{queryParams:{order:'popular','price-range':'expensive'}}
-      //state: { hello: 'world'}
-      );
+  openAddProfile() {
+    this.router.navigate(['/add-climber-profile']);
 }
 }
 

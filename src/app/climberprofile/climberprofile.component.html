@@ -8,14 +8,12 @@
             <p><strong>{{ 'profile.notified'| translate }}</strong>{{this.climberProfile.notified? "OUI": "NON"}}</p>
             <p><strong>{{ 'profile.climberProfileDescription'| translate }}</strong>{{this.climberProfile.climberProfileDescription}}</p>
         </div>
-        <button class="button" (click)="openRubrique()" >{{ 'profile.btn.updateProfile'| translate }}</button> <br/>
+        <!-- TODO Need To be Edit Profile-->
+        <button class="button" (click)="openAddProfile()" >{{ 'profile.btn.updateProfile'| translate }}</button> <br/>
     }
 
     @else{
         <div >{{ 'profile.txt.createProfile'| translate }}</div>
-        <button class="button" (click)="openRubrique()" > {{ 'profile.btn.createProfile'| translate }}</button> <br/>
+        <button class="button" (click)="openAddProfile()" > {{ 'profile.btn.createProfile'| translate }}</button> <br/>
     }
-
-    
-    <a routerLink="../contact" routerLinkActive="active-page">{{ 'profile.link.contact'| translate }}</a>
 </div>

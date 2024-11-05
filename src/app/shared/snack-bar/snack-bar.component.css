@@ -10,6 +10,8 @@
     overflow: hidden;
 }
 
+/* TODO: link to global variables*/
+
 .snack-bar {
     display: inline-flex;
     box-sizing: border-box;

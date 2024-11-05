@@ -109,8 +109,10 @@ export class CreateClimberprofileComponent {
 
   private showErrors(): void { 
     for(const value in this.field){
-      if(this.field[value].errors)
-        this.snackBarService.add(value, 4000, "error");
+      if(this.field[value].errors) {
+        let fieldError = this.translate.instant('profile.edit.fieldError');
+        this.snackBarService.add(fieldError + value, 4000, "error");
+      }
     };
   }
 

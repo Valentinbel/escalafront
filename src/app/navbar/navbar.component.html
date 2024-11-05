@@ -4,12 +4,15 @@
       
       <ul class="menu-items">
         <li><a routerLink="home" routerLinkActive="active-link" ariaCurrentWhenActive="page">{{ 'navbar.home'| translate }}</a></li>
-        <li><a routerLink="climber-profile" routerLinkActive="active-link" ariaCurrentWhenActive="page">{{ 'navbar.profile'| translate }}</a></li>
-        <li><a routerLink="searches" routerLinkActive="active-link" ariaCurrentWhenActive="page">{{ 'navbar.searches'| translate }}</a></li>
         <li><a routerLink="contact" routerLinkActive="active-link" ariaCurrentWhenActive="page">{{ 'navbar.contact'| translate }}</a></li> 
-        <li><a (click)="logout()">Logout</a></li><!--seulement si looged In  sinoin ca plante-->
-        <li><a routerLink="register" routerLinkActive="active-link" ariaCurrentWhenActive="page">Register</a></li> 
-        <li><a routerLink="login" routerLinkActive="active" ariaCurrentWhenActive="page">Login</a></li>
+        @if (isLoggedIn) {
+          <li><a routerLink="climber-profile" routerLinkActive="active-link" ariaCurrentWhenActive="page">{{ 'navbar.profile'| translate }}</a></li>
+        <li><a routerLink="searches" routerLinkActive="active-link" ariaCurrentWhenActive="page">{{ 'navbar.searches'| translate }}</a></li>
+          <li><a (click)="logout()">Logout</a></li><!--seulement si looged In  sinoin ca plante-->
+        }
+        @else {
+          <li><a routerLink="connect" routerLinkActive="active" ariaCurrentWhenActive="page">Connect</a></li>
+        }
       </ul>
       <a routerLink="home" class="logo">Pinya</a>
     </div>

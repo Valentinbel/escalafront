@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { TestService } from '../test.service';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, FormsModule
-    //,    BrowserModule // a quoi servent tous ces modules '? Documenter
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
@@ -23,19 +21,7 @@ export class RegisterComponent {
   isSignUpFailed = false;
   errorMessage = '';
 
-  constructor(private readonly authService: AuthService, private readonly testService: TestService) {
-    this.testService.getPublicContent().subscribe({
-      next:data => {console.log(data);
-      }, 
-      error: err => {
-        console.log(err);
-        if(err.error) {
-          console.log(JSON.parse(err.error).message)
-        } else {
-          console.log("Error with Status: ", err.status)
-        }
-      }
-    });
+  constructor(private readonly authService: AuthService) {
   }
 
   onSubmit(): void {

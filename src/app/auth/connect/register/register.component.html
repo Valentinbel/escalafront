@@ -1,10 +1,5 @@
 <div class="col-md-12">
     <div class="card card-container">
-      <img
-        id="profile-img"
-        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-        class="profile-img-card" alt="Avatar"
-      />
       @if (!isSuccessful) {
       <form
         name="form"
@@ -14,16 +9,9 @@
       >
         <div class="form-group">
           <label for="username">Username</label>
-          <input
-            type="text"
-            class="form-control"
-            name="username"
-            [(ngModel)]="form.userName"
-            required
-            minlength="3"
-            maxlength="20"
-            #username="ngModel"
-            [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
+          <input type="text" class="form-control" name="username" [(ngModel)]="form.userName" required 
+          minlength="3" maxlength="20" #username="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
           />
           @if (username.errors && f.submitted) {
           <div class="invalid-feedback">
@@ -31,7 +19,7 @@
             <div>Username is required</div>
             }
             @if (username.errors['minlength']) {
-            <div>Username must be at least 3 characters</div>
+            <div>Username must be at least 3 characters</div> 
             }
             @if (username.errors['maxlength']) {
             <div>Username must be at most 20 characters</div>
@@ -41,14 +29,7 @@
         </div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input
-            type="email"
-            class="form-control"
-            name="email"
-            [(ngModel)]="form.email"
-            required
-            email
-            #email="ngModel"
+          <input type="email" class="form-control" name="email" [(ngModel)]="form.email" required email #email="ngModel"
             [ngClass]="{ 'is-invalid': f.submitted && email.errors }"
           />
           @if (email.errors && f.submitted) {
@@ -64,14 +45,8 @@
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            name="password"
-            [(ngModel)]="form.password"
-            required
-            minlength="6"
-            #password="ngModel"
+          <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required
+            minlength="6" #password="ngModel" 
             [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
           />
           @if (password.errors && f.submitted) {
@@ -86,7 +61,7 @@
           }
         </div>
         <div class="form-group">
-          <button class="btn btn-primary btn-block">Sign Up</button>
+          <button class="button">Sign Up</button>
         </div>
   
         @if (f.submitted && isSignUpFailed) {

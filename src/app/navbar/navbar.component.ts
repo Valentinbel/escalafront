@@ -16,6 +16,7 @@ import { TranslateModule } from '@ngx-translate/core';
 export class NavbarComponent {
 
   eventBusSub?: Subscription;
+  isLoggedIn = false;
   
   constructor(
     private readonly authService: AuthService, 
@@ -27,6 +28,10 @@ export class NavbarComponent {
     this.eventBusSub = this.eventBusService.on('logout', () => {
       this.logout();
     });
+    if (this.authStorageService.isLoggedIn()) {
+      this.isLoggedIn = true;
+    }
+    console.log(this.authStorageService.isLoggedIn().valueOf())
   }
 
   logout(): void {
@@ -36,6 +41,7 @@ export class NavbarComponent {
       next: res => {
         console.log(res);
         this.authStorageService.clean();
+        this.isLoggedIn = false;
       },
       error: err => {
         console.log(err);

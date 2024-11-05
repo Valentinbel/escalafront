@@ -13,6 +13,24 @@
         "welcomeMessage": "Salut grimpeur ! ", 
         "toSearches": "Recherches"
     }, 
+    "connect":{
+        "btn": {
+            "login": "J'ai un compte",
+            "register": "Je n'ai pas de compte"
+        },
+        "login": {
+            "username": "Nom d'utilisateur : ",
+            "password": "Mot de passe : ",
+            "login": "Se connecter",
+            "success": "Bienvenue ",
+            "error": {
+                "username": "Veuillez indiquer votre nom d'utilisateur",
+                "password": "Veuillez indiquer votre mot de passe",
+                "passwordMin": "Le mot de passe doit faire au moins 6 caractères",
+                "loginFailed": "Échec de l'authentification : "
+            }
+        }
+    },
     "profile": {
         "name": "Nom : ",
         "avatar": "Avatar : ",
@@ -28,6 +46,9 @@
         },
         "link": {
             "contact": "Contactez-nous"
+        }, 
+        "edit": {
+            "fieldError": "Erreur sur le champ suivant : "
         }
     }
 }

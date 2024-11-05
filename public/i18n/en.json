@@ -13,6 +13,24 @@
         "welcomeMessage": "Hello climber", 
         "toSearches": "Searches"
     }, 
+    "connect":{
+        "btn": {
+            "login": "I have an account",
+            "register": "I don't have account"
+        },
+        "login": {
+            "username": "User name: ",
+            "password": "Password: ",
+            "login": "Login",
+            "success": "Welcome ",
+            "error": {
+                "username": "Username is required",
+                "password": "Password is required",
+                "passwordMin": "Password must be at least 6 characters",
+                "loginFailed": "Login failed: "
+            }
+        }
+    },
     "profile": {
         "name": "Name: ",
         "avatar": "Avatar: ",
@@ -28,6 +46,9 @@
         },
         "link": {
             "contact": "Contact Us"
+        },
+        "edit": {
+            "fieldError": "Error on the following field: "
         }
     }
 }
