@@ -16,7 +16,7 @@ export class AuthService {
 
   constructor(private readonly http: HttpClient) { }
 
-  login(userName: string, password: string ): Observable<any> {
+  login(userName: string, password: string ): Observable<any> { // TODO: model
     return this.http.post(
       AUTH_API + 'login',
       {
@@ -25,7 +25,7 @@ export class AuthService {
     );
   }
 
-  register(userName: string, email: string, password: string): Observable<any> {
+  register(userName: string, email: string, password: string): Observable<any> { // TODO: model
     return this.http.post(
       AUTH_API + 'register',
       {
@@ -34,12 +34,16 @@ export class AuthService {
     );
   }
 
-  logout(): Observable<any> {
+  logout(): Observable<any> { // TODO: model
     return this.http.post(AUTH_API + 'signout', {}, httpOptions);
   }
 
-  refreshToken(): Observable<any>  {
+  refreshToken(): Observable<any>  { // TODO: model
     console.log("refreshToken/////////////////////////////////")
     return this.http.post(AUTH_API + 'refreshtoken', { }, httpOptions);
+  }
+
+  updateClimberUser(userId: number, profileId: number) : Observable<any>  { // TODO: model
+    return this.http.put('http://localhost:8080/api/' + 'climber-users', {userId, profileId}, httpOptions)
   }
 }

@@ -48,7 +48,10 @@
             "contact": "Contactez-nous"
         }, 
         "edit": {
-            "fieldError": "Erreur sur le champ suivant : "
+            "fieldError": "Erreur sur le champ suivant : ",
+            "error": {
+                "save": "Erreur lors de la création du profile"
+            }
         }
     }
 }

@@ -48,7 +48,10 @@
             "contact": "Contact Us"
         },
         "edit": {
-            "fieldError": "Error on the following field: "
+            "fieldError": "Error on the following field: ",
+            "error": {
+                "save": "Error during the profile creation"
+            }
         }
     }
 }

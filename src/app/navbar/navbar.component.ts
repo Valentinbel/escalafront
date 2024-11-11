@@ -31,7 +31,6 @@ export class NavbarComponent {
     if (this.authStorageService.isLoggedIn()) {
       this.isLoggedIn = true;
     }
-    console.log(this.authStorageService.isLoggedIn().valueOf())
   }
 
   logout(): void {

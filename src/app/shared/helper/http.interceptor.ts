@@ -20,7 +20,6 @@ export class HttpRequestInterceptor implements HttpInterceptor {
     
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
        req = this.buildRequest(req);
-      console.log(req.headers);
          
         return next.handle(req).pipe(
           catchError((error) => {

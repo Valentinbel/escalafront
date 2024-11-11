@@ -18,7 +18,7 @@ export class AuthStorageService {
     window.sessionStorage.setItem(USER_KEY, JSON.stringify(climberUser));
   }
 
-  public getClimberUser(): any {
+  public getClimberUser(): any { //TODO Ajouter climberUser
     const climberUser = window.sessionStorage.getItem(USER_KEY);
     if (climberUser) {
       return JSON.parse(climberUser);

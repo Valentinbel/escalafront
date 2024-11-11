@@ -8,6 +8,7 @@ import { SnackBarService } from '../../shared/snack-bar/snack-bar.service';
 import { SnackBarComponent } from '../../shared/snack-bar/snack-bar.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LanguageEnum } from '../../model/enum/language.enum';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-create-climberprofile',
@@ -18,6 +19,9 @@ import { LanguageEnum } from '../../model/enum/language.enum';
 })
 export class CreateClimberprofileComponent {
   climberProfile: ClimberProfile;
+  userId: number;
+  user: any;
+  ////// NETTOYER ////////////////////////////////////////////
 
   languageList: string[] = [];
   languageMap: Map<string, string>= new Map; 
@@ -39,10 +43,16 @@ export class CreateClimberprofileComponent {
     private readonly route: ActivatedRoute, 
     private readonly formBuilder: FormBuilder, 
     private readonly climberprofileService: ClimberprofileService, 
+    private readonly authService : AuthService,
     private readonly snackBarService: SnackBarService, 
-    private readonly translate: TranslateService) {}
+    private readonly translateService: TranslateService) {}
 
   ngOnInit(): void{
+    if (history.state.user) {
+      this.user = history.state.user;
+      this.userId = history.state.userId;
+      console.log("on les a? : ", this.user, this.userId);
+    }
     this.profileForm = this.formBuilder.group(
       {
         name: ['', 
@@ -67,38 +77,43 @@ export class CreateClimberprofileComponent {
   private setLanguageList() {
     this.languageList = []; 
     this.languageMap.clear();
-    //this.selectedLang = '';
     
     for (let lang in LanguageEnum) {
       if(isNaN(Number(lang))) {
-        this.translate.get('lang.'+lang.toLowerCase()).forEach(language => {
+        this.translateService.get('lang.'+lang.toLowerCase()).forEach(language => {
           this.languageList.push(language);
           this.languageMap.set(lang.toLowerCase(), language);
-          if(lang.toLowerCase() === this.translate.currentLang){
-            this.selectedLang = this.translate.instant('lang.' + lang.toLowerCase());
+          if(lang.toLowerCase() === this.translateService.currentLang){
+            this.selectedLang = this.translateService.instant('lang.' + lang.toLowerCase());
+            this.getLanguageId(lang.toLowerCase());
           }
         });
       }
     }
-    this.translate.get('lang.'+ this.translate.currentLang).subscribe(currentLanguage => {
+
+   /* this.translate.get('lang.'+ this.translate.currentLang).subscribe(currentLanguage => {
       this.selectedLang = currentLanguage;
       console.log(this.selectedLang);
-    });
+    });*/
   }
    
   useLanguage(language: any): void {
     this.languageMap.forEach((label, code) => {
       if(language === label){
-        this.translate.use(code);
-        this.selectedLang = this.translate.instant('lang.'+code);
+        this.translateService.use(code);
+        this.selectedLang = this.translateService.instant('lang.'+code);
         console.log(this.selectedLang);
-        for (let lang in LanguageEnum) {
-          if(lang === code.toUpperCase())
-            this.languageId = parseInt(LanguageEnum[lang]);
-        }
+        this.getLanguageId(code);
       }
     });
       this.setLanguageList();
+  }
+
+  private getLanguageId(shortCode: string): void {
+    for (let lang in LanguageEnum) {
+      if(lang === shortCode.toUpperCase())
+        this.languageId = parseInt(LanguageEnum[lang]);
+    }
   }
 
   createProfile(): void{
@@ -110,7 +125,7 @@ export class CreateClimberprofileComponent {
   private showErrors(): void { 
     for(const value in this.field){
       if(this.field[value].errors) {
-        let fieldError = this.translate.instant('profile.edit.fieldError');
+        let fieldError = this.translateService.instant('profile.edit.fieldError');
         this.snackBarService.add(fieldError + value, 4000, "error");
       }
     };
@@ -118,21 +133,33 @@ export class CreateClimberprofileComponent {
 
   private  saveProfile(){
     this.climberProfile = {
-      name : this.field['name'].value, 
+      profileName : this.field['name'].value, 
       avatar: this.field['avatar'].value,
       genderId : this.field['gender'].value,
       languageId : this.languageId,
-      notified : this.field['notified'].value,
+      notified : this.field['notified'].value !== null? true : false,
       climberProfileDescription : this.field['description'].value,
+      //climberUser: this.userId
     };
-    console.log("climberProfile to save: " + JSON.stringify(this.climberProfile));
+    //alert(JSON.stringify(this.climberProfile));
+    //console.log("climberProfile to save: " + JSON.stringify(this.climberProfile));
     
      this.climberprofileService.postClimberProfile(this.climberProfile).subscribe(profile => {
       if(profile) {
         console.log(profile);
-        this.router.navigate(['../'], {relativeTo: this.route}); 
-      } else console.log("Le post n'a pas marché");
-    });
+        this.user.climberProfile = profile.id;
+        alert(this.user.climberProfile);
+        this.authService.updateClimberUser(this.user.id, this.user.climberProfile).subscribe(updatedUser => {
+          alert("On a updated le user:" + updatedUser);
+        });
+        this.router.navigate(['../climber-profile'], {relativeTo: this.route}); // TODO: mettre create en enfant de ClimberProfile pour mettre ca: ['../'], {relativeTo: this.route}
+      }
+    },
+    /*error => {
+      let message = this.translateService.instant('connect.login.error.loginFailed');
+      this.snackBarService.add(message , 4000, "error");
+    }*/
+   );
   }
 
   cancel(): void {
