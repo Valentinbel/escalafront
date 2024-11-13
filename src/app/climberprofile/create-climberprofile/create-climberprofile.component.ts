@@ -9,6 +9,7 @@ import { SnackBarComponent } from '../../shared/snack-bar/snack-bar.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LanguageEnum } from '../../model/enum/language.enum';
 import { AuthService } from '../../auth/auth.service';
+import { AuthStorageService } from '../../auth/auth-storage.service';
 
 @Component({
   selector: 'app-create-climberprofile',
@@ -44,6 +45,7 @@ export class CreateClimberprofileComponent {
     private readonly formBuilder: FormBuilder, 
     private readonly climberprofileService: ClimberprofileService, 
     private readonly authService : AuthService,
+    private readonly authStorageService: AuthStorageService,
     private readonly snackBarService: SnackBarService, 
     private readonly translateService: TranslateService) {}
 
@@ -137,29 +139,33 @@ export class CreateClimberprofileComponent {
       avatar: this.field['avatar'].value,
       genderId : this.field['gender'].value,
       languageId : this.languageId,
-      notified : this.field['notified'].value !== null? true : false,
+      notified : this.field['notified'].value ?? false,
       climberProfileDescription : this.field['description'].value,
-      //climberUser: this.userId
+      climberUser: this.userId
     };
     //alert(JSON.stringify(this.climberProfile));
     //console.log("climberProfile to save: " + JSON.stringify(this.climberProfile));
     
-     this.climberprofileService.postClimberProfile(this.climberProfile).subscribe(profile => {
+     this.climberprofileService.postClimberProfile(this.climberProfile).subscribe({
+      next: (profile) => {
       if(profile) {
         console.log(profile);
         this.user.climberProfile = profile.id;
         alert(this.user.climberProfile);
         this.authService.updateClimberUser(this.user.id, this.user.climberProfile).subscribe(updatedUser => {
           alert("On a updated le user:" + updatedUser);
+          //this.authStorageService.
+          // mettre à jour le authStorageService: Comparer le storage user avec ce qu'on reçoit. Sinon le mettre dans une variable à part. 
+
         });
         this.router.navigate(['../climber-profile'], {relativeTo: this.route}); // TODO: mettre create en enfant de ClimberProfile pour mettre ca: ['../'], {relativeTo: this.route}
       }
     },
-    /*error => {
+    error : error => {
       let message = this.translateService.instant('connect.login.error.loginFailed');
       this.snackBarService.add(message , 4000, "error");
-    }*/
-   );
+    }
+  });
   }
 
   cancel(): void {
