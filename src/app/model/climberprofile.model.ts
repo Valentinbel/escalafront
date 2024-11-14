@@ -8,6 +8,6 @@ export class ClimberProfile {
         //public climberUser?: Object, //////////////////
         public notified?: boolean, // Pourquoi c'est pas isNotified qui fonctionne? 
         public climberProfileDescription?: string, /// text
-        public climberUser?: number
+        public climberUserId?: number
     ) {}
 }

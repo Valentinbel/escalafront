@@ -5,12 +5,11 @@ import { AuthStorageService } from '../../auth-storage.service';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { SnackBarService } from '../../../shared/snack-bar/snack-bar.service';
-import { SnackBarComponent } from '../../../shared/snack-bar/snack-bar.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FormsModule, TranslateModule, SnackBarComponent],
+  imports: [ReactiveFormsModule, CommonModule, FormsModule, TranslateModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -43,7 +42,7 @@ export class LoginComponent {
 
     this.authService.login(username, password).subscribe({
       next: data => {
-        this.authStorageService.saveClimberUser(data);
+        this.authStorageService.setClimberUser(data);
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;

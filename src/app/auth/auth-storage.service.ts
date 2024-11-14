@@ -10,21 +10,29 @@ export class AuthStorageService {
   constructor() { }
 
   clean(): void {
-    window.sessionStorage.clear();
+    sessionStorage.clear();
   }
 
-  public saveClimberUser(climberUser: any): void { // TODO Ajouter climberUser
-    window.sessionStorage.removeItem(USER_KEY);
-    window.sessionStorage.setItem(USER_KEY, JSON.stringify(climberUser));
+  public setClimberUser(climberUser: any): void {
+    sessionStorage.removeItem(USER_KEY);
+    sessionStorage.setItem(USER_KEY, JSON.stringify(climberUser));
   }
 
-  public getClimberUser(): any { // TODO Ajouter climberUser
-    const climberUser = window.sessionStorage.getItem(USER_KEY);
+  public getClimberUser(): any {
+    const climberUser = sessionStorage.getItem(USER_KEY);
     if (climberUser) {
       return JSON.parse(climberUser);
     }
-
     return {};
+  }
+
+  public getProfileId(): number {
+    const profileId = sessionStorage.getItem('profileId');
+    return profileId ? JSON.parse(profileId) : 0;
+  }
+
+  public setProfileId(profileId: number): void {
+    sessionStorage.setItem('profileId', JSON.stringify(profileId));
   }
 
   public isLoggedIn(): boolean {
@@ -32,7 +40,6 @@ export class AuthStorageService {
     if (climberUser) {
       return true;
     }
-
     return false;
   }
 }
