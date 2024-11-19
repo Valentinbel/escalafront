@@ -1,5 +1,5 @@
 <div class="centeredComponent">
-  <form [formGroup]="profileForm" (ngSubmit)="createProfile()">
+  <form [formGroup]="profileForm" (ngSubmit)="submitProfile()">
     
     <div>
       <label class="label" for="name">Name: </label>
@@ -39,7 +39,7 @@
     </div>
     
     <div>
-      <label class="label" for="notified">Want to be notified for a new Match: </label>
+      <label class="label" for="notified">I accept to be notified by mail for a new Match: </label>
       <input id="notified" type="checkbox" formControlName="notified" />
     </div>
     
@@ -50,7 +50,7 @@
 
     <div>
       <button type="submit" class="button">Create Profile</button>
-      <button type="button" class="button" (click)="cancel()">Cancel</button>
+      <button type="button" class="button" (click)="cancelProfile()">Cancel</button>
     </div>
   </form>
 </div>

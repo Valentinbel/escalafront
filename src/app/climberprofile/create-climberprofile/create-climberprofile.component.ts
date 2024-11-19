@@ -30,6 +30,7 @@ export class CreateClimberprofileComponent {
   languageList: string[] = [];
   languageMap: Map<string, string> = new Map();
   languageId: number;
+  profileId: number;
   selectedLang: string;
 
   profileForm: FormGroup = new FormGroup({
@@ -54,6 +55,7 @@ export class CreateClimberprofileComponent {
   ngOnInit(): void {
     if (history.state.userId) {
       this.userId = history.state.userId;
+      this.profileId = history.state.profileId;
     }
 
     this.profileForm = this.formBuilder.group({
@@ -74,8 +76,7 @@ export class CreateClimberprofileComponent {
     this.setLanguageList();
   }
 
-  get field(): { [key: string]: AbstractControl } {
-    // we can get name field in the template using field.name instead of form.controls.name
+  get field(): { [key: string]: AbstractControl } { // using field.name instead of form.controls.name
     return this.profileForm.controls;
   }
 
@@ -123,7 +124,7 @@ export class CreateClimberprofileComponent {
     }
   }
 
-  createProfile(): void {
+  submitProfile(): void {
     this.submitted = true;
     this.profileForm.invalid ? this.showErrors() : this.saveProfile();
     console.log('Profile: ' + JSON.stringify(this.profileForm.value, null, 2));
@@ -142,6 +143,7 @@ export class CreateClimberprofileComponent {
 
   private saveProfile() {
     this.climberProfile = {
+      id: this.profileId,
       profileName: this.field['name'].value,
       avatar: this.field['avatar'].value,
       genderId: this.field['gender'].value,
@@ -169,7 +171,7 @@ export class CreateClimberprofileComponent {
       });
   }
 
-  cancel(): void {
+  cancelProfile(): void {
     this.router.navigate(['../climber-profile'], { relativeTo: this.route });
     //this.dialogRef.close(true);
     alert("T'as cliqué sur cancel, tu vas être redirigé");

@@ -25,13 +25,9 @@ export class ClimberprofileComponent {
   ) {}
 
   ngOnInit() {
-    // TODO: clean this user / userID si pas nécessaire ??
     this.userId = this.authStorageService.getClimberUser().id;
     this.profileId = this.authStorageService.getProfileId();
-    console.log(this.userId);
-    console.log(this.profileId);
     if (this.userId && this.profileId === 0) {
-      console.log('on va chercher le profile');
       this.getProfileByUserId(this.userId);
     }
   }
@@ -49,6 +45,7 @@ export class ClimberprofileComponent {
 
   openAddProfile() {
     const userId = this.userId;
-    this.router.navigate(['/add-climber-profile'], { state: { userId } });
+    const profileId = this.profileId;
+    this.router.navigate(['/add-climber-profile'], { state: { userId, profileId } });
   }
 }
