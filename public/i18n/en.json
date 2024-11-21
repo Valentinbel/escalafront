@@ -3,7 +3,9 @@
         "home": "Home", 
         "profile": "Profile",
         "searches": "Searches",
-        "contact": "Contact"
+        "contact": "Contact",
+        "connect": "Connect", 
+        "logout": "Logout"
     },
     "lang": {
         "en": "English",
@@ -35,23 +37,29 @@
         "name": "Name: ",
         "avatar": "Avatar: ",
         "language": "Language: ",
+        "gender": "Gender: ",
         "notified": "Notifications actived: ",
         "climberProfileDescription": "Description: ",
+        "yes": "Yes",
+        "no": "No",
         "btn": {
             "createProfile": "Create Profile",
-            "updateProfile": "Update Profile"
+            "editProfile": "Edit Profile",
+            "cancel": "Cancel"
         },
         "txt": {
-           "createProfile": "Mhh, You still don't have any profile. You'll have to create one!"
+           "createProfile": "Mhh, You still don't have any profile. You'll have to create one!",
+           "notifications": "I accept to be notified by mail for a new match: "
         },
         "link": {
             "contact": "Contact Us"
         },
         "edit": {
+            "nameRequired":"Name is required",
+            "nameMinLength": "Name must be at least 4 characters",
+            "nameMaxLength": "Name must not exceed 20 characters",
             "fieldError": "Error on the following field: ",
-            "error": {
-                "save": "Error during the profile creation"
-            }
+            "saveError": "Error during the profile creation"
         }
     }
 }

@@ -3,7 +3,9 @@
         "home": "Accueil", 
         "profile": "Profil",
         "searches": "Recherches",
-        "contact": "Contact"
+        "contact": "Contact", 
+        "connect": "Connexion", 
+        "logout": "Déconnexion"
     },
     "lang": {
         "en": "Anglais",
@@ -35,23 +37,29 @@
         "name": "Nom : ",
         "avatar": "Avatar : ",
         "language": "Langue : ",
+        "gender": "Genre : ",
         "notified": "Notifications actives : ",
         "climberProfileDescription": "Description : ",
+        "yes": "Oui",
+        "no": "Non",
         "btn": {
             "createProfile": "Créer Profil",
-            "updateProfile": "Modifier profil"
+            "editProfile": "Modifier profil",
+            "cancel": "Annuler"
         },
         "txt": {
-           "createProfile": "Mhh, Tu n'as pas de profil. Il va falloir en créer un !"
+           "createProfile": "Mhh, Tu n'as pas de profil. Il va falloir en créer un !",
+           "notifications": "J'accepte d'être notifié par mail lors d'iun nouveau match : "
         },
         "link": {
             "contact": "Contactez-nous"
         }, 
         "edit": {
+            "nameRequired":"Le nom est obligatoire",
+            "nameMinLength": "Le nom doit contenir au moins 4 caractères",
+            "nameMaxLength": "Le nom ne doit pas dépasser 20 caractères",
             "fieldError": "Erreur sur le champ suivant : ",
-            "error": {
-                "save": "Erreur lors de la création du profile"
-            }
+            "saveError": "Erreur lors de la création du profile"
         }
     }
 }

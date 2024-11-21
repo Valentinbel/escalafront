@@ -42,7 +42,7 @@ h1, h2, h3, h4, h5, h6 {
 p {
 	text-wrap: pretty;
 }
-input, select { 
+input, select, textarea { 
 	display: block;
 	width: 100%;
 	padding: 10px;
@@ -100,6 +100,10 @@ input, select {
 
 .invalid-form {
     color: var(--red-error);
+}
+
+.invalid-form span {
+	padding-left: 6px;
 }
 
 .is-invalid{

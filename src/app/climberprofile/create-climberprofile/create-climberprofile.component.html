@@ -1,32 +1,32 @@
 <div class="centeredComponent">
-  <form [formGroup]="profileForm" (ngSubmit)="submitProfile()">
+  <form [formGroup]="profileForm" id="profileForm" (ngSubmit)="submitProfile()">
     
     <div>
-      <label class="label" for="name">Name: </label>
+      <label class="label" for="name">{{ 'profile.name'| translate }}</label>
       <input id="name" type="text" autocomplete="username" formControlName="name" 
       [ngClass]="{ 'is-invalid': submitted && field['name'].errors }"/>
       @if (submitted && field['name'].errors) {
         <div class="invalid-form">
           @if (field['name'].errors['required']) {
-            <div>Username is required</div>
+            <span>{{ 'profile.edit.nameRequired'| translate }}</span>
             }
           @if (field['name'].errors['minlength']) {
-            <div>Username must be at least 4 characters</div>
+            <span>{{ 'profile.edit.nameMinLength'| translate }}</span>
             }
           @if (field['name'].errors['maxlength']) {
-            <div>Username must not exceed 20 characters</div>
+            <span>{{ 'profile.edit.nameMaxLength'| translate }}</span>
             }
         </div>
       }
     </div>
 
     <div>
-      <label class="label" for="description">Profile Description: </label>
-      <input id="description" type="text" formControlName="description"/>
+      <label class="label" for="description">{{ 'profile.climberProfileDescription'| translate }}</label>
+      <textarea id="description" rows="4" formControlName="description"></textarea>
     </div>
 
     <div>
-      <label class="label" for="language">Language: </label>
+      <label class="label" for="language">{{ 'profile.language'| translate }}</label>
       <select formControlName="language" name="language" id="language" (ngModelChange)="useLanguage($event)">
         <option [ngValue]="null" disabled selected hidden>{{selectedLang}}</option>
         <option [ngValue]="i" *ngFor="let i of languageList">{{i}}</option> 
@@ -34,23 +34,25 @@
     </div>
 
     <div>
-      <label class="label" for="gender">Gender: </label>
+      <label class="label" for="gender">{{ 'profile.gender'| translate }}</label>
       <input id="gender" type="number" formControlName="gender"/>
     </div>
     
     <div>
-      <label class="label" for="notified">I accept to be notified by mail for a new Match: </label>
+      <label class="label" for="notified">{{ 'profile.txt.notifications'| translate }}</label>
       <input id="notified" type="checkbox" formControlName="notified" />
     </div>
     
     <div>
-      <label class="label" for="avatar">Avatar: </label>
+      <label class="label" for="avatar">{{ 'profile.avatar'| translate }}</label>
       <input id="avatar" type="text" formControlName="avatar"/>
     </div>
 
     <div>
-      <button type="submit" class="button">Create Profile</button>
-      <button type="button" class="button" (click)="cancelProfile()">Cancel</button>
+      <button type="submit" class="button">
+        {{ (this.profileId === 0 ? 'profile.btn.createProfile' : 'profile.btn.editProfile') | translate }}
+      </button>
+      <button type="button" class="button" (click)="cancelProfile()">{{ 'profile.btn.cancel'| translate }}</button>
     </div>
   </form>
 </div>

@@ -133,9 +133,7 @@ export class CreateClimberprofileComponent {
   private showErrors(): void {
     for (const value in this.field) {
       if (this.field[value].errors) {
-        let fieldError = this.translateService.instant(
-          'profile.edit.fieldError'
-        );
+        let fieldError = this.translateService.instant('profile.edit.fieldError');
         this.snackBarService.add(fieldError + value, 4000, 'error');
       }
     }
@@ -163,10 +161,10 @@ export class CreateClimberprofileComponent {
           }
         },
         error: () => {
-          let message = this.translateService.instant(
-            'connect.login.error.loginFailed'
-          );
-          this.snackBarService.add(message, 4000, 'error');
+          let messageLogin = this.translateService.instant('connect.login.error.loginFailed');
+          let messageSave = this.translateService.instant('profile.edit.saveError');
+          this.snackBarService.add(messageLogin, 4000, 'error');
+          this.snackBarService.add(messageSave, 4000, 'error');
         },
       });
   }

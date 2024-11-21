@@ -5,15 +5,13 @@
             <p><strong>{{ 'profile.avatar'| translate }}</strong> {{this.climberProfile.avatar}}</p>
             <p><strong>{{ 'profile.gender'| translate }}</strong>{{this.climberProfile.genderId}}</p>
             <p><strong>{{ 'profile.language'| translate }}</strong>{{this.climberProfile.languageId}}</p>
-            <p><strong>{{ 'profile.notified'| translate }}</strong>{{this.climberProfile.notified? "OUI": "NON"}}</p>
+            <p><strong>{{ 'profile.notified'| translate }}</strong>{{ (this.climberProfile.notified? 'profile.yes' : 'profile.no') | translate }}</p>
             <p><strong>{{ 'profile.climberProfileDescription'| translate }}</strong>{{this.climberProfile.climberProfileDescription}}</p>
         </div>
-        <!-- TODO Need To be Edit Profile-->
-        <button class="button" (click)="openAddProfile()" >{{ 'profile.btn.updateProfile'| translate }}</button> <br/>
+        <button class="button" (click)="openAddProfile()" >{{ 'profile.btn.editProfile'| translate }}</button> <br/>
     }
-
     @else{
         <div >{{ 'profile.txt.createProfile'| translate }}</div>
-        <button class="button" (click)="openAddProfile()" > {{ 'profile.btn.createProfile'| translate }}</button> <br/>
+        <button class="button" (click)="openAddProfile()" >{{ 'profile.btn.createProfile'| translate }}</button> <br/>
     }
 </div>
