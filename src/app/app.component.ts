@@ -21,6 +21,7 @@ export class AppComponent {
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
+  userId: number;
 
   constructor(
     private readonly authService: AuthService, 
@@ -40,6 +41,7 @@ export class AppComponent {
 
     if (this.isLoggedIn) {
       const user = this.authStorageService.getClimberUser();
+      this.userId = user.id; 
       this.roles = user.roles;
       console.log(" user from Storage : ", user);
 
@@ -48,23 +50,19 @@ export class AppComponent {
 
       this.username = user.username;
     } else console.log("NOT LOGGED IN")
-    /*console.log("Salut les amis");
-    this.climberprofileService.getClimberProfiles().subscribe((climberProfile) => console.log("getClimberProfiles: " , climberProfile));
-
-    this.climberprofileService.getClimberProfileById(1).subscribe((climberProfile) => console.log("getClimberProfileById(1): ", climberProfile));*/
   }
 
   logout(): void {
-    this.authService.logout().subscribe({
-      next: res => {
-        console.log(res);
-        this.authStorageService.clean();
-
-        window.location.reload();
-      },
-      error: err => {
-        console.log(err);
-      }
-    });
-  }
+    if (this.isLoggedIn) {
+      this.authService.logout(this.userId).subscribe({
+        next: res => {
+          console.log(res);
+          this.authStorageService.clean();
+        },
+        error: err => {
+          console.log(err);
+        }
+      });
+    }
+  }   
 }

@@ -10,7 +10,7 @@
         @else {
           <li><a routerLink="climber-profile" routerLinkActive="active-link" ariaCurrentWhenActive="page">{{ 'navbar.profile'| translate }}</a></li>
           <li><a routerLink="searches" routerLinkActive="active-link" ariaCurrentWhenActive="page">{{ 'navbar.searches'| translate }}</a></li>
-          <li><a (click)="logout()">{{ 'navbar.logout'| translate }}</a></li>  
+          <li><a routerLink="home" routerLinkActive="active-link" ariaCurrentWhenActive="page" (click)="logout()">{{ 'navbar.logout'| translate }}</a></li>  
         }
       </ul>
       <a routerLink="home" class="logo">Pinya</a>

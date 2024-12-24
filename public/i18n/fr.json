@@ -5,7 +5,8 @@
         "searches": "Recherches",
         "contact": "Contact", 
         "connect": "Connexion", 
-        "logout": "Déconnexion"
+        "logout": "Déconnexion",
+        "logoutMessage": "Tu t'es déconnecté !"
     },
     "lang": {
         "en": "Anglais",

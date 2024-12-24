@@ -16,6 +16,7 @@ export class AuthStorageService {
   public setClimberUser(climberUser: any): void {
     sessionStorage.removeItem(USER_KEY);
     sessionStorage.setItem(USER_KEY, JSON.stringify(climberUser));
+    sessionStorage.setItem('climberUserId', JSON.stringify(climberUser.id) )
   }
 
   public getClimberUser(): any {
@@ -24,6 +25,11 @@ export class AuthStorageService {
       return JSON.parse(climberUser);
     }
     return {};
+  }
+
+  public getClimberUserId(): number {
+    const climberUserId = sessionStorage.getItem('climberUserId');
+    return climberUserId ? JSON.parse(climberUserId) : 0;
   }
 
   public getProfileId(): number {

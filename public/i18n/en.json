@@ -5,7 +5,8 @@
         "searches": "Searches",
         "contact": "Contact",
         "connect": "Connect", 
-        "logout": "Logout"
+        "logout": "Logout",
+        "logoutMessage": "You logged out!"
     },
     "lang": {
         "en": "English",
