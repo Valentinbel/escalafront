@@ -1,77 +1,96 @@
 <div class="col-md-12">
     <div class="card card-container">
       @if (!isSuccessful) {
-      <form
-        name="form"
-        (ngSubmit)="f.form.valid && onSubmit()"
-        #f="ngForm"
-        novalidate
-      >
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input type="text" class="form-control" name="username" [(ngModel)]="form.userName" required 
-          minlength="3" maxlength="20" #username="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
-          />
-          @if (username.errors && f.submitted) {
-          <div class="invalid-feedback">
-            @if (username.errors['required']) {
-            <div>Username is required</div>
+        <form [formGroup]="registerForm" id="registerForm" (ngSubmit)="submitRegister()"> 
+
+        <div>
+          <label class="label" for="userName">{{ 'connect.login.username'| translate }}</label>
+          <input id="userName" type="text" formControlName="userName" autocomplete="off"
+          [ngClass]="{ 'is-invalid': submitted && field['userName'].errors }"/>
+
+          @if (submitted && field['userName'].errors) {
+          <div class="invalid-form">
+            @if (field['userName'].errors['required']) {
+              <span>{{ 'connect.login.error.usernameRequired'| translate }}</span>
             }
-            @if (username.errors['minlength']) {
-            <div>Username must be at least 3 characters</div> 
+            @if (field['userName'].errors['minlength']) {
+              <span>{{ 'connect.register.error.usernameMinLength'| translate }}</span>
             }
-            @if (username.errors['maxlength']) {
-            <div>Username must be at most 20 characters</div>
+            @if (field['userName'].errors['maxlength']) {
+              <span>{{ 'connect.register.error.usernameMaxLength'| translate }}</span>
             }
           </div>
           }
         </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" class="form-control" name="email" [(ngModel)]="form.email" required email #email="ngModel"
-            [ngClass]="{ 'is-invalid': f.submitted && email.errors }"
-          />
-          @if (email.errors && f.submitted) {
-          <div class="invalid-feedback">
-            @if (email.errors['required']) {
-            <div>Email is required</div>
-            }
-            @if (email.errors['email']) {
-            <div>Email must be a valid email address</div>
-            }
-          </div>
+
+        <div>
+          <label class="label" for="email">{{ 'connect.register.email'| translate }}</label>
+          <input id="email" type="email" formControlName="email" autocomplete="on"
+            [ngClass]="{ 'is-invalid': submitted && field['email'].errors }"/>
+          @if (submitted && field['email'].errors) {
+            <div class="invalid-form">
+              @if (field['email'].errors['required']) {
+                <span>{{ 'connect.register.error.emailRequired'| translate }}</span>
+              }
+              @if (field['email'].errors['email']) {
+                <span>{{ 'connect.register.error.emailValid'| translate }}</span>
+              }
+              @if (field['email'].errors['maxlength']) {
+                <span>{{ 'connect.register.error.emailMaxLength'| translate }}</span>
+              }
+            </div>
           }
         </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required
-            minlength="6" #password="ngModel" 
-            [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
-          />
-          @if (password.errors && f.submitted) {
-          <div class="invalid-feedback">
-            @if (password.errors['required']) {
-            <div>Password is required</div>
-            }
-            @if (password.errors['minlength']) {
-            <div>Password must be at least 6 characters</div>
-            }
-          </div>
+
+        <div>
+          <label class="label" for="password">{{ 'connect.login.password'| translate }}</label>
+          <input id="password" type="password" formControlName="password" 
+            [ngClass]="{ 'is-invalid': submitted && field['password'].errors }"/>
+          @if (submitted && field['password'].errors) {
+            <div class="invalid-form">
+              @if (field['password'].errors['required']) {
+                <span>{{ 'connect.login.error.passwordRequired'| translate }}</span>
+              }
+              @if (field['password'].errors['minlength']) {
+                <span>{{ 'connect.login.error.passwordMinLength'| translate }}</span>
+              }
+              @if (field['password'].errors['maxlength']) {
+                <span>{{ 'connect.login.error.passwordMaxLength'| translate }}</span>
+              }
+            </div>
           }
         </div>
-        <div class="form-group">
-          <button class="button">Sign Up</button>
+
+        <div>
+          <label class="label" for="passwordConfirm">{{ 'connect.register.confirmPassword'| translate }}</label>
+          <input id="passwordConfirm" type="password" formControlName="passwordConfirm" 
+            [ngClass]="{ 'is-invalid': submitted && field['passwordConfirm'].errors }"/>
+          @if (submitted && field['passwordConfirm'].errors) {
+            <div class="invalid-form">
+              @if (field['passwordConfirm'].errors['required']) {
+                <span>{{ 'connect.register.error.confirmPasswordRequired'| translate }}</span>
+              }
+              @if (field['passwordConfirm'].errors['minlength']) {
+                <span>{{ 'connect.register.error.confirmPasswordMinLength'| translate }}</span>
+              }
+              @if (field['passwordConfirm'].errors['maxlength']) {
+                <span>{{ 'connect.register.error.confirmPasswordMaxLength'| translate }}</span>
+              }
+              @if (registerForm.hasError('passwordMismatch')) {
+                <span>{{ 'connect.register.error.passwordMismatch'| translate }}</span>
+              }
+            </div>
+          }
         </div>
-  
-        @if (f.submitted && isSignUpFailed) {
-        <div class="alert alert-warning">
-          Signup failed!<br />{{ errorMessage }}
+
+        <div>
+          <button type="submit" class="button">{{ 'connect.btn.createAccount'| translate }}</button>
         </div>
-        }
       </form>
+
       } @else {
-      <div class="alert alert-success">Your registration is successful!</div>
+        <!-- TODO Mettre en forme-->
+      <div>{{ 'connect.registrationSuccessfull'| translate }}</div>
       }
     </div>
   </div>

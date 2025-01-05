@@ -20,8 +20,8 @@ export class LoginComponent {
   };
 
   isLoggedIn: boolean = false;
-  isLoginFailed: boolean = false;
-  errorMessage: string = '';
+  isLoginFailed: boolean = false; //TODO supprimer aussi ?????
+  errorMessage: string = ''; // TODO revoir?
   userName: string = '';
 
   constructor(

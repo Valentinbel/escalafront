@@ -1,29 +1,37 @@
 <div class="col-md-12">
     <div class="card card-container">
+      <!-- 
+        METTRE LES SPANS POUR ERREURS
+      -->
       @if (!isLoggedIn) {
       <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate >
         <div class="form-group">
           <label for="username">{{ 'connect.login.username'| translate }}</label>
-          <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required #username="ngModel" 
+          <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required #username="ngModel"  autocomplete="on"
             [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
           />
           @if (username.errors && f.submitted) {
-          <div class="invalid-feedback">{{ 'connect.login.error.username'| translate }}</div>
+          <div class="invalid-feedback">{{ 'connect.login.error.usernameRequired'| translate }}</div>
           }
         </div>
         <div class="form-group">
           <label for="password">{{ 'connect.login.password'| translate }}</label>
-          <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="6" #password="ngModel"
+          <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="8" #password="ngModel"
             [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
           />
           @if (password.errors && f.submitted) {
           <div class="invalid-feedback">
             @if (password.errors['required']) {
-            <div>{{ 'connect.login.error.password'| translate }}</div>
+            <div>{{ 'connect.login.error.passwordRequired'| translate }}</div>
             }
             @if (password.errors['minlength']) {
-            <div>{{ 'connect.login.error.passwordMin'| translate }}</div>
+            <div>{{ 'connect.login.error.passwordMinLength'| translate }}</div>
             }
+            <!--
+            @if (field['password'].errors['maxlength']) {
+                <span>{{ 'connect.login.error.passwordMaxLength'| translate }}</span>
+              }
+          -->
           </div>
           }
         </div>

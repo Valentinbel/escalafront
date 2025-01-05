@@ -1,14 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-  AbstractControl,
-  FormBuilder,
-  FormsModule,
-} from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators, AbstractControl, FormBuilder, FormsModule} from '@angular/forms';
 import { ClimberprofileService } from './../../climberprofile/climberprofile.service';
 import { CommonModule } from '@angular/common';
 import { ClimberProfile } from '../../model/climberprofile.model';
@@ -23,15 +15,8 @@ import { LanguageEnum } from '../../model/enum/language.enum';
   templateUrl: './create-climberprofile.component.html',
   styleUrl: './create-climberprofile.component.css',
 })
-export class CreateClimberprofileComponent {
-  climberProfile: ClimberProfile;
-  userId: number;
 
-  languageList: string[] = [];
-  languageMap: Map<string, string> = new Map();
-  languageId: number;
-  profileId: number;
-  selectedLang: string;
+export class CreateClimberprofileComponent {
 
   profileForm: FormGroup = new FormGroup({
     name: new FormControl(''),
@@ -41,7 +26,16 @@ export class CreateClimberprofileComponent {
     avatar: new FormControl(''),
     notified: new FormControl(''),
   });
+
+  climberProfile: ClimberProfile;
   submitted = false;
+
+  userId: number;
+  languageList: string[] = [];
+  languageMap: Map<string, string> = new Map();
+  languageId: number;
+  profileId: number;
+  selectedLang: string;
 
   constructor(
     private readonly router: Router,
@@ -59,8 +53,7 @@ export class CreateClimberprofileComponent {
     }
 
     this.profileForm = this.formBuilder.group({
-      name: [
-        '',
+      name: ['',
         [
           Validators.required,
           Validators.minLength(4),
@@ -98,11 +91,6 @@ export class CreateClimberprofileComponent {
         });
       }
     }
-
-    /* this.translate.get('lang.'+ this.translate.currentLang).subscribe(currentLanguage => {
-      this.selectedLang = currentLanguage;
-      console.log(this.selectedLang);
-    });*/
   }
 
   useLanguage(language: any): void {
@@ -133,13 +121,13 @@ export class CreateClimberprofileComponent {
   private showErrors(): void {
     for (const value in this.field) {
       if (this.field[value].errors) {
-        let fieldError = this.translateService.instant('profile.edit.fieldError');
-        this.snackBarService.add(fieldError + value, 4000, 'error');
+        let fieldError = this.translateService.instant('form.fieldError');
+        this.snackBarService.add(fieldError + value, 8000, 'error');
       }
     }
   }
 
-  private saveProfile() {
+  private saveProfile(): void {
     this.climberProfile = {
       id: this.profileId,
       profileName: this.field['name'].value,
@@ -151,22 +139,20 @@ export class CreateClimberprofileComponent {
       climberUserId: this.userId,
     };
 
-    this.climberprofileService
-      .postClimberProfile(this.climberProfile)
-      .subscribe({
-        next: (profile) => {
-          if (profile) {
-            console.log(profile);
-            this.router.navigate(['../climber-profile'], {relativeTo: this.route}); // TODO: mettre create en enfant de ClimberProfile pour mettre ca: ['../'], {relativeTo: this.route}
-          }
-        },
-        error: () => {
-          let messageLogin = this.translateService.instant('connect.login.error.loginFailed');
-          let messageSave = this.translateService.instant('profile.edit.saveError');
-          this.snackBarService.add(messageLogin, 4000, 'error');
-          this.snackBarService.add(messageSave, 4000, 'error');
-        },
-      });
+    this.climberprofileService.postClimberProfile(this.climberProfile).subscribe({
+      next: (profile) => {
+        if (profile) {
+          console.log(profile);
+          this.router.navigate(['../climber-profile'], {relativeTo: this.route}); // TODO: mettre create en enfant de ClimberProfile pour mettre ca: ['../'], {relativeTo: this.route}
+        }
+      },
+      error: () => {
+        let messageLogin = this.translateService.instant('connect.login.error.loginFailed');
+        let messageSave = this.translateService.instant('profile.edit.saveError');
+        this.snackBarService.add(messageLogin, 8000, 'error');
+        this.snackBarService.add(messageSave, 8000, 'error');
+      },
+    });
   }
 
   cancelProfile(): void {
