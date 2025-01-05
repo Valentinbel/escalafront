@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Register } from '../model/register.model';
 import { MessageResponse } from '../model/message-response.model';
+import { LoginResponse } from '../model/login-response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -15,11 +16,10 @@ export class AuthService {
 
   constructor(private readonly httpClient: HttpClient) { }
 
-  login(userName: string, password: string ): Observable<any> { // TODO: model
-    return this.httpClient.post(
-      this.urlAuth + 'login',
+  login(userName: string, password: string ): Observable<LoginResponse> { 
+    return this.httpClient.post<LoginResponse>(this.urlAuth + 'login',
       {
-        userName, password,
+        userName, password, // TODO: model
       }, this.httpOptions
     );
   }

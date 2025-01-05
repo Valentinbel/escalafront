@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { LoginResponse } from '../model/login-response.model';
 
 const USER_KEY = 'auth-user';
 
@@ -13,7 +14,7 @@ export class AuthStorageService {
     sessionStorage.clear();
   }
 
-  public setClimberUser(climberUser: any): void {
+  public setClimberUser(climberUser: LoginResponse): void {
     sessionStorage.removeItem(USER_KEY);
     sessionStorage.setItem(USER_KEY, JSON.stringify(climberUser));
     sessionStorage.setItem('climberUserId', JSON.stringify(climberUser.id) )
