@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { EventBusService } from '../shared/event-bus.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { SnackBarService } from '../shared/snack-bar/snack-bar.service';
+import { MessageResponse } from '../model/messageresponse.model';
 
 @Component({
   selector: 'app-navbar',
@@ -39,17 +40,16 @@ export class NavbarComponent {
   logout(): void {
     if (this.isLoggedIn) {
       let userId = this.authStorageService.getClimberUserId();
-      console.log(userId)
       this.authService.logout(userId).subscribe({
-        next: res => {
-          console.log(res);
+        next: (response: MessageResponse) => {
+          console.log(response.message);
           this.authStorageService.clean();
           this.isLoggedIn = false;
 
           let logoutMessage = this.translateService.instant('navbar.logoutMessage');
           this.snackBarService.add(logoutMessage , 4000, "error");
         },
-        error: err => {
+        error: (err) => {
           console.log(err);
         }
       });

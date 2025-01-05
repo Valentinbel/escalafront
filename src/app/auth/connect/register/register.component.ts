@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { SnackBarService } from '../../../shared/snack-bar/snack-bar.service';
 import { Register } from '../../../model/register.model';
+import { MessageResponse } from '../../../model/messageresponse.model';
 
 @Component({
   selector: 'app-register',
@@ -97,12 +98,12 @@ export class RegisterComponent {
     };
 
     this.authService.register(this.registerModel).subscribe({
-      next: data => {
-        console.log(data);
+      next: (response: MessageResponse) => {
+        console.log(response.message);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
       },
-      error: err => {
+      error: (err) => {
         this.errorMessage = err.error.message;
         console.log(this.errorMessage);
         this.isSignUpFailed = true;

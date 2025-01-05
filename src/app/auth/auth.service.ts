@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Register } from '../model/register.model';
+import { MessageResponse } from '../model/messageresponse.model';
 
 @Injectable({
   providedIn: 'root',
@@ -23,12 +24,12 @@ export class AuthService {
     );
   }
 
-  register(registerForm: Register): Observable<any> { // TODO: model
-    return this.httpClient.post(this.urlAuth + 'register',registerForm, this.httpOptions);
+  register(registerForm: Register): Observable<MessageResponse> {
+    return this.httpClient.post<MessageResponse>(this.urlAuth + 'register',registerForm, this.httpOptions);
   }
 
-  logout(userId: number): Observable<any> {
-    return this.httpClient.post(this.urlAuth + 'signout/'+ userId, this.httpOptions); 
+  logout(userId: number): Observable<MessageResponse> {
+    return this.httpClient.post<MessageResponse>(this.urlAuth + 'signout/'+ userId, this.httpOptions); 
   }
 
   refreshToken(): Observable<any>  { // TODO: model

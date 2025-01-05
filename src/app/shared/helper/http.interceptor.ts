@@ -6,6 +6,7 @@ import { EventBusService } from "../event-bus.service";
 import { EventData } from "../event.class";
 import { AuthService } from "../../auth/auth.service";
 import { Router } from "@angular/router";
+import { MessageResponse } from "../../model/messageresponse.model";
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
@@ -74,10 +75,10 @@ export class HttpRequestInterceptor implements HttpInterceptor {
                   this.authStorageService.clean();
                   this.eventBusService.emit(new EventData('logout', null));
                   this.authService.logout(userId).subscribe({
-                    next: res => {
-                      console.log(res);
+                    next: (reponses: MessageResponse) => {
+                      console.log(reponses.message);
                     },
-                    error: err => {
+                    error: (err) => {
                       console.log(err);
                     }
                   });
