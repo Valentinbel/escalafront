@@ -34,7 +34,7 @@ export class ClimberprofileComponent {
 
   getProfileByUserId(userId: number): void {
     this.climberprofileService.getProfileByUserId(userId).subscribe({
-      next: (climberProfile) => {
+      next: (climberProfile: ClimberProfile) => {
         this.climberProfile = climberProfile;
         this.authStorageService.setProfileId(climberProfile.id!);
         console.log(this.climberProfile);

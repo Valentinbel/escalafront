@@ -41,7 +41,7 @@ export class LoginComponent {
     const { username, password } = this.form;
 
     this.authService.login(username, password).subscribe({
-      next: data => {
+      next: (data) => {
         this.authStorageService.setClimberUser(data);
 
         this.isLoginFailed = false;
@@ -49,7 +49,7 @@ export class LoginComponent {
         this.userName = this.authStorageService.getClimberUser().userName;
         this.reloadPage();
       },
-      error: err => {
+      error: (err) => {
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
         this.displayErrorSnackBar(this.errorMessage);

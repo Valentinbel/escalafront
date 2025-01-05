@@ -6,6 +6,7 @@ import { AuthStorageService } from './auth/auth-storage.service';
 import { AuthService } from './auth/auth.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import defaultLanguage from '../../public/i18n/en.json';
+import { MessageResponse } from './model/messageresponse.model';
 
 @Component({
   selector: 'app-root',
@@ -55,11 +56,11 @@ export class AppComponent {
   logout(): void {
     if (this.isLoggedIn) {
       this.authService.logout(this.userId).subscribe({
-        next: res => {
-          console.log(res);
+        next: (response: MessageResponse) => {
+          console.log(response.message);
           this.authStorageService.clean();
         },
-        error: err => {
+        error: (err) => {
           console.log(err);
         }
       });

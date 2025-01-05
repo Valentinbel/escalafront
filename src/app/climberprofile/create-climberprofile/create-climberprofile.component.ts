@@ -140,7 +140,7 @@ export class CreateClimberprofileComponent {
     };
 
     this.climberprofileService.postClimberProfile(this.climberProfile).subscribe({
-      next: (profile) => {
+      next: (profile: ClimberProfile) => {
         if (profile) {
           console.log(profile);
           this.router.navigate(['../climber-profile'], {relativeTo: this.route}); // TODO: mettre create en enfant de ClimberProfile pour mettre ca: ['../'], {relativeTo: this.route}
