@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { SnackBarService } from '../../../shared/snack-bar/snack-bar.service';
 import { Register } from '../../../model/register.model';
-import { MessageResponse } from '../../../model/messageresponse.model';
+import { MessageResponse } from '../../../model/message-response.model';
 
 @Component({
   selector: 'app-register',

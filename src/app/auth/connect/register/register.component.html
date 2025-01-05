@@ -76,7 +76,10 @@
               @if (field['passwordConfirm'].errors['maxlength']) {
                 <span>{{ 'connect.register.error.confirmPasswordMaxLength'| translate }}</span>
               }
-              @if (registerForm.hasError('passwordMismatch')) {
+              @if (!field['passwordConfirm'].errors['required'] 
+                && !field['passwordConfirm'].errors['minlength'] 
+                && !field['passwordConfirm'].errors['maxlength']
+                && registerForm.hasError('passwordMismatch')) {
                 <span>{{ 'connect.register.error.passwordMismatch'| translate }}</span>
               }
             </div>

@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 import { EventBusService } from '../shared/event-bus.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { SnackBarService } from '../shared/snack-bar/snack-bar.service';
-import { MessageResponse } from '../model/messageresponse.model';
+import { MessageResponse } from '../model/message-response.model';
 
 @Component({
   selector: 'app-navbar',

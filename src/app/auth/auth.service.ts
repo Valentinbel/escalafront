@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Register } from '../model/register.model';
-import { MessageResponse } from '../model/messageresponse.model';
+import { MessageResponse } from '../model/message-response.model';
 
 @Injectable({
   providedIn: 'root',

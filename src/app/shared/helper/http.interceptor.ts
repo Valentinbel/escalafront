@@ -6,7 +6,7 @@ import { EventBusService } from "../event-bus.service";
 import { EventData } from "../event.class";
 import { AuthService } from "../../auth/auth.service";
 import { Router } from "@angular/router";
-import { MessageResponse } from "../../model/messageresponse.model";
+import { MessageResponse } from "../../model/message-response.model";
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {

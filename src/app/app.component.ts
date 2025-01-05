@@ -6,7 +6,7 @@ import { AuthStorageService } from './auth/auth-storage.service';
 import { AuthService } from './auth/auth.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import defaultLanguage from '../../public/i18n/en.json';
-import { MessageResponse } from './model/messageresponse.model';
+import { MessageResponse } from './model/message-response.model';
 
 @Component({
   selector: 'app-root',
