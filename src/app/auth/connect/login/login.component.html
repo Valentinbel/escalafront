@@ -1,44 +1,51 @@
-<div class="col-md-12">
-    <div class="card card-container">
-      <!-- 
-        METTRE LES SPANS POUR ERREURS
-      -->
+<div>
+    <div> <!-- METTRE LES SPANS POUR ERREURS -->
+    <!-- TODO Mettre des h1 ou h2 sur TOUS les html --> 
       @if (!isLoggedIn) {
-      <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate >
-        <div class="form-group">
-          <label for="username">{{ 'connect.login.username'| translate }}</label>
-          <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required #username="ngModel"  autocomplete="on"
-            [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
-          />
-          @if (username.errors && f.submitted) {
-          <div class="invalid-feedback">{{ 'connect.login.error.usernameRequired'| translate }}</div>
-          }
-        </div>
-        <div class="form-group">
-          <label for="password">{{ 'connect.login.password'| translate }}</label>
-          <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="8" #password="ngModel"
-            [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
-          />
-          @if (password.errors && f.submitted) {
-          <div class="invalid-feedback">
-            @if (password.errors['required']) {
-            <div>{{ 'connect.login.error.passwordRequired'| translate }}</div>
+        <form [formGroup]="loginForm" id="registerForm" (ngSubmit)="submitLogin()"> 
+          
+          <div>
+            <label class="label" for="email">{{ 'connect.register.email'| translate }}</label>
+            <input id="email" type="email" formControlName="email" autocomplete="on"
+              [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"/>
+            @if (submitted && f['email'].errors) {
+              <div class="invalid-form">
+                @if (f['email'].errors['required']) {
+                  <span>{{ 'connect.register.error.emailRequired'| translate }}</span>
+                }
+                @if (f['email'].errors['email']) {
+                  <span>{{ 'connect.register.error.emailValid'| translate }}</span>
+                }
+                @if (f['email'].errors['maxlength']) {
+                  <span>{{ 'connect.register.error.emailMaxLength'| translate }}</span>
+                }
+              </div>
             }
-            @if (password.errors['minlength']) {
-            <div>{{ 'connect.login.error.passwordMinLength'| translate }}</div>
-            }
-            <!--
-            @if (field['password'].errors['maxlength']) {
-                <span>{{ 'connect.login.error.passwordMaxLength'| translate }}</span>
-              }
-          -->
           </div>
-          }
-        </div>
-        <div class="form-group">
-          <button class="button">{{ 'connect.login.login'| translate }}</button>
-        </div>
-      </form>
+  
+          <div>
+            <label class="label" for="password">{{ 'connect.login.password'| translate }}</label>
+            <input id="password" type="password" formControlName="password" 
+              [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"/>
+            @if (submitted && f['password'].errors) {
+              <div class="invalid-form">
+                @if (f['password'].errors['required']) {
+                  <span>{{ 'connect.login.error.passwordRequired'| translate }}</span>
+                }
+                @if (f['password'].errors['minlength']) {
+                  <span>{{ 'connect.login.error.passwordMinLength'| translate }}</span>
+                }
+                @if (f['password'].errors['maxlength']) {
+                  <span>{{ 'connect.login.error.passwordMaxLength'| translate }}</span>
+                }
+              </div>
+            }
+          </div>
+            
+          <div>
+            <button type="submit" class="button">{{ 'connect.login.login'| translate }}</button>
+          </div>
+        </form>
       }
     </div>
   </div>

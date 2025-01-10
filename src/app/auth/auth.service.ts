@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Register } from '../model/register.model';
 import { MessageResponse } from '../model/message-response.model';
 import { LoginResponse } from '../model/login-response.model';
+import { Login } from '../model/login.model';
 
 @Injectable({
   providedIn: 'root',
@@ -16,12 +17,8 @@ export class AuthService {
 
   constructor(private readonly httpClient: HttpClient) { }
 
-  login(userName: string, password: string ): Observable<LoginResponse> { 
-    return this.httpClient.post<LoginResponse>(this.urlAuth + 'login',
-      {
-        userName, password, // TODO: model
-      }, this.httpOptions
-    );
+  login(loginForm: Login ): Observable<LoginResponse> { 
+    return this.httpClient.post<LoginResponse>(this.urlAuth + 'login', loginForm, this.httpOptions);
   }
 
   register(registerForm: Register): Observable<MessageResponse> {

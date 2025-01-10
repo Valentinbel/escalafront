@@ -1,12 +1,12 @@
-import { HTTP_INTERCEPTORS, HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { catchError, Observable, switchMap, throwError } from "rxjs";
-import { AuthStorageService } from "../../auth/auth-storage.service";
-import { EventBusService } from "../event-bus.service";
-import { EventData } from "../event.class";
-import { AuthService } from "../../auth/auth.service";
-import { Router } from "@angular/router";
-import { MessageResponse } from "../../model/message-response.model";
+import { HTTP_INTERCEPTORS, HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { catchError, Observable, switchMap, throwError } from 'rxjs';
+import { AuthStorageService } from '../../auth/auth-storage.service';
+import { EventBusService } from '../event-bus.service';
+import { EventData } from '../event.class';
+import { AuthService } from '../../auth/auth.service';
+import { Router } from '@angular/router';
+import { MessageResponse } from '../../model/message-response.model';
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
@@ -68,7 +68,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
     
                 if (error.status === 403) {
                   this.eventBusService.emit(new EventData('logout', null));
-                  console.log("403 Forbidden, You are authenticated but can't access this one");                
+                  console.log("403 Forbidden, You are authenticated but can't access this one");
                 }
                 if (error.status === 401) {
                   const userId = this.authStorageService.getClimberUserId();

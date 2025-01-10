@@ -47,7 +47,7 @@ export class NavbarComponent {
           this.isLoggedIn = false;
 
           let logoutMessage = this.translateService.instant('navbar.logoutMessage');
-          this.snackBarService.add(logoutMessage , 4000, "error");
+          this.snackBarService.add(logoutMessage , 8000, 'error');
         },
         error: (err) => {
           console.log(err);

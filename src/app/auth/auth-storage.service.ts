@@ -20,7 +20,7 @@ export class AuthStorageService {
     sessionStorage.setItem('climberUserId', JSON.stringify(climberUser.id) )
   }
 
-  public getClimberUser(): any {
+  public getClimberUser(): any { // TODO Model
     const climberUser = sessionStorage.getItem(USER_KEY);
     if (climberUser) {
       return JSON.parse(climberUser);

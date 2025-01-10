@@ -35,7 +35,7 @@ export class ConnectComponent {
   displayWelcomeSnackBar(): void {
     let userName = this.authStorageService.getClimberUser().userName;
     let message = this.translateService.instant('connect.login.success');
-    this.snackBarService.add(message + userName, 4000, "success");
+    this.snackBarService.add(message + userName, 4000, 'success');
   }
 
   displayLogin():void {

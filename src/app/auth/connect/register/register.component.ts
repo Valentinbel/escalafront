@@ -22,7 +22,7 @@ export class RegisterComponent {
     userName: new FormControl(''),
     email: new FormControl(''),
     password: new FormControl(''),
-  })
+  });
 
   registerModel: Register;
   submitted = false;
@@ -40,20 +40,22 @@ export class RegisterComponent {
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
-      userName:['', [ Validators.required, 
-                      Validators.minLength(4),
-                      Validators.maxLength(20)]],
-      email:['', [  Validators.required,
-                    Validators.email,
-                    Validators.maxLength(50)]],
-      password:['',[  Validators.required,
-                      Validators.minLength(8),
-                      Validators.maxLength(40)]],
-      passwordConfirm:['',[ Validators.required,
-                            Validators.minLength(8),
-                            Validators.maxLength(40)]],
-                            
-                            
+      userName:['', [ 
+        Validators.required, 
+        Validators.minLength(4),
+        Validators.maxLength(20)]],
+      email:['', [  
+        Validators.required,
+        Validators.email,
+        Validators.maxLength(50)]],
+      password:['',[  
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(40)]],
+      passwordConfirm:['',[ 
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(40)]],              
     },{ validators: this.passwordMatchValidator })
   }
 
@@ -68,7 +70,7 @@ export class RegisterComponent {
     return null;
   };
 
-  get field(): { [key: string]: AbstractControl } { // using field.name instead of form.controls.name // TODO mettre juste f
+  get f(): { [key: string]: AbstractControl } { // using field.name instead of form.controls.name 
     return this.registerForm.controls;
   }
 
@@ -78,8 +80,8 @@ export class RegisterComponent {
   }
 
   private showErrors(): void {
-    for (const value in this.field) {
-      if (this.field[value].errors) {
+    for (const value in this.f) {
+      if (this.f[value].errors) {
         let fieldError = this.translateService.instant('form.fieldError');
         this.snackBarService.add(fieldError + value, 8000, 'error');
       } 
@@ -92,9 +94,9 @@ export class RegisterComponent {
 
   private saveRegister(): void {
     this.registerModel = {
-      userName: this.field['userName'].value,
-      email: this.field['email'].value,
-      password: this.field['password'].value
+      userName: this.f['userName'].value,
+      email: this.f['email'].value,
+      password: this.f['password'].value
     };
 
     this.authService.register(this.registerModel).subscribe({

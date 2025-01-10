@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NavbarComponent } from "./navbar/navbar.component";
+import { NavbarComponent } from './navbar/navbar.component';
 import { SnackBarComponent } from './shared/snack-bar/snack-bar.component';
 import { AuthStorageService } from './auth/auth-storage.service';
 import { AuthService } from './auth/auth.service';
