@@ -17,7 +17,7 @@ export class ClimberprofileService {
     return this.httpClient.get<ClimberProfile>(this.urlClimberProfileByclimberUser + climberProfileId);
   }
 
-  postClimberProfile(climberprofile: ClimberProfile): Observable<ClimberProfile> {
+  saveClimberProfile(climberprofile: ClimberProfile): Observable<ClimberProfile> {
     return this.httpClient.post(this.urlClimberProfiles, climberprofile);
   }
 }

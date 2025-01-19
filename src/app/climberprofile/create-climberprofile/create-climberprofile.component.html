@@ -1,28 +1,31 @@
 <div class="centeredComponent">
+  <h1 *ngIf="isAddMode">{{ 'profile.title.createProfile'| translate }}</h1>
+  <h1 *ngIf="!isAddMode">{{ 'profile.title.editProfile'| translate }}</h1>
+
   <form [formGroup]="profileForm" id="profileForm" (ngSubmit)="submitProfile()">
-    
     <div>
-      <label class="label" for="name">{{ 'profile.name'| translate }}</label>
-      <input id="name" type="text" autocomplete="username" formControlName="name" 
-      [ngClass]="{ 'is-invalid': submitted && field['name'].errors }"/>
-      @if (submitted && field['name'].errors) {
+      <label class="label" for="userName">{{ 'profile.name'| translate }}</label>
+      <input id="userName" type="text" formControlName="userName" 
+        [ngClass]="{ 'is-invalid': submitted && field['userName'].errors }"/> 
+
+      @if (submitted && field['userName'].errors) {
         <div class="invalid-form">
-          @if (field['name'].errors['required']) {
+          @if (field['userName'].errors['required']) {
             <span>{{ 'profile.edit.nameRequired'| translate }}</span>
             }
-          @if (field['name'].errors['minlength']) {
+          @if (field['userName'].errors['minlength']) {
             <span>{{ 'profile.edit.nameMinLength'| translate }}</span>
             }
-          @if (field['name'].errors['maxlength']) {
-            <span>{{ 'profile.edit.nameMaxLength'| translate }}</span>
+          @if (field['userName'].errors['maxlength']) {
+            <span>{{ 'profile.edit.nameMaxLength'| translate }}</span> <!-- TODO changer dans les translate-->
             }
         </div>
       }
     </div>
 
     <div>
-      <label class="label" for="description">{{ 'profile.climberProfileDescription'| translate }}</label>
-      <textarea id="description" rows="4" formControlName="description"></textarea>
+      <label class="label" for="climberProfileDescription">{{ 'profile.climberProfileDescription'| translate }}</label>
+      <textarea id="climberProfileDescription" rows="4" formControlName="climberProfileDescription"></textarea>
     </div>
 
     <div>
@@ -34,8 +37,8 @@
     </div>
 
     <div>
-      <label class="label" for="gender">{{ 'profile.gender'| translate }}</label>
-      <input id="gender" type="number" formControlName="gender"/>
+      <label class="label" for="genderId">{{ 'profile.gender'| translate }}</label>
+      <input id="genderId" type="number" formControlName="genderId"/>
     </div>
     
     <div>
@@ -49,8 +52,8 @@
     </div>
 
     <div>
-      <button type="submit" class="button">
-        {{ (this.profileId === 0 ? 'profile.btn.createProfile' : 'profile.btn.editProfile') | translate }}
+      <button type="submit" class="button"> 
+        {{ (isAddMode ? 'profile.btn.createProfile' : 'profile.btn.editProfile') | translate }}
       </button>
       <button type="button" class="button" (click)="cancelProfile()">{{ 'profile.btn.cancel'| translate }}</button>
     </div>

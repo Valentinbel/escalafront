@@ -71,9 +71,13 @@
             "editProfile": "Modifier profil",
             "cancel": "Annuler"
         },
+        "title": {
+            "createProfile": "Crée ton profil",
+            "editProfile": "Modifie ton profil"
+        },
         "txt": {
            "createProfile": "Mhh, Tu n'as pas de profil. Il va falloir en créer un !",
-           "notifications": "J'accepte d'être notifié par mail lors d'iun nouveau match : "
+           "notifications": "J'accepte d'être notifié par mail lors d'un nouveau match : "
         },
         "link": {
             "contact": "Contactez-nous"

@@ -5,6 +5,7 @@ import { ClimberProfile } from '../model/climberprofile.model';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthStorageService } from '../auth/auth-storage.service';
+import { ProfileStorageServiceService } from './profile-storage-service.service';
 
 @Component({
   selector: 'app-climberprofile',
@@ -15,19 +16,20 @@ import { AuthStorageService } from '../auth/auth-storage.service';
 })
 export class ClimberprofileComponent {
   climberProfile: ClimberProfile;
+  userName: string;
   private userId: number;
-  private profileId: number;
 
   constructor(
     private readonly climberprofileService: ClimberprofileService,
     private readonly authStorageService: AuthStorageService,
+    private readonly profileStorageService: ProfileStorageServiceService,
     private readonly router: Router
   ) {}
 
   ngOnInit() {
     this.userId = this.authStorageService.getClimberUser().id;
-    this.profileId = this.authStorageService.getProfileId();
-    if (this.userId) { //TODO : and that... ? && this.profileId === 0
+    this.userName = this.authStorageService.getClimberUser().userName;
+    if (this.userId) { //TODO : and ... ? && this.profileId === 0
       this.getProfileByUserId(this.userId);
     }
   }
@@ -36,7 +38,7 @@ export class ClimberprofileComponent {
     this.climberprofileService.getProfileByUserId(userId).subscribe({
       next: (climberProfile: ClimberProfile) => {
         this.climberProfile = climberProfile;
-        this.authStorageService.setProfileId(climberProfile.id!);
+        this.profileStorageService.setProfile(climberProfile);
         console.log(this.climberProfile);
       },
       error: (err) => console.log('There is no profile related to your account. Please create one.',err)
@@ -45,7 +47,8 @@ export class ClimberprofileComponent {
 
   openAddProfile() {
     const userId = this.userId;
-    const profileId = this.profileId;
-    this.router.navigate(['/add-climber-profile'], { state: { userId, profileId } });
+    const profile = this.climberProfile;
+    const userName = this.userName;
+    this.router.navigate(['/add-climber-profile'], { state: { userId, userName, profile } });
   }
 }

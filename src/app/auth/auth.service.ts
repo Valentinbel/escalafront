@@ -33,8 +33,4 @@ export class AuthService {
     console.log("refreshToken/////////////////////////////////")
     return this.httpClient.post(this.urlAuth + 'refreshtoken', { }, this.httpOptions);
   }
-
-  updateClimberUser(userId: number, profileId: number) : Observable<any>  { // TODO: model
-    return this.httpClient.put(this.baseUrl + 'climber-users', {userId, profileId}, this.httpOptions)
-  }
 }

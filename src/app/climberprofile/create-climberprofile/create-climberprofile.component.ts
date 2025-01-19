@@ -7,6 +7,9 @@ import { ClimberProfile } from '../../model/climberprofile.model';
 import { SnackBarService } from '../../shared/snack-bar/snack-bar.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LanguageEnum } from '../../model/enum/language.enum';
+import { ClimberuserService } from '../climberuser.service';
+import { ProfileStorageServiceService } from '../profile-storage-service.service';
+import { AuthStorageService } from '../../auth/auth-storage.service';
 
 @Component({
   selector: 'app-create-climberprofile',
@@ -17,18 +20,24 @@ import { LanguageEnum } from '../../model/enum/language.enum';
 })
 
 export class CreateClimberprofileComponent {
+// TODO: REFAIRE UN TEST DEPUIS LE REGISTER
+// FINIR LE PATCH POUR LE RESTE DU PROFILE 
+// TODO isLoading
+// https://jasonwatmore.com/post/2020/09/02/angular-combined-add-edit-create-update-form-example
+// TODO navbar mettre userName
 
   profileForm: FormGroup = new FormGroup({
-    name: new FormControl(''),
-    description: new FormControl(''),
-    language: new FormControl(''),
-    gender: new FormControl(''),
+    userName: new FormControl(''),
+    climberProfileDescription: new FormControl(''),
+    languageId: new FormControl(''),
+    genderId: new FormControl(''),
     avatar: new FormControl(''),
     notified: new FormControl(''),
   });
 
   climberProfile: ClimberProfile;
   submitted = false;
+  isAddMode: boolean;
 
   userId: number;
   languageList: string[] = [];
@@ -36,12 +45,16 @@ export class CreateClimberprofileComponent {
   languageId: number;
   profileId: number;
   selectedLang: string;
+  userName: string;
 
   constructor(
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly formBuilder: FormBuilder,
     private readonly climberprofileService: ClimberprofileService,
+    private readonly climberUserService: ClimberuserService,
+    private readonly authStorageService: AuthStorageService,
+    private readonly profileStorageService: ProfileStorageServiceService,
     private readonly snackBarService: SnackBarService,
     private readonly translateService: TranslateService
   ) {}
@@ -49,23 +62,55 @@ export class CreateClimberprofileComponent {
   ngOnInit(): void {
     if (history.state.userId) {
       this.userId = history.state.userId;
-      this.profileId = history.state.profileId;
+      this.userName = history.state.userName;
+      this.climberProfile = history.state.profile;
+      this.profileId = this.climberProfile.id!;
     }
 
+    /* TODO this.id = this.route.snapshot.params['id'];
+        this.isAddMode = !this.id;*/
+
+    this.isAddMode = this.climberProfile === undefined;
+   
+    console.log('climberProfile: ' + JSON.stringify(this.climberProfile));
+    console.log('this.isAddMode: ' + this.isAddMode);
+
     this.profileForm = this.formBuilder.group({
-      name: ['',
+      userName: ['',
         [
           Validators.required,
           Validators.minLength(4),
           Validators.maxLength(20),
         ],
       ],
-      description: [],
+      climberProfileDescription: [],
       language: [],
-      gender: [],
+      genderId: [],
       notified: [],
       avatar: [],
     });
+    
+
+  
+    // TODO Dans une fonction particuliere type retrieve fields
+    // TODO Attention à languageId qui ne fonctione pas.
+    this.profileForm.get('userName')?.patchValue(this.userName);
+    if (!this.isAddMode && this.climberProfile !== undefined) {
+      let profileToUpdate: ClimberProfile;
+      profileToUpdate = this.profileStorageService.getProfile();
+  
+      this.profileForm.get('climberProfileDescription')?.patchValue(profileToUpdate.climberProfileDescription);
+      this.profileForm.get('languageId')?.patchValue(profileToUpdate.languageId);
+      this.languageId = profileToUpdate.languageId!;
+      this.profileForm.get('genderId')?.patchValue(profileToUpdate.genderId); 
+      this.profileForm.get('avatar')?.patchValue(profileToUpdate.avatar);
+      this.profileForm.get('notified')?.patchValue(profileToUpdate.notified);
+
+
+      
+    }
+
+    // TODO : on dira dans la fonction: si !addmode et profile.languageId, alors on utilise ça
     this.setLanguageList();
   }
 
@@ -93,7 +138,7 @@ export class CreateClimberprofileComponent {
     }
   }
 
-  useLanguage(language: any): void {
+  useLanguage(language: any): void { // TODO type
     this.languageMap.forEach((label, code) => {
       if (language === label) {
         this.translateService.use(code);
@@ -114,7 +159,7 @@ export class CreateClimberprofileComponent {
 
   submitProfile(): void {
     this.submitted = true;
-    this.profileForm.invalid ? this.showErrors() : this.saveProfile();
+    this.profileForm.invalid ? this.showErrors() : this.saveForm();
     console.log('Profile: ' + JSON.stringify(this.profileForm.value, null, 2));
   }
 
@@ -126,33 +171,60 @@ export class CreateClimberprofileComponent {
       }
     }
   }
+  private saveForm(): void {
+    this.saveProfile();
+    this.saveUserName();
+    // TODO: nest l'un dans l'autre ?
+  }
+
+  private saveUserName(): void {
+    let userName  = this.field['userName'].value;
+    console.log(typeof(this.field['userName'].value));
+
+    this.climberUserService.updateClimberUserNameById(this.userId, userName).subscribe({
+      next: () => {
+        this.authStorageService.setUserName(userName);
+      },
+      error: (err) => {
+        this.displayErrorSnackBar(err.error.message);
+      },
+    });
+  }
+
 
   private saveProfile(): void {
+    console.log('profileId: ', this.profileId);
     this.climberProfile = {
       id: this.profileId,
-      profileName: this.field['name'].value,
       avatar: this.field['avatar'].value,
-      genderId: this.field['gender'].value,
+      genderId: this.field['genderId'].value,
       languageId: this.languageId,
       notified: this.field['notified'].value ?? false,
-      climberProfileDescription: this.field['description'].value,
+      climberProfileDescription: this.field['climberProfileDescription'].value,
       climberUserId: this.userId,
     };
 
-    this.climberprofileService.postClimberProfile(this.climberProfile).subscribe({
+    this.climberprofileService.saveClimberProfile(this.climberProfile).subscribe({
       next: (profile: ClimberProfile) => {
         if (profile) {
           console.log(profile);
           this.router.navigate(['../climber-profile'], {relativeTo: this.route}); // TODO: mettre create en enfant de ClimberProfile pour mettre ca: ['../'], {relativeTo: this.route}
         }
       },
-      error: () => {
-        let messageLogin = this.translateService.instant('connect.login.error.loginFailed');
-        let messageSave = this.translateService.instant('profile.edit.saveError');
-        this.snackBarService.add(messageLogin, 8000, 'error');
-        this.snackBarService.add(messageSave, 8000, 'error');
+      error: (err) => {
+        this.displayErrorSnackBar(err.error.message);
       },
     });
+  }
+
+  displayErrorSnackBar(errorMessage: string): void {
+    console.log(errorMessage);
+    let messageLogin = this.translateService.instant('connect.login.error.loginFailed');
+    let messageSave = this.translateService.instant('profile.edit.saveError');
+    this.snackBarService.add(messageLogin, 8000, 'error');
+    this.snackBarService.add(messageSave, 8000, 'error');
+
+    //TODO Faire comme ca dans les autres endroits: login, register et où il y a d'autres subscribe. 
   }
 
   cancelProfile(): void {

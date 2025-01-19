@@ -71,6 +71,10 @@
             "editProfile": "Edit Profile",
             "cancel": "Cancel"
         },
+        "title": {
+            "createProfile": "Create your profile",
+            "editProfile": "Edit your profile"
+        },
         "txt": {
            "createProfile": "Mhh, You still don't have any profile. You'll have to create one!",
            "notifications": "I accept to be notified by mail for a new match: "

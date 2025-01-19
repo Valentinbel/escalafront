@@ -20,6 +20,12 @@ export class AuthStorageService {
     sessionStorage.setItem('climberUserId', JSON.stringify(climberUser.id) )
   }
 
+  public setUserName( userName: string): void {
+    const climberUser = this.getClimberUser();
+    climberUser.userName = userName;
+    sessionStorage.setItem('USER_KEY', JSON.stringify(climberUser));
+  }
+
   public getClimberUser(): any { // TODO Model
     const climberUser = sessionStorage.getItem(USER_KEY);
     if (climberUser) {
@@ -31,15 +37,6 @@ export class AuthStorageService {
   public getClimberUserId(): number {
     const climberUserId = sessionStorage.getItem('climberUserId');
     return climberUserId ? JSON.parse(climberUserId) : 0;
-  }
-
-  public getProfileId(): number {
-    const profileId = sessionStorage.getItem('profileId');
-    return profileId ? JSON.parse(profileId) : 0;
-  }
-
-  public setProfileId(profileId: number): void {
-    sessionStorage.setItem('profileId', JSON.stringify(profileId));
   }
 
   public isLoggedIn(): boolean {
