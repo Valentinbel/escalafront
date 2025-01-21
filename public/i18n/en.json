@@ -6,7 +6,8 @@
         "contact": "Contact",
         "connect": "Connect", 
         "logout": "Logout",
-        "logoutMessage": "You logged out!"
+        "logoutMessage": "You logged out!",
+        "hello": "Hello "
     },
     "lang": {
         "en": "English",

@@ -9,7 +9,7 @@ import { SnackBarService } from '../shared/snack-bar/snack-bar.service';
 import { MessageResponse } from '../model/message-response.model';
 
 @Component({
-  selector: 'app-navbar',
+  selector: 'navbar',
   standalone: true,
   imports: [RouterModule, TranslateModule],
   templateUrl: './navbar.component.html',
@@ -19,6 +19,7 @@ export class NavbarComponent {
 
   eventBusSub?: Subscription;
   isLoggedIn = false;
+  userName: string;
   
   constructor(
     private readonly authService: AuthService, 
@@ -32,8 +33,10 @@ export class NavbarComponent {
     this.eventBusSub = this.eventBusService.on('logout', () => {
       this.logout();
     });
+
     if (this.authStorageService.isLoggedIn()) {
       this.isLoggedIn = true;
+      this.userName = this.authStorageService.getUserName();
     }
   }
 

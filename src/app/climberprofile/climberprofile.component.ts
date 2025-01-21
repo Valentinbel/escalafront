@@ -28,7 +28,7 @@ export class ClimberprofileComponent {
 
   ngOnInit() {
     this.userId = this.authStorageService.getClimberUser().id;
-    this.userName = this.authStorageService.getClimberUser().userName;
+    this.userName = this.authStorageService.getUserName();
     if (this.userId) { //TODO : and ... ? && this.profileId === 0
       this.getProfileByUserId(this.userId);
     }

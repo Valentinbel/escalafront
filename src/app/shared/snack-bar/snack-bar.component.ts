@@ -3,7 +3,7 @@ import { SnackBarService } from './snack-bar.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-snack-bar',
+  selector: 'snack-bar',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './snack-bar.component.html',

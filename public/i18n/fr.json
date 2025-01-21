@@ -6,7 +6,8 @@
         "contact": "Contact", 
         "connect": "Connexion", 
         "logout": "Déconnexion",
-        "logoutMessage": "Tu t'es déconnecté !"
+        "logoutMessage": "Tu t'es déconnecté !",
+        "hello": "Salut "
     },
     "lang": {
         "en": "Anglais",

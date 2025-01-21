@@ -7,11 +7,12 @@ import { AuthService } from './auth/auth.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import defaultLanguage from '../../public/i18n/en.json';
 import { MessageResponse } from './model/message-response.model';
+import { ContactComponent } from "./contact/contact.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ NavbarComponent, RouterModule, SnackBarComponent, TranslateModule ], //RouterOutlet
+  imports: [NavbarComponent, RouterModule, SnackBarComponent, TranslateModule, ContactComponent], //RouterOutlet
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

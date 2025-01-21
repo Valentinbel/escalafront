@@ -27,7 +27,6 @@ export class LoginComponent {
   loginModel: Login;
 
   isLoggedIn: boolean = false;
-  errorMessage: string = ''; // TODO revoir?
   userName: string = '';
 
   constructor(
@@ -87,18 +86,14 @@ export class LoginComponent {
         this.reloadPage();
       },
       error: (err) => {
-        this.errorMessage = err.error.message;
-        this.displayErrorSnackBar(this.errorMessage);
+        let errorMessage = err.error.message;
+        let message = this.translateService.instant('connect.login.error.loginFailed');
+        this.snackBarService.add(message + errorMessage, 8000, 'error');
       }
     });
   }
 
   reloadPage(): void {
     window.location.reload();
-  }
-
-  displayErrorSnackBar(errorMessage: string): void {
-    let message = this.translateService.instant('connect.login.error.loginFailed');
-    this.snackBarService.add(message + errorMessage, 8000, 'error');
   }
 }

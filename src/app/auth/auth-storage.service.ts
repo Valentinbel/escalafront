@@ -14,10 +14,23 @@ export class AuthStorageService {
     sessionStorage.clear();
   }
 
+  public getClimberUser(): any { // TODO Model
+    const climberUser = sessionStorage.getItem(USER_KEY);
+    if (climberUser) {
+      return JSON.parse(climberUser);
+    }
+    return {};
+  }
+  
   public setClimberUser(climberUser: LoginResponse): void {
     sessionStorage.removeItem(USER_KEY);
     sessionStorage.setItem(USER_KEY, JSON.stringify(climberUser));
     sessionStorage.setItem('climberUserId', JSON.stringify(climberUser.id) )
+  }
+
+  public getUserName(): string {
+    const climberUser = this.getClimberUser();
+    return climberUser.userName;
   }
 
   public setUserName( userName: string): void {
@@ -26,13 +39,6 @@ export class AuthStorageService {
     sessionStorage.setItem('USER_KEY', JSON.stringify(climberUser));
   }
 
-  public getClimberUser(): any { // TODO Model
-    const climberUser = sessionStorage.getItem(USER_KEY);
-    if (climberUser) {
-      return JSON.parse(climberUser);
-    }
-    return {};
-  }
 
   public getClimberUserId(): number {
     const climberUserId = sessionStorage.getItem('climberUserId');

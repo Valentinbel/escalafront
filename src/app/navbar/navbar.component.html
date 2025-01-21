@@ -4,7 +4,7 @@
       <ul class="menu-items">
         @if(!isLoggedIn) {
           <li><a routerLink="home" routerLinkActive="active-link" ariaCurrentWhenActive="page">{{ 'navbar.home'| translate }}</a></li>
-          <li><a routerLink="contact" routerLinkActive="active-link" ariaCurrentWhenActive="page">{{ 'navbar.contact'| translate }}</a></li> 
+          <!--<li><a routerLink="contact" routerLinkActive="active-link" ariaCurrentWhenActive="page">{{ 'navbar.contact'| translate }}</a></li> -->
           <li><a routerLink="connect" routerLinkActive="active" ariaCurrentWhenActive="page">{{ 'navbar.connect'| translate }}</a></li>
         }
         @else {
@@ -14,5 +14,8 @@
         }
       </ul>
       <a routerLink="home" class="logo">Pinya</a>
+      @if(isLoggedIn) {
+        <span>{{ 'navbar.hello'| translate }}{{this.userName}}</span>
+      }
     </div>
   </nav>
