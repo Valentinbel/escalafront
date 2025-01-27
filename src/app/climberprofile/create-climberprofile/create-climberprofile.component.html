@@ -2,6 +2,8 @@
   <h1 *ngIf="isAddMode">{{ 'profile.title.createProfile'| translate }}</h1>
   <h1 *ngIf="!isAddMode">{{ 'profile.title.editProfile'| translate }}</h1>
 
+  <avatar></avatar>
+
   <form [formGroup]="profileForm" id="profileForm" (ngSubmit)="submitProfile()">
     <div>
       <label class="label" for="userName">{{ 'profile.name'| translate }}</label>

@@ -27,9 +27,12 @@
               }
             ],
             "styles": [
-              "src/style/styles.css"
+              "src/style/styles.css",
+              "node_modules/cropperjs/dist/cropper.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/cropperjs/dist/cropper.js"
+            ]
           },
           "configurations": {
             "production": {

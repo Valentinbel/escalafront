@@ -10,21 +10,21 @@ import { LanguageEnum } from '../../model/enum/language.enum';
 import { ClimberuserService } from '../climberuser.service';
 import { ProfileStorageServiceService } from '../profile-storage-service.service';
 import { AuthStorageService } from '../../auth/auth-storage.service';
+import { AvatarComponent } from "../../shared/avatar/avatar.component";
 
 @Component({
   selector: 'app-create-climberprofile',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, TranslateModule, FormsModule],
+  imports: [ReactiveFormsModule, CommonModule, TranslateModule, FormsModule, AvatarComponent],
   templateUrl: './create-climberprofile.component.html',
   styleUrl: './create-climberprofile.component.css',
 })
 
 export class CreateClimberprofileComponent {
-// TODO: REFAIRE UN TEST DEPUIS LE REGISTER
 // FINIR LE PATCH POUR LE RESTE DU PROFILE 
 // TODO isLoading
+// Changer nom component => Modifier routing comme dans tuto 
 // https://jasonwatmore.com/post/2020/09/02/angular-combined-add-edit-create-update-form-example
-// TODO navbar mettre userName
 
   profileForm: FormGroup = new FormGroup({
     userName: new FormControl(''),
@@ -89,8 +89,6 @@ export class CreateClimberprofileComponent {
       notified: [],
       avatar: [],
     });
-    
-
   
     // TODO Dans une fonction particuliere type retrieve fields
     // TODO Attention à languageId qui ne fonctione pas.
@@ -106,8 +104,11 @@ export class CreateClimberprofileComponent {
       this.profileForm.get('avatar')?.patchValue(profileToUpdate.avatar);
       this.profileForm.get('notified')?.patchValue(profileToUpdate.notified);
 
-
-      
+     /* if (!this.isAddMode) {
+        this.userService.getById(this.id)
+            .pipe(first())
+            .subscribe(x => this.form.patchValue(x));
+      }*/
     }
 
     // TODO : on dira dans la fonction: si !addmode et profile.languageId, alors on utilise ça
@@ -171,6 +172,7 @@ export class CreateClimberprofileComponent {
       }
     }
   }
+
   private saveForm(): void {
     this.saveProfile();
     this.saveUserName();
@@ -190,7 +192,6 @@ export class CreateClimberprofileComponent {
       },
     });
   }
-
 
   private saveProfile(): void {
     console.log('profileId: ', this.profileId);
