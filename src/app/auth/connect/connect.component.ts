@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -12,7 +12,8 @@ import { SnackBarService } from '../../shared/snack-bar/snack-bar.service';
     templateUrl: './connect.component.html',
     styleUrl: './connect.component.css'
 })
-export class ConnectComponent {
+
+export class ConnectComponent implements OnInit {
   isLoggedIn: boolean = false;
   wantLogin: boolean = true;
 

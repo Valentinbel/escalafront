@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth.service';
 import { AbstractControl, ValidationErrors, ValidatorFn ,FormBuilder, FormControl, 
   FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -15,7 +15,7 @@ import { MessageResponse } from '../../../model/message-response.model';
     styleUrl: './register.component.css'
 })
 
-export class RegisterComponent {
+export class RegisterComponent implements OnInit{
 
   registerForm: FormGroup = new FormGroup({
     userName: new FormControl(''),

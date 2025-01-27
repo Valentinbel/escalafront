@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { AuthStorageService } from '../auth/auth-storage.service';
@@ -14,7 +14,7 @@ import { MessageResponse } from '../model/message-response.model';
     templateUrl: './navbar.component.html',
     styleUrl: './navbar.component.css'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit{
 
   eventBusSub?: Subscription;
   isLoggedIn = false;

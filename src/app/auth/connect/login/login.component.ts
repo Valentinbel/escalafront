@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth.service';
 import { FormBuilder, FormControl, FormGroup, FormsModule, Validators, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 import { AuthStorageService } from '../../auth-storage.service';
@@ -15,7 +15,7 @@ import { Login } from '../../../model/login.model';
     styleUrl: './login.component.css'
 })
 
-export class LoginComponent {
+export class LoginComponent implements OnInit{
 
   loginForm: FormGroup = new FormGroup({
     email: new FormControl(''),

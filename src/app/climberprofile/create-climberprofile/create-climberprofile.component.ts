@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators, AbstractControl, FormBuilder, FormsModule} from '@angular/forms';
 import { ClimberprofileService } from './../../climberprofile/climberprofile.service';
@@ -19,7 +19,7 @@ import { AvatarComponent } from "../../shared/avatar/avatar.component";
     styleUrl: './create-climberprofile.component.css'
 })
 
-export class CreateClimberprofileComponent {
+export class CreateClimberprofileComponent implements OnInit{
 // FINIR LE PATCH POUR LE RESTE DU PROFILE 
 // TODO isLoading
 // Changer nom component => Modifier routing comme dans tuto 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ClimberprofileService } from './../climberprofile/climberprofile.service';
 import { RouterModule, Router } from '@angular/router';
 import { ClimberProfile } from '../model/climberprofile.model';
@@ -13,7 +13,7 @@ import { ProfileStorageServiceService } from './profile-storage-service.service'
     templateUrl: './climberprofile.component.html',
     styleUrl: './climberprofile.component.css'
 })
-export class ClimberprofileComponent {
+export class ClimberprofileComponent implements OnInit{
   climberProfile: ClimberProfile;
   userName: string;
   private userId: number;
