@@ -9,11 +9,10 @@ import { Register } from '../../../model/register.model';
 import { MessageResponse } from '../../../model/message-response.model';
 
 @Component({
-  selector: 'app-register',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, TranslateModule, FormsModule],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+    selector: 'app-register',
+    imports: [ReactiveFormsModule, CommonModule, TranslateModule, FormsModule],
+    templateUrl: './register.component.html',
+    styleUrl: './register.component.css'
 })
 
 export class RegisterComponent {

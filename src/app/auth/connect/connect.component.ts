@@ -7,11 +7,10 @@ import { Router } from '@angular/router';
 import { SnackBarService } from '../../shared/snack-bar/snack-bar.service';
 
 @Component({
-  selector: 'app-connect',
-  standalone: true,
-  imports: [LoginComponent, RegisterComponent, TranslateModule],
-  templateUrl: './connect.component.html',
-  styleUrl: './connect.component.css'
+    selector: 'app-connect',
+    imports: [LoginComponent, RegisterComponent, TranslateModule],
+    templateUrl: './connect.component.html',
+    styleUrl: './connect.component.css'
 })
 export class ConnectComponent {
   isLoggedIn: boolean = false;

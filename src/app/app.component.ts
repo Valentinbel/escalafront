@@ -10,11 +10,10 @@ import { MessageResponse } from './model/message-response.model';
 import { ContactComponent } from "./contact/contact.component";
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [NavbarComponent, RouterModule, SnackBarComponent, TranslateModule, ContactComponent], //RouterOutlet
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+    selector: 'app-root',
+    imports: [NavbarComponent, RouterModule, SnackBarComponent, TranslateModule, ContactComponent], //RouterOutlet
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'pinya';

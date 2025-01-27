@@ -9,11 +9,10 @@ import { LoginResponse } from '../../../model/login-response.model';
 import { Login } from '../../../model/login.model';
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FormsModule, TranslateModule],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+    selector: 'app-login',
+    imports: [ReactiveFormsModule, CommonModule, FormsModule, TranslateModule],
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.css'
 })
 
 export class LoginComponent {

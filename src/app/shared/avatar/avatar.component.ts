@@ -4,11 +4,10 @@ import { ImageCropperComponent } from './image-cropper/image-cropper.component';
 
 
 @Component({
-  selector: 'avatar',
-  standalone: true,
-  imports: [CommonModule ],
-  templateUrl: './avatar.component.html',
-  styleUrl: './avatar.component.css'
+    selector: 'avatar',
+    imports: [CommonModule],
+    templateUrl: './avatar.component.html',
+    styleUrl: './avatar.component.css'
 })
 export class AvatarComponent {
   // TODO Icon vient de https://phosphoricons.com/. Banque importée dans index.html

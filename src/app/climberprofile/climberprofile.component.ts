@@ -8,11 +8,10 @@ import { AuthStorageService } from '../auth/auth-storage.service';
 import { ProfileStorageServiceService } from './profile-storage-service.service';
 
 @Component({
-  selector: 'app-climberprofile',
-  standalone: true,
-  imports: [RouterModule, CommonModule, TranslateModule],
-  templateUrl: './climberprofile.component.html',
-  styleUrl: './climberprofile.component.css',
+    selector: 'app-climberprofile',
+    imports: [RouterModule, CommonModule, TranslateModule],
+    templateUrl: './climberprofile.component.html',
+    styleUrl: './climberprofile.component.css'
 })
 export class ClimberprofileComponent {
   climberProfile: ClimberProfile;

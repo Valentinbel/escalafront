@@ -9,11 +9,10 @@ import { SnackBarService } from '../shared/snack-bar/snack-bar.service';
 import { MessageResponse } from '../model/message-response.model';
 
 @Component({
-  selector: 'navbar',
-  standalone: true,
-  imports: [RouterModule, TranslateModule],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+    selector: 'navbar',
+    imports: [RouterModule, TranslateModule],
+    templateUrl: './navbar.component.html',
+    styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
 

@@ -13,11 +13,10 @@ import { AuthStorageService } from '../../auth/auth-storage.service';
 import { AvatarComponent } from "../../shared/avatar/avatar.component";
 
 @Component({
-  selector: 'app-create-climberprofile',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, TranslateModule, FormsModule, AvatarComponent],
-  templateUrl: './create-climberprofile.component.html',
-  styleUrl: './create-climberprofile.component.css',
+    selector: 'app-create-climberprofile',
+    imports: [ReactiveFormsModule, CommonModule, TranslateModule, FormsModule, AvatarComponent],
+    templateUrl: './create-climberprofile.component.html',
+    styleUrl: './create-climberprofile.component.css'
 })
 
 export class CreateClimberprofileComponent {

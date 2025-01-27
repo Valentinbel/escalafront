@@ -3,11 +3,10 @@ import { SnackBarService } from './snack-bar.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'snack-bar',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './snack-bar.component.html',
-  styleUrl: './snack-bar.component.css'
+    selector: 'snack-bar',
+    imports: [CommonModule],
+    templateUrl: './snack-bar.component.html',
+    styleUrl: './snack-bar.component.css'
 })
 export class SnackBarComponent {
   constructor(public snackBarService: SnackBarService){}
