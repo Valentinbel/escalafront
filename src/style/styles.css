@@ -4,10 +4,10 @@
 
 :root {
 	/* colors */
-	--pinya-color-powderBlueBg: #B6E1E7;
-	--pinya-color-orangeBackGround:  #F9B872;
-	--btn-color-greenBackGround: #44c767;
-	--btn-color-greenBorder: #18ab29;
+	--pinya-color-violetBg: #D953DB;
+	--pinya-color-orangeBackGround:  #DBBD53;
+	--btn-color-greyBackGround: #608680;
+	--btn-color-greyBorder: #18ab29;
 	--btn-color-greenTxtShadow: #2f6627;
 	--btn-color-greenHover: #5cbf2a;
 	--white: white;
@@ -48,7 +48,8 @@ input, select, textarea {
 	padding: 10px;
 	margin: 5px;
 	background-color: var(--white);
-	border: 1px solid ;
+	border: none;
+    border-radius: 5px;
 }
 
 /* Fonts*/
@@ -87,9 +88,9 @@ input, select, textarea {
 /********************/
 .centeredComponent{
     margin-inline: 3rem;
-	background-color: var(--pinya-color-powderBlueBg);
+	background-color: var(--pinya-color-violetBg);
 	padding: 1.5rem 4rem;
-	border: 1px solid var(--black);
+	/*border: 1px solid var(--black);*/
     border-radius: var(--borderRadius-default);
 }
 /* Forms*/
@@ -112,7 +113,7 @@ input, select, textarea {
 
 /* Buttons*/
 .button {
-	background-color: var(--btn-color-greenBackGround);
+	background-color: var(--btn-color-greyBackGround);
 	border-radius:var(--borderRadius-default);
 	border:1px solid var(--btn-color-greenBorder);
 	display:inline-block;

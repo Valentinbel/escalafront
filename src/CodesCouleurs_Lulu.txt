@@ -1,0 +1,22 @@
+#53DBC5 //vert emeraude (navbar)
+#DBBD53 // Orange (fond)
+#D953DB //violet (cadre)
+#608680 // gris (boutons)
+#5C5439 // marron (?) bouton2?
+
+essayer: 
+vert oyen en fond
+vert foncé en centeredForm
+Navbar en rose
+Boutons en orange-
+
+
+-------------------------
+TODO: 
+    Changer le nom des composants avec tirets, car pas de majuscules dans les nom des fichiers. 
+    Et certains fichiers sont dejà comme ca
+    Verifier quand meme dans un doc de reference sur le nommage des fichiers si on est ok
+
+TODO: 
+    Chercher comment avoir les imports automatiquement en singlequote
+    Avoir une erreur sonar
