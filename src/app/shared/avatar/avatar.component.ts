@@ -22,6 +22,7 @@ export class AvatarComponent {
     if (files.length > 0) {
       const _file = URL.createObjectURL(files[0]);
       console.log(_file);
+      this.file = _file;
       this.resetInput();
       
       /*this.openAvatarEditor(_file).subscribe((result) => {
@@ -32,7 +33,7 @@ export class AvatarComponent {
       }); */
     }
   }
-  
+
   resetInput(){
     const input = document.getElementById('avatar-input-file') as HTMLInputElement;
     if(input){
