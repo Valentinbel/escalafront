@@ -1,17 +1,22 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog'
 import { ImageCropperComponent } from './image-cropper/image-cropper.component';
+import { Observable } from 'rxjs';
 
 
 @Component({
     selector: 'avatar',
-    imports: [CommonModule],
+    imports: [CommonModule, MatDialogModule],
     templateUrl: './avatar.component.html',
     styleUrl: './avatar.component.css'
 })
 export class AvatarComponent {
   // TODO Icon vient de https://phosphoricons.com/. Banque importée dans index.html
   // On peut lui mettre une color. + size.+ 
+
+  
+  constructor(public dialog: MatDialog) {}
 
   file: string = '';
 
@@ -21,15 +26,13 @@ export class AvatarComponent {
     if (files.length > 0) {
       const _file = URL.createObjectURL(files[0]);
       console.log(_file);
-      this.file = _file;
       this.resetInput();
-      
-      /*this.openAvatarEditor(_file).subscribe((result) => {
+      this.openAvatarEditor(_file).subscribe((result) => {
         if(result){
           console.log('resultopenAvatarEditor: ' ,result);
           this.file = result;
         }
-      }); */
+      }); 
     }
   }
 
@@ -40,14 +43,14 @@ export class AvatarComponent {
     }
   }
 
-  /*openAvatarEditor(image: string): void {
+  openAvatarEditor(image: string): Observable<any> {
     const dialogRef = this.dialog.open(ImageCropperComponent, { 
       maxWidth: '80vw',
       maxHeight: '80vh',
       data: image
     });
     return dialogRef.afterClosed();
-  }*/
+  }
 }
 //https://codepen.io/denic/pen/ZEbKgPp
 //https://codepen.io/timothylong/pen/AJxrPR
