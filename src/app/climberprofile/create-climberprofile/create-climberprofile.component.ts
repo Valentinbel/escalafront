@@ -7,7 +7,7 @@ import { ClimberProfile } from '../../model/climberprofile.model';
 import { SnackBarService } from '../../shared/snack-bar/snack-bar.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LanguageEnum } from '../../model/enum/language.enum';
-import { ClimberuserService } from '../climberuser.service';
+import { ClimberuserService } from '../../shared/climberuser.service';
 import { ProfileStorageServiceService } from '../profile-storage-service.service';
 import { AuthStorageService } from '../../auth/auth-storage.service';
 import { AvatarComponent } from "../../shared/avatar/avatar.component";
