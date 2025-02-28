@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -7,6 +7,5 @@ import { RouterModule } from '@angular/router';
     templateUrl: './contact.component.html',
     styleUrl: './contact.component.css'
 })
-export class ContactComponent {
-
+export class ContactComponent { //implements OnInit 
 }
