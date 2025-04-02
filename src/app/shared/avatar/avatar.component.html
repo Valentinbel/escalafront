@@ -1,8 +1,8 @@
 <div class="avatar-container">
 
     <div class="image-container" *ngIf="file; else placeholder"
-    [ngClass]="{'box-shadow-avatar': !!file}"
-    [ngStyle]="{backgroundImage: 'url(' + file + ')'}">
+        [ngClass]="{'box-shadow-avatar': !!file}"
+        [ngStyle]="{backgroundImage: 'url(' + file + ')'}">
     </div>
 
     <ng-template #placeholder>

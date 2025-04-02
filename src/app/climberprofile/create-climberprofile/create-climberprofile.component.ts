@@ -58,6 +58,7 @@ export class CreateClimberprofileComponent implements OnInit{
     private readonly translateService: TranslateService
   ) {}
 
+  // TODO Renommer composant en : add-edit-climberprofile.component.ts
   ngOnInit(): void {
     if (history.state.userId) {
       this.userId = history.state.userId;
@@ -72,7 +73,6 @@ export class CreateClimberprofileComponent implements OnInit{
     this.isAddMode = this.climberProfile === undefined;
    
     console.log('climberProfile: ' + JSON.stringify(this.climberProfile));
-    console.log('this.isAddMode: ' + this.isAddMode);
 
     this.profileForm = this.formBuilder.group({
       userName: ['',
@@ -194,6 +194,7 @@ export class CreateClimberprofileComponent implements OnInit{
 
   private saveProfile(): void {
     console.log('profileId: ', this.profileId);
+    console.log('avatar', this.field['avatar'].value);
     this.climberProfile = {
       id: this.profileId,
       avatar: this.field['avatar'].value,

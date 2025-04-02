@@ -2,9 +2,8 @@
   <h1 *ngIf="isAddMode">{{ 'profile.title.createProfile'| translate }}</h1>
   <h1 *ngIf="!isAddMode">{{ 'profile.title.editProfile'| translate }}</h1>
 
-  <avatar></avatar>
-
   <form [formGroup]="profileForm" id="profileForm" (ngSubmit)="submitProfile()">
+    <avatar formControlName="avatar"></avatar>
     <div>
       <label class="label" for="userName">{{ 'profile.name'| translate }}</label>
       <input id="userName" type="text" formControlName="userName" 
@@ -46,11 +45,6 @@
     <div>
       <label class="label" for="notified">{{ 'profile.txt.notifications'| translate }}</label>
       <input id="notified" type="checkbox" formControlName="notified" />
-    </div>
-    
-    <div>
-      <label class="label" for="avatar">{{ 'profile.avatar'| translate }}</label>
-      <input id="avatar" type="text" formControlName="avatar"/>
     </div>
 
     <div>

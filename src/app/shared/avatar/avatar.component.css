@@ -19,7 +19,7 @@
     box-shadow: 0 10px 20px 20px #6c93001a; /*TODO valriable : => on pourrait changer de couleur */
 
     &.avatar-placeholder{
-        background-image: url('/img/avatar-placeholder.png');/*TODO valriable*/
+        background-image: url('/img/avatar-placeholder.png');/*TODO variable*/
     }
 }
 
