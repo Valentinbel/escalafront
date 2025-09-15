@@ -7,7 +7,7 @@ import { ClimberProfile } from '../model/climberprofile.model';
   providedIn: 'root'
 })
 export class ClimberprofileService {
-  private readonly baseUrl = 'http://localhost:8080/api/';
+  private readonly baseUrl = 'http://localhost:8085/api/';
   private readonly urlClimberProfiles = this.baseUrl + 'climber-profiles';
   private readonly urlClimberProfileByclimberUser = this.urlClimberProfiles + '/climber-users/';
 

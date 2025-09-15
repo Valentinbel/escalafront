@@ -11,7 +11,7 @@ import { Login } from '../model/login.model';
 })
 export class AuthService {
 
-  private readonly baseUrl = 'http://localhost:8080/api/';
+  private readonly baseUrl = 'http://localhost:8085/api/';
   private readonly urlAuth = this.baseUrl + 'auth/';
   private readonly httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
 
