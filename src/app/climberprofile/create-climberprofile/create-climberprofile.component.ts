@@ -60,11 +60,16 @@ export class CreateClimberprofileComponent implements OnInit{
 
   // TODO Renommer composant en : add-edit-climberprofile.component.ts
   ngOnInit(): void {
+    console.log("history.state: ", history.state);
     if (history.state.userId) {
       this.userId = history.state.userId;
       this.userName = history.state.userName;
-      this.climberProfile = history.state.profile;
-      this.profileId = this.climberProfile.id!;
+      
+      if (history.state.profile) {
+        this.climberProfile = history.state.profile;
+        this.profileId = this.climberProfile.id!;
+      }
+      
     }
 
     /* TODO this.id = this.route.snapshot.params['id'];
