@@ -48,6 +48,9 @@ export class ClimberprofileComponent implements OnInit{
   openAddProfile() {
     const userId = this.userId;
     const profile = this.climberProfile;
+      //TODO Vérifier ce qu'on envoie ici. Avatar Service #1 dit :
+      // const profile = this.climberProfile ?? null;
+    console.log("profile envoyé à Create: " + profile);
     const userName = this.userName;
     this.router.navigate(['/add-climber-profile'], { state: { userId, userName, profile } });
   }

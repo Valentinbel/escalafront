@@ -69,7 +69,8 @@ export class CreateClimberprofileComponent implements OnInit{
         this.climberProfile = history.state.profile;
         this.profileId = this.climberProfile.id!;
       }
-      
+      //TODO quel est l'état de climberProfile? 
+      console.log("history.state.profile: "+  history.state.profile);
     }
 
     /* TODO this.id = this.route.snapshot.params['id'];
@@ -181,6 +182,7 @@ export class CreateClimberprofileComponent implements OnInit{
     this.saveProfile();
     this.saveUserName();
     // TODO: nest l'un dans l'autre ?
+    
   }
 
   private saveUserName(): void {
