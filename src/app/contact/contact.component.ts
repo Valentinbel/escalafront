@@ -1,13 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-contact',
-  standalone: true,
-  imports: [RouterModule],
-  templateUrl: './contact.component.html',
-  styleUrl: './contact.component.css'
+    selector: 'contact',
+    imports: [RouterModule],
+    templateUrl: './contact.component.html',
+    styleUrl: './contact.component.css'
 })
-export class ContactComponent {
-
+export class ContactComponent { //implements OnInit 
 }

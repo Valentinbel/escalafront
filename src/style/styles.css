@@ -1,27 +1,54 @@
-/*HTML ELEMENTS*/
-
 :root {
-	--pinya-color-orangeBackGround:  #F9B872;
-	--btn-color-greenBackGround: #44c767;
-	--btn-color-greenBorder: #18ab29;
-	/*rename that*/
+	/* colors */
+	--pinya-color-violetBg: #D953DB;
+	--pinya-color-orangeBackGround:  #DBBD53;
+	--btn-color-greyBackGround: #608680;
+	--btn-color-greyBorder: #18ab29;
+	--btn-color-greenTxtShadow: #2f6627;
+	--btn-color-greenHover: #5cbf2a;
 	--white: white;
 	--black: black;
 	--red-error: red;
 
-	/* 
-
-	++++++++++++++++++++
-	Ce n'est pas fini
-	++++++++++++++++++++
-	
-	*/
-
+	/* Border radius */
+	--borderRadius-default: 28px;
 	/* Font Sizes */
-	/* Font Weights */
+	--btn-fontSize: 17px;
+	/* Font weights */
 	/* Durations */
 	/* Shadows */
 }
+
+@font-face {
+    font-family: 'Figtree';
+    src: url('../../public/fonts/Figtree-Light.woff2') format('woff2'),
+        url('../../public/fonts/Figtree-Light.woff') format('woff'),
+        url('../../public/fonts/Figtree-Light.ttf') format('truetype');
+    font-weight: 300; /* ou light */
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Figtree';
+    src: url('../../public/fonts/Figtree-Regular.woff2') format('woff2'),
+        url('../../public/fonts/Figtree-Regular.woff') format('woff'),
+        url('../../public/fonts/Figtree-Regular.ttf') format('truetype');
+    font-weight: 400; /* regular */
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Figtree';
+    src: url('../../public/fonts/Figtree-ExtraBold.woff2') format('woff2'),
+        url('../../public/fonts/Figtree-ExtraBold.woff') format('woff'),
+        url('../../public/fonts/Figtree-ExtraBold.ttf') format('truetype');
+    font-weight: 800; /* Extra Bold */
+    font-style: normal;
+    font-display: swap;
+}
+
 
 *,
 *::after,
@@ -31,8 +58,15 @@
     margin: 0;
 }
 
-body{
-    background-color: var(--pinya-color-orangeBackGround);
+html, body { 
+	height: 100%; 
+}
+
+body {
+	margin: 0; 
+	font-family: Figtree, sans-serif;
+	font-weight: 400; /* regular */
+	background-color: var(--pinya-color-orangeBackGround);
 }
 
 h1, h2, h3, h4, h5, h6 { 
@@ -41,23 +75,26 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
 	text-wrap: pretty;
+	margin-bottom: 1rem;
 }
-input, select { 
+
+input, select, textarea { 
 	display: block;
 	width: 100%;
 	padding: 10px;
 	margin: 5px;
 	background-color: var(--white);
-	border: 1px solid ;
+	border: none;
+    border-radius: 5px;
 }
 
 /********************/
 .centeredComponent{
     margin-inline: 3rem;
-	background-color: #B6E1E7;
-	padding-inline: 1rem;
-	border: 1px solid var(--black);
-	padding: 1rem;
+	background-color: var(--pinya-color-violetBg);
+	padding: 1.5rem 4rem;
+	/*border: 1px solid var(--black);*/
+    border-radius: var(--borderRadius-default);
 }
 /* Forms*/
 
@@ -69,29 +106,32 @@ input, select {
     color: var(--red-error);
 }
 
+.invalid-form span {
+	padding-left: 6px;
+}
+
 .is-invalid{
     border-color: var(--red-error)
 }
 
 /* Buttons*/
 .button {
-	background-color: var(--btn-color-greenBackGround);
-	border-radius:28px;
-	border:1px solid var(--btn-color-greenBorder); 
+	background-color: var(--btn-color-greyBackGround);
+	border-radius:var(--borderRadius-default);
+	border:1px solid var(--btn-color-greenBorder);
 	display:inline-block;
 	cursor:pointer;
-	color:#ffffff;
-	font-size:17px;
-    margin: 1rem 0.5rem ;
+	color: var(--white);
+	font-size:var(--btn-fontSize);
+    margin: 1rem 1rem 1rem 0;
 	padding:16px 31px;
 	text-decoration:none;
-	text-shadow:0px 1px 0px #2f6627;
+	text-shadow:0px 1px 0px var(--btn-color-greenTxtShadow);
 }
 .button:hover {
-	background-color:#5cbf2a;
+	background-color:var(--btn-color-greenHover);
 }
 .button:active {
 	position:relative;
 	top:1px;
 }
-

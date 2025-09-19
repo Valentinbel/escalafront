@@ -1,0 +1,51 @@
+<div>
+    <div> <!-- METTRE LES SPANS POUR ERREURS -->
+    <!-- TODO Mettre des h1 ou h2 sur TOUS les html --> 
+      @if (!isLoggedIn) {
+        <form [formGroup]="loginForm" id="registerForm" (ngSubmit)="submitLogin()"> 
+          
+          <div>
+            <label class="label" for="email">{{ 'connect.register.email'| translate }}</label>
+            <input id="email" type="email" formControlName="email" autocomplete="on"
+              [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"/>
+            @if (submitted && f['email'].errors) {
+              <div class="invalid-form">
+                @if (f['email'].errors['required']) {
+                  <span>{{ 'connect.register.error.emailRequired'| translate }}</span>
+                }
+                @if (f['email'].errors['email']) {
+                  <span>{{ 'connect.register.error.emailValid'| translate }}</span>
+                }
+                @if (f['email'].errors['maxlength']) {
+                  <span>{{ 'connect.register.error.emailMaxLength'| translate }}</span>
+                }
+              </div>
+            }
+          </div>
+  
+          <div>
+            <label class="label" for="password">{{ 'connect.login.password'| translate }}</label>
+            <input id="password" type="password" formControlName="password" 
+              [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"/>
+            @if (submitted && f['password'].errors) {
+              <div class="invalid-form">
+                @if (f['password'].errors['required']) {
+                  <span>{{ 'connect.login.error.passwordRequired'| translate }}</span>
+                }
+                @if (f['password'].errors['minlength']) {
+                  <span>{{ 'connect.login.error.passwordMinLength'| translate }}</span>
+                }
+                @if (f['password'].errors['maxlength']) {
+                  <span>{{ 'connect.login.error.passwordMaxLength'| translate }}</span>
+                }
+              </div>
+            }
+          </div>
+            
+          <div>
+            <button type="submit" class="button">{{ 'connect.login.login'| translate }}</button>
+          </div>
+        </form>
+      }
+    </div>
+  </div>

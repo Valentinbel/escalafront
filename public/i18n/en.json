@@ -3,31 +3,92 @@
         "home": "Home", 
         "profile": "Profile",
         "searches": "Searches",
-        "contact": "Contact"
+        "contact": "Contact",
+        "connect": "Connect", 
+        "logout": "Logout",
+        "logoutMessage": "You logged out!",
+        "hello": "Hello "
     },
     "lang": {
         "en": "English",
         "fr": "French"
     },
     "home": {
-        "welcomeMessage": "Hello climber", 
+        "welcomeMessage": "Hello", 
         "toSearches": "Searches"
     }, 
+    "form":{
+        "fieldError": "Error on the following field: "
+    },
+    "connect":{
+        "btn": {
+            "haveAccount": "I have an account",
+            "dontHaveAccount": "I don't have account",
+            "createAccount": "Create Account"
+
+        },
+        "registrationSuccessfull": "Vous avez bien créé votre compte",
+        "login": {
+            "username": "Username: ",
+            "password": "Password: ",
+            "login": "Login",
+            "success": "Welcome ",
+            "error": {
+                "usernameRequired": "Username is required",
+                "passwordRequired": "Password is required",
+                "passwordMinLength": "Password must be at least 8 characters",
+                "passwordMaxLength": "Passwordne must not exceed 40 characters",
+                "loginFailed": "Login failed: "
+            }
+        }, 
+        "register": {
+            "---------------": "username & password things are in login------------",
+            "email": "Email: ",
+            "confirmPassword": "Confirm password",
+            "error": {
+                "usernameMinLength": "Username must be at least 4 characters",
+                "usernameMaxLength": "Username must not exceed 20 characters",
+                "emailRequired": "Email is required",
+                "emailValid": "Email must be a valid email address",
+                "emailMaxLength": "Email must not exceed 50 characters",
+                "confirmPasswordRequired": "Confirm Password is required",
+                "confirmPasswordMinLength": "Confirm Password must be at least 8 characters",
+                "confirmPasswordMaxLength": "Confirm Password must not exceed 40 characters",
+                "passwordMismatch": "Passwords don't match"
+            }
+        }
+    },
     "profile": {
         "name": "Name: ",
         "avatar": "Avatar: ",
         "language": "Language: ",
+        "gender": "Gender: ",
         "notified": "Notifications actived: ",
         "climberProfileDescription": "Description: ",
+        "yes": "Yes",
+        "no": "No",
         "btn": {
             "createProfile": "Create Profile",
-            "updateProfile": "Update Profile"
+            "editProfile": "Edit Profile",
+            "cancel": "Cancel"
+        },
+        "title": {
+            "createProfile": "Create your profile",
+            "editProfile": "Edit your profile"
         },
         "txt": {
-           "createProfile": "Mhh, You still don't have any profile. You'll have to create one!"
+           "createProfile": "Mhh, You still don't have any profile. You'll have to create one!",
+           "notifications": "I accept to be notified by mail for a new match: "
         },
         "link": {
             "contact": "Contact Us"
+        },
+        "edit": {
+            "nameRequired":"Name is required",
+            "nameMinLength": "Name must be at least 4 characters",
+            "nameMaxLength": "Name must not exceed 20 characters",
+            
+            "saveError": "Error during the profile creation"
         }
     }
 }

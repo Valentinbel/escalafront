@@ -7,20 +7,17 @@ import { ClimberProfile } from '../model/climberprofile.model';
   providedIn: 'root'
 })
 export class ClimberprofileService {
-  private readonly baseUrl = 'http://localhost:8080/api/';
+  private readonly baseUrl = 'http://localhost:8085/api/';
   private readonly urlClimberProfiles = this.baseUrl + 'climber-profiles';
+  private readonly urlClimberProfileByclimberUser = this.urlClimberProfiles + '/climber-users/';
 
   constructor(private readonly httpClient: HttpClient) { }
 
-  getClimberProfiles(): Observable<ClimberProfile[]> {
-    return this.httpClient.get<ClimberProfile[]>(this.urlClimberProfiles);
+  getProfileByUserId(climberProfileId: number): Observable<ClimberProfile>{
+    return this.httpClient.get<ClimberProfile>(this.urlClimberProfileByclimberUser + climberProfileId);
   }
 
-  getClimberProfileById(climberProfileId: number): Observable<ClimberProfile>{
-    return this.httpClient.get<ClimberProfile>(this.urlClimberProfiles + '/' +climberProfileId );
-  }
-
-  postClimberProfile(climberprofile: ClimberProfile): Observable<ClimberProfile> {
+  saveClimberProfile(climberprofile: ClimberProfile): Observable<ClimberProfile> {
     return this.httpClient.post(this.urlClimberProfiles, climberprofile);
   }
 }

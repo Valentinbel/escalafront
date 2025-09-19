@@ -1,26 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NavbarComponent } from "./navbar/navbar.component";
+import { NavbarComponent } from './navbar/navbar.component';
 import { SnackBarComponent } from './shared/snack-bar/snack-bar.component';
 import { AuthStorageService } from './auth/auth-storage.service';
 import { AuthService } from './auth/auth.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import defaultLanguage from '../../public/i18n/en.json';
+import { MessageResponse } from './model/message-response.model';
+import { ContactComponent } from "./contact/contact.component";
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ NavbarComponent, RouterModule, SnackBarComponent, TranslateModule ], //RouterOutlet
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+    selector: 'app-root',
+    imports: [NavbarComponent, RouterModule, SnackBarComponent, TranslateModule, ContactComponent], //RouterOutlet
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'pinya';
   private roles: string[] = [];
   isLoggedIn = false;
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
+  userId: number;
 
   constructor(
     private readonly authService: AuthService, 
@@ -40,6 +42,7 @@ export class AppComponent {
 
     if (this.isLoggedIn) {
       const user = this.authStorageService.getClimberUser();
+      this.userId = user.id; 
       this.roles = user.roles;
       console.log(" user from Storage : ", user);
 
@@ -48,23 +51,19 @@ export class AppComponent {
 
       this.username = user.username;
     } else console.log("NOT LOGGED IN")
-    /*console.log("Salut les amis");
-    this.climberprofileService.getClimberProfiles().subscribe((climberProfile) => console.log("getClimberProfiles: " , climberProfile));
-
-    this.climberprofileService.getClimberProfileById(1).subscribe((climberProfile) => console.log("getClimberProfileById(1): ", climberProfile));*/
   }
 
   logout(): void {
-    this.authService.logout().subscribe({
-      next: res => {
-        console.log(res);
-        this.authStorageService.clean();
-
-        window.location.reload();
-      },
-      error: err => {
-        console.log(err);
-      }
-    });
-  }
+    if (this.isLoggedIn) {
+      this.authService.logout(this.userId).subscribe({
+        next: (response: MessageResponse) => {
+          console.log(response.message);
+          this.authStorageService.clean();
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
+    }
+  }   
 }

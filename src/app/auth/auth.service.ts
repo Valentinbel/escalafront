@@ -1,45 +1,36 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
-
-const AUTH_API = 'http://localhost:8080/api/auth/'; // mettre en private readonly comme on sait faire
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+import { Register } from '../model/register.model';
+import { MessageResponse } from '../model/message-response.model';
+import { LoginResponse } from '../model/login-response.model';
+import { Login } from '../model/login.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
 
-  constructor(private readonly http: HttpClient) { }
+  private readonly baseUrl = 'http://localhost:8085/api/';
+  private readonly urlAuth = this.baseUrl + 'auth/';
+  private readonly httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
 
-  login(userName: string, password: string ): Observable<any> {
-    return this.http.post(
-      AUTH_API + 'login',
-      {
-        userName, password,
-      }, httpOptions
-    );
+  constructor(private readonly httpClient: HttpClient) { }
+
+  login(loginForm: Login ): Observable<LoginResponse> { 
+    return this.httpClient.post<LoginResponse>(this.urlAuth + 'login', loginForm, this.httpOptions);
   }
 
-  register(userName: string, email: string, password: string): Observable<any> {
-    return this.http.post(
-      AUTH_API + 'register',
-      {
-        userName, email, password,
-      }, httpOptions
-    );
+  register(registerForm: Register): Observable<MessageResponse> {
+    return this.httpClient.post<MessageResponse>(this.urlAuth + 'register',registerForm, this.httpOptions);
   }
 
-  logout(): Observable<any> {
-    return this.http.post(AUTH_API + 'signout', {}, httpOptions);
+  logout(userId: number): Observable<MessageResponse> {
+    return this.httpClient.post<MessageResponse>(this.urlAuth + 'signout/'+ userId, this.httpOptions); 
   }
 
-  refreshToken(): Observable<any>  {
+  refreshToken(): Observable<any>  { // TODO: model
     console.log("refreshToken/////////////////////////////////")
-    return this.http.post(AUTH_API + 'refreshtoken', { }, httpOptions);
+    return this.httpClient.post(this.urlAuth + 'refreshtoken', { }, this.httpOptions);
   }
 }

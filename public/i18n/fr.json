@@ -3,31 +3,92 @@
         "home": "Accueil", 
         "profile": "Profil",
         "searches": "Recherches",
-        "contact": "Contact"
+        "contact": "Contact", 
+        "connect": "Connexion", 
+        "logout": "Déconnexion",
+        "logoutMessage": "Tu t'es déconnecté !",
+        "hello": "Salut "
     },
     "lang": {
         "en": "Anglais",
         "fr": "Français"
     },
     "home": {
-        "welcomeMessage": "Salut grimpeur ! ", 
+        "welcomeMessage": "Salut ! ", 
         "toSearches": "Recherches"
     }, 
+    "form":{
+        "fieldError": "Erreur sur le champ suivant : "
+    },
+    "connect":{
+        "btn": {
+            "haveAccount": "J'ai un compte",
+            "dontHaveAccount": "Je n'ai pas de compte",
+            "createAccount": "Créer compte"
+        },
+        "registrationSuccessfull": "Votre compte a bien été créé !",
+        "login": {
+            "username": "Nom d'utilisateur : ",
+            "password": "Mot de passe : ",
+            "login": "Se connecter",
+            "success": "Bienvenue ",
+            "error": {
+                "usernameRequired": "Veuillez indiquer votre nom d'utilisateur",
+                "passwordRequired": "Veuillez indiquer votre mot de passe",
+                "passwordMinLength": "Le mot de passe doit contenir au moins 8 caractères",
+                "passwordMaxLength": "Le mot de passe ne doit pas dépasser 40 caractères",
+                "loginFailed": "Échec de l'authentification : "
+            }
+        }, 
+        "register": {
+            "---------------": "username & password things are in login------------",
+            "email": "Email : ",
+            "confirmPassword": "Confirmation du mot de passe",
+            "error": {
+                "usernameMinLength": "Le nom d'utilisateur doit contenir au moins 4 caractères",
+                "usernameMaxLength": "Le nom d'utilisateur ne doit pas dépasser 20 caractères",
+                "emailRequired": "Veuillez indiquer votre email",
+                "emailValid": "Veuillez indiquer une adresse email valide",
+                "emailMaxLength": "L'email ne doit pas dépasser 50 caractères",
+                "confirmPasswordRequired": "Veuillez indiquer votre confirmation de mot de passe",
+                "confirmPasswordMinLength": "La confirmation du mot de passe doit contenir au moins 8 caractères",
+                "confirmPasswordMaxLength": "La confirmation du mot de passe ne doit pas dépasser 40 caractères",
+                "passwordMismatch": "Les mots de passe ne correspondent pas",
+                "registerFailed": "Échec de la création du compte"
+            }
+        }
+    },
     "profile": {
         "name": "Nom : ",
         "avatar": "Avatar : ",
         "language": "Langue : ",
+        "gender": "Genre : ",
         "notified": "Notifications actives : ",
         "climberProfileDescription": "Description : ",
+        "yes": "Oui",
+        "no": "Non",
         "btn": {
             "createProfile": "Créer Profil",
-            "updateProfile": "Modifier profil"
+            "editProfile": "Modifier profil",
+            "cancel": "Annuler"
+        },
+        "title": {
+            "createProfile": "Crée ton profil",
+            "editProfile": "Modifie ton profil"
         },
         "txt": {
-           "createProfile": "Mhh, Tu n'as pas de profil. Il va falloir en créer un !"
+           "createProfile": "Mhh, Tu n'as pas de profil. Il va falloir en créer un !",
+           "notifications": "J'accepte d'être notifié par mail lors d'un nouveau match : "
         },
         "link": {
             "contact": "Contactez-nous"
+        }, 
+        "edit": {
+            "nameRequired":"Veuillez indiquer votre nom",
+            "nameMinLength": "Le nom doit contenir au moins 4 caractères",
+            "nameMaxLength": "Le nom ne doit pas dépasser 20 caractères",
+            
+            "saveError": "Erreur lors de la création du profile"
         }
     }
 }

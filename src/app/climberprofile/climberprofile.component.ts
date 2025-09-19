@@ -1,49 +1,57 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ClimberprofileService } from './../climberprofile/climberprofile.service';
-import { RouterModule, ActivatedRoute, Router } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { ClimberProfile } from '../model/climberprofile.model';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
+import { AuthStorageService } from '../auth/auth-storage.service';
+import { ProfileStorageServiceService } from './profile-storage-service.service';
 
 @Component({
-  selector: 'app-climberprofile',
-  standalone: true,
-  imports: [ RouterModule, CommonModule, TranslateModule],
-  templateUrl: './climberprofile.component.html',
-  styleUrl: './climberprofile.component.css'
+    selector: 'app-climberprofile',
+    imports: [RouterModule, CommonModule, TranslateModule],
+    templateUrl: './climberprofile.component.html',
+    styleUrl: './climberprofile.component.css'
 })
-export class ClimberprofileComponent {
-
+export class ClimberprofileComponent implements OnInit{
   climberProfile: ClimberProfile;
-  
+  userName: string;
+  private userId: number;
+
   constructor(
-    private readonly climberprofileService: ClimberprofileService, 
-    private readonly router: Router,
-    private readonly route: ActivatedRoute){}
+    private readonly climberprofileService: ClimberprofileService,
+    private readonly authStorageService: AuthStorageService,
+    private readonly profileStorageService: ProfileStorageServiceService,
+    private readonly router: Router
+  ) {}
 
-  ngOnInit(){
-    console.log("Salut ClimberprofileComponent");
-    //  récupérer le ClimberProfile grâce au User en amont. 
-  
-    this.getClimberProfileById(1);
+  ngOnInit() {
+    this.userId = this.authStorageService.getClimberUser().id;
+    console.log("this.userId: ", this.userId);
+    this.userName = this.authStorageService.getUserName();
+    if (this.userId) { //TODO : and ... ? && this.profileId === 0 pour éviter l'erreur  error: (err) => console.log('There is no profile related to your account.
+      this.getProfileByUserId(this.userId);
+    }
   }
 
-  getClimberProfileById(id: number): void {
-    this.climberprofileService.getClimberProfileById(id).subscribe((climberProfile) =>{
-      this.climberProfile =  climberProfile;
-      console.log(this.climberProfile);
-    } );
+  getProfileByUserId(userId: number): void {
+    this.climberprofileService.getProfileByUserId(userId).subscribe({
+      next: (climberProfile: ClimberProfile) => {
+        this.climberProfile = climberProfile;
+        this.profileStorageService.setProfile(climberProfile);
+        console.log(this.climberProfile);
+      },
+      error: (err) => console.log('There is no profile related to your account. Please create one.',err)
+    });
   }
 
-  openRubrique() {
-    // this.matomoService.updateUrl('/rubrique');
-    //this.router.navigate(['/add-climber-profile'], { state: { contenu } });
-
-    this.router.navigate(
-      ['/add-climber-profile']
-      //{queryParams:{order:'popular','price-range':'expensive'}}
-      //state: { hello: 'world'}
-      );
+  openAddProfile() {
+    const userId = this.userId;
+    const profile = this.climberProfile;
+      //TODO Vérifier ce qu'on envoie ici. Avatar Service #1 dit :
+      // const profile = this.climberProfile ?? null;
+    console.log("profile envoyé à Create: " + profile);
+    const userName = this.userName;
+    this.router.navigate(['/add-climber-profile'], { state: { userId, userName, profile } });
+  }
 }
-}
-

@@ -1,0 +1,20 @@
+<div class="centeredComponent">
+    
+    @if (wantLogin) {
+        <div id="login">
+            <app-login></app-login>
+        </div>
+        @if(!isLoggedIn) {
+        <button class="button" (click)="displayRegister()" >{{ 'connect.btn.dontHaveAccount'| translate }}</button> <br/>
+        }
+    } @else {
+        @if(!isLoggedIn) {
+            <button class="button" (click)="displayLogin()" >{{ 'connect.btn.haveAccount'| translate }}</button> <br/>
+        }
+        <div id="register">
+            <app-register></app-register>
+        </div>
+    }
+    
+</div>
+
