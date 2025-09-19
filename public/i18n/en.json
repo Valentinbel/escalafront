@@ -90,5 +90,8 @@
             
             "saveError": "Error during the profile creation"
         }
+    },
+    "avatar": {
+        "saveError": "Error on uploading your profile avatar"
     }
 }

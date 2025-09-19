@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class ClimberuserService {
   private readonly baseUrl = 'http://localhost:8085/api/';
   private readonly urlClimberUser = this.baseUrl + 'climber-user';
-    private readonly httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
+  private readonly httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
 
   constructor(private readonly httpClient: HttpClient) { }
 
