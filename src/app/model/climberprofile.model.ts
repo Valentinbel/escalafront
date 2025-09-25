@@ -1,7 +1,8 @@
 export class ClimberProfile {
     constructor(
         public id?: number,
-        public avatar?: string,
+        public userName?: string,
+        public avatarId?: number,
         public genderId?: number,
         public languageId?:number,
         public notified?: boolean, // Pourquoi c'est pas isNotified qui fonctionne? 

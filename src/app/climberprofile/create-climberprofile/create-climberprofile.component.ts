@@ -106,7 +106,7 @@ export class CreateClimberprofileComponent implements OnInit{
       this.profileForm.get('languageId')?.patchValue(profileToUpdate.languageId);
       this.languageId = profileToUpdate.languageId!;
       this.profileForm.get('genderId')?.patchValue(profileToUpdate.genderId); 
-      this.profileForm.get('avatar')?.patchValue(profileToUpdate.avatar);
+      this.profileForm.get('avatar')?.patchValue(profileToUpdate.avatarId);
       this.profileForm.get('notified')?.patchValue(profileToUpdate.notified);
 
      /* if (!this.isAddMode) {
@@ -180,7 +180,7 @@ export class CreateClimberprofileComponent implements OnInit{
 
   private saveForm(): void {
     this.saveProfile();
-    this.saveUserName();
+    //this.saveUserName();
     // TODO: nest l'un dans l'autre ?
     
   }
@@ -204,18 +204,20 @@ export class CreateClimberprofileComponent implements OnInit{
     console.log('avatar', this.field['avatar'].value);
     this.climberProfile = {
       id: this.profileId,
-      avatar: this.field['avatar'].value,
+      userName: this.field['userName'].value,
+      avatarId: this.field['avatar'].value,
       genderId: this.field['genderId'].value,
       languageId: this.languageId,
       notified: this.field['notified'].value ?? false,
       climberProfileDescription: this.field['climberProfileDescription'].value,
       climberUserId: this.userId,
     };
+    console.log(this.climberProfile);
 
     this.climberprofileService.saveClimberProfile(this.climberProfile).subscribe({
       next: (profile: ClimberProfile) => {
         if (profile) {
-          console.log(profile);
+          console.log("retour du back saveClimberProfile: " + profile);
           this.router.navigate(['../climber-profile'], {relativeTo: this.route}); // TODO: mettre create en enfant de ClimberProfile pour mettre ca: ['../'], {relativeTo: this.route}
         }
       },

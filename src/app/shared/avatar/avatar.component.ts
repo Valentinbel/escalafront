@@ -30,7 +30,8 @@ export class AvatarComponent implements OnInit, ControlValueAccessor {
 
   private userId: number;
   private fileConverted: File;
-  
+  private avatarId: number;
+
   constructor(
     public dialog: MatDialog, 
     private readonly avatarService: AvatarService,
@@ -47,14 +48,14 @@ export class AvatarComponent implements OnInit, ControlValueAccessor {
    }
   }
 
-  onChange = (fileUrl: string) => {};
+  onChange = (fileInfoId: number) => {}; // TODO avatarId ?????
 
   onTouched = () => {};
   
  /* disabled: boolean = false;*/
   
-  writeValue(_file: string): void {
-    this.file = _file;
+  writeValue(_avatarId: number): void {
+    this.avatarId = _avatarId;
   }
   registerOnChange(fn: any): void {
     this.onChange = fn;
@@ -74,15 +75,12 @@ export class AvatarComponent implements OnInit, ControlValueAccessor {
     if (files.length > 0) {
       const _file = URL.createObjectURL(files[0]);
       const fileName = files[0].name;
-      console.log(_file);
       this.resetInput();
       this.openAvatarEditor(_file).subscribe((result) => {
         if(result){
-          console.log('result openAvatarEditor: ' ,result);
           this.file = result;
           this.fileConverted = this.convertToFile(result, fileName);
-          this.saveFile(this.fileConverted);
-          this.onChange(this.file); 
+          this.saveFile(this.fileConverted); 
         }
       }); 
     }
@@ -127,7 +125,9 @@ export class AvatarComponent implements OnInit, ControlValueAccessor {
   saveFile(fileConverted: File) {
     this.avatarService.upload(fileConverted, this.userId).subscribe({
       next: (event) => {
-        console.log(event);
+        console.log("retour upload avatar. fileInfoId: "+  event);
+        this.avatarId = event;
+        this.onChange(this.avatarId); 
       },
       error: (err) => {
         this.displayErrorSnackBar(err.error.message);
