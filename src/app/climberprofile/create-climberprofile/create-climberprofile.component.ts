@@ -31,7 +31,7 @@ export class CreateClimberprofileComponent implements OnInit{
     languageId: new FormControl(''),
     genderId: new FormControl(''),
     avatar: new FormControl(''),
-    notified: new FormControl(''),
+    isNotified: new FormControl(''),
   });
 
   climberProfile: ClimberProfile;
@@ -91,7 +91,7 @@ export class CreateClimberprofileComponent implements OnInit{
       climberProfileDescription: [],
       language: [],
       genderId: [],
-      notified: [],
+      isNotified: [],
       avatar: [],
     });
   
@@ -107,7 +107,7 @@ export class CreateClimberprofileComponent implements OnInit{
       this.languageId = profileToUpdate.languageId!;
       this.profileForm.get('genderId')?.patchValue(profileToUpdate.genderId); 
       this.profileForm.get('avatar')?.patchValue(profileToUpdate.avatarId);
-      this.profileForm.get('notified')?.patchValue(profileToUpdate.notified);
+      this.profileForm.get('isNotified')?.patchValue(profileToUpdate.isNotified);
 
      /* if (!this.isAddMode) {
         this.userService.getById(this.id)
@@ -208,7 +208,7 @@ export class CreateClimberprofileComponent implements OnInit{
       avatarId: this.field['avatar'].value,
       genderId: this.field['genderId'].value,
       languageId: this.languageId,
-      notified: this.field['notified'].value ?? false,
+      isNotified: this.field['isNotified'].value ?? false,
       climberProfileDescription: this.field['climberProfileDescription'].value,
       climberUserId: this.userId,
     };

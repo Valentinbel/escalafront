@@ -5,7 +5,7 @@ export class ClimberProfile {
         public avatarId?: number,
         public genderId?: number,
         public languageId?:number,
-        public notified?: boolean, // Pourquoi c'est pas isNotified qui fonctionne? 
+        public isNotified?: boolean,
         public climberProfileDescription?: string, /// text
         public climberUserId?: number
     ) {}

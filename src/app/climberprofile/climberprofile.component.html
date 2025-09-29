@@ -5,7 +5,7 @@
             <p><strong>{{ 'profile.avatar'| translate }}</strong> {{this.climberProfile.avatarId}}</p>
             <p><strong>{{ 'profile.gender'| translate }}</strong>{{this.climberProfile.genderId}}</p>
             <p><strong>{{ 'profile.language'| translate }}</strong>{{this.climberProfile.languageId}}</p>
-            <p><strong>{{ 'profile.notified'| translate }}</strong>{{ (this.climberProfile.notified? 'profile.yes' : 'profile.no') | translate }}</p>
+            <p><strong>{{ 'profile.isNotified'| translate }}</strong>{{ (this.climberProfile.isNotified? 'profile.yes' : 'profile.no') | translate }}</p>
             <p><strong>{{ 'profile.climberProfileDescription'| translate }}</strong>{{this.climberProfile.climberProfileDescription}}</p>
         </div>
         <button class="button" (click)="openAddProfile()" >{{ 'profile.btn.editProfile'| translate }}</button> <br/>

@@ -63,7 +63,7 @@
         "avatar": "Avatar : ",
         "language": "Langue : ",
         "gender": "Genre : ",
-        "notified": "Notifications actives : ",
+        "isNotified": "Notifications actives : ",
         "climberProfileDescription": "Description : ",
         "yes": "Oui",
         "no": "Non",
