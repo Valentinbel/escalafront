@@ -44,7 +44,6 @@ export class AppComponent implements OnInit {
       const user = this.authStorageService.getClimberUser();
       this.userId = user.id; 
       this.roles = user.roles;
-      console.log(" user from Storage : ", user);
 
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');

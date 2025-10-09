@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { AuthStorageService } from '../auth/auth-storage.service';
@@ -14,12 +14,16 @@ import { MessageResponse } from '../model/message-response.model';
     templateUrl: './navbar.component.html',
     styleUrl: './navbar.component.css'
 })
-export class NavbarComponent implements OnInit{
+export class NavbarComponent implements OnInit {
 
   eventBusSub?: Subscription;
   isLoggedIn = false;
-  userName: string;
-  
+
+   // Service injecté != constructor
+  injectedAuthStorageService = inject(AuthStorageService);
+  // Accès au signal username (lecture seule)
+  readonly userNameSignal = this.injectedAuthStorageService.username;
+
   constructor(
     private readonly authService: AuthService, 
     private readonly authStorageService: AuthStorageService,
@@ -35,7 +39,6 @@ export class NavbarComponent implements OnInit{
 
     if (this.authStorageService.isLoggedIn()) {
       this.isLoggedIn = true;
-      this.userName = this.authStorageService.getUserName();
     }
   }
 

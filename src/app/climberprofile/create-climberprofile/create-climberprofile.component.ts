@@ -69,16 +69,12 @@ export class CreateClimberprofileComponent implements OnInit{
         this.climberProfile = history.state.profile;
         this.profileId = this.climberProfile.id!;
       }
-      //TODO quel est l'état de climberProfile? 
-      console.log("history.state.profile: "+  history.state.profile);
     }
 
     /* TODO this.id = this.route.snapshot.params['id'];
         this.isAddMode = !this.id;*/
 
     this.isAddMode = this.climberProfile === undefined;
-   
-    console.log('climberProfile: ' + JSON.stringify(this.climberProfile));
 
     this.profileForm = this.formBuilder.group({
       userName: ['',
@@ -217,7 +213,10 @@ export class CreateClimberprofileComponent implements OnInit{
     this.climberprofileService.saveClimberProfile(this.climberProfile).subscribe({
       next: (profile: ClimberProfile) => {
         if (profile) {
-          console.log("retour du back saveClimberProfile: " + profile);
+          console.log("retour du back saveClimberProfile: " + JSON.stringify(profile));
+          if (profile.userName) 
+            this.authStorageService.setUserName(profile.userName);
+        
           this.router.navigate(['../climber-profile'], {relativeTo: this.route}); // TODO: mettre create en enfant de ClimberProfile pour mettre ca: ['../'], {relativeTo: this.route}
         }
       },

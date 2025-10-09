@@ -27,7 +27,6 @@ export class ClimberprofileComponent implements OnInit{
 
   ngOnInit() {
     this.userId = this.authStorageService.getClimberUser().id;
-    console.log("this.userId: ", this.userId);
     this.userName = this.authStorageService.getUserName();
     if (this.userId) { //TODO : and ... ? && this.profileId === 0 pour éviter l'erreur  error: (err) => console.log('There is no profile related to your account.
       this.getProfileByUserId(this.userId);
@@ -39,7 +38,6 @@ export class ClimberprofileComponent implements OnInit{
       next: (climberProfile: ClimberProfile) => {
         this.climberProfile = climberProfile;
         this.profileStorageService.setProfile(climberProfile);
-        console.log(this.climberProfile);
       },
       error: (err) => console.log('There is no profile related to your account. Please create one.',err)
     });
@@ -50,7 +48,7 @@ export class ClimberprofileComponent implements OnInit{
     const profile = this.climberProfile;
       //TODO Vérifier ce qu'on envoie ici. Avatar Service #1 dit :
       // const profile = this.climberProfile ?? null;
-    console.log("profile envoyé à Create: " + profile);
+    console.log("profile envoyé à Create: " + JSON.stringify(profile));
     const userName = this.userName;
     this.router.navigate(['/add-climber-profile'], { state: { userId, userName, profile } });
   }

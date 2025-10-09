@@ -26,7 +26,6 @@ export class AvatarComponent implements OnInit, ControlValueAccessor {
   
   // TODO Icon vient de https://phosphoricons.com/. Banque importée dans index.html
   // On peut lui mettre une color. + size.+ 
-  // Déplacer component dans Profile. 
 
   private userId: number;
   private fileConverted: File;
@@ -76,7 +75,7 @@ export class AvatarComponent implements OnInit, ControlValueAccessor {
       const _file = URL.createObjectURL(files[0]);
       const fileName = files[0].name;
       this.resetInput();
-      this.openAvatarEditor(_file).subscribe((result) => {
+      this.openAvatarEditor(_file).subscribe((result) => { // TODO un next: error ici
         if(result){
           this.file = result;
           this.fileConverted = this.convertToFile(result, fileName);

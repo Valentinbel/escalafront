@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { effect, Injectable, signal } from '@angular/core';
 import { LoginResponse } from '../model/login-response.model';
 
 const USER_KEY = 'auth-user';
@@ -8,7 +8,19 @@ const USER_KEY = 'auth-user';
 })
 export class AuthStorageService {
 
-  constructor() { }
+  // Signal pour le username (juste dans le service)
+  private readonly usernameSignal = signal<string>(this.getUserName());
+  
+  // Lecture seule pour les composants
+  readonly username = this.usernameSignal.asReadonly();
+
+  constructor() { 
+    // Effect pour synchroniser automatiquement avec localStorage
+    effect(() => {
+      const currentUsername = this.usernameSignal();
+      this.setUserName(currentUsername); 
+    });
+  }
 
   clean(): void {
     sessionStorage.clear();
@@ -25,7 +37,9 @@ export class AuthStorageService {
   public setClimberUser(climberUser: LoginResponse): void {
     sessionStorage.removeItem(USER_KEY);
     sessionStorage.setItem(USER_KEY, JSON.stringify(climberUser));
-    sessionStorage.setItem('climberUserId', JSON.stringify(climberUser.id) )
+    sessionStorage.setItem('climberUserId', JSON.stringify(climberUser.id));
+
+    this.usernameSignal.set(climberUser.userName);
   }
 
   public getUserName(): string {
@@ -36,9 +50,10 @@ export class AuthStorageService {
   public setUserName( userName: string): void {
     const climberUser = this.getClimberUser();
     climberUser.userName = userName;
-    sessionStorage.setItem('USER_KEY', JSON.stringify(climberUser));
-  }
+    sessionStorage.setItem(USER_KEY, JSON.stringify(climberUser));
 
+    this.usernameSignal.set(climberUser.userName);
+  }
 
   public getClimberUserId(): number {
     const climberUserId = sessionStorage.getItem('climberUserId');
