@@ -17,8 +17,7 @@ export class AuthStorageService {
   constructor() { 
     // Effect pour synchroniser automatiquement avec localStorage
     effect(() => {
-      const currentUsername = this.usernameSignal();
-      this.setUserName(currentUsername); 
+       this.usernameSignal();
     });
   }
 
