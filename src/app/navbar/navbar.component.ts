@@ -19,18 +19,17 @@ export class NavbarComponent implements OnInit {
   eventBusSub?: Subscription;
   isLoggedIn = false;
 
-   // Service injecté != constructor
-  injectedAuthStorageService = inject(AuthStorageService);
+  // Service injecté != constructor
+  authStorageService = inject(AuthStorageService);
+  authService = inject(AuthService);
+  eventBusService = inject(EventBusService);
+  translateService = inject(TranslateService)
+  snackBarService = inject(SnackBarService);
+  
   // Accès au signal username (lecture seule)
-  readonly userNameSignal = this.injectedAuthStorageService.username;
+  readonly userNameSignal = this.authStorageService.username;
 
-  constructor(
-    private readonly authService: AuthService, 
-    private readonly authStorageService: AuthStorageService,
-    private readonly eventBusService: EventBusService,
-    private readonly translateService: TranslateService,
-    private readonly snackBarService: SnackBarService,
-  ){}
+  constructor(){}
 
   ngOnInit(): void {
     this.eventBusSub = this.eventBusService.on('logout', () => {
