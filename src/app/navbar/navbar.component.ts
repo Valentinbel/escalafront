@@ -59,5 +59,6 @@ export class NavbarComponent implements OnInit {
         }
       });
     }
+    this.isLoggedIn = false;
   }
 }
