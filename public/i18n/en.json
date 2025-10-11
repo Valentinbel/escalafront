@@ -27,7 +27,7 @@
             "createAccount": "Create Account"
 
         },
-        "registrationSuccessfull": "Vous avez bien créé votre compte",
+        "registrationSuccessfull": "Account successfully created",
         "login": {
             "username": "Username: ",
             "password": "Password: ",
