@@ -2,7 +2,6 @@
     @if (this.climberProfile) {
         <div >
             <p><strong>{{ 'profile.name'| translate }}</strong> {{this.userName}}</p>
-            <p><strong>{{ 'profile.avatar'| translate }}</strong> {{this.climberProfile.avatarId}}</p>
             <p><strong>{{ 'profile.gender'| translate }}</strong>{{this.climberProfile.genderId}}</p>
             <p><strong>{{ 'profile.language'| translate }}</strong>{{this.climberProfile.languageId}}</p>
             <p><strong>{{ 'profile.isNotified'| translate }}</strong>{{ (this.climberProfile.isNotified? 'profile.yes' : 'profile.no') | translate }}</p>
