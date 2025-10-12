@@ -7,16 +7,12 @@ import { Observable } from 'rxjs';
 })
 export class AvatarService {
   private readonly baseUrl = 'http://localhost:8085/api/';
-  private readonly urlClimberProfiles = this.baseUrl + 'climber-profiles/';
-  private readonly urlAvatar = this.urlClimberProfiles + 'avatar';
-  private readonly httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
-    
+  private readonly urlAvatar = this.baseUrl + 'avatar';
+
   constructor(private readonly httpClient: HttpClient) { }
 
   
   upload(fileConverted: File, userId: number): Observable<any> {
-    // TODO Qu'est ce qu'on attend comme observable en reponse? //number ????
-
     // Créer le FormData
     const formData: FormData = new FormData();
     formData.append('file', fileConverted);
