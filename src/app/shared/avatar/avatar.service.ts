@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class AvatarService {
   private readonly baseUrl = 'http://localhost:8085/api/';
-  private readonly urlAvatar = this.baseUrl + 'avatar';
+  private readonly urlAvatar = this.baseUrl + 'avatar/';
 
   constructor(private readonly httpClient: HttpClient) { }
 
@@ -22,8 +22,7 @@ export class AvatarService {
     return this.httpClient.post<string>(this.urlAvatar, formData);
   }
 
-  getFiles(): Observable<any> {
-    //TODO revoir ca aussi & le <any>
-    return this.httpClient.get(`${this.baseUrl}/file`);
+  getFile(userId: number): Observable<any> {
+    return this.httpClient.get<any>(this.urlAvatar + userId);
   }
 }

@@ -30,6 +30,7 @@ export class AvatarComponent implements OnInit, ControlValueAccessor {
   private userId: number;
   private fileConverted: File;
   private avatarId: number;
+  private avatarInputFile?: Observable<any>;
 
   constructor(
     public dialog: MatDialog, 
@@ -44,6 +45,8 @@ export class AvatarComponent implements OnInit, ControlValueAccessor {
    console.log("history.state avatar: ", history.state);
    if (history.state.userId) {
     this.userId = history.state.userId;
+    this.getFile(this.userId);
+    console.log("avatarInputFile: ", this.avatarInputFile);
    }
   }
 
@@ -68,6 +71,19 @@ export class AvatarComponent implements OnInit, ControlValueAccessor {
   
   file: string = '';
 
+  getFile(userId: number) {
+    this.avatarService.getFile(this.userId).subscribe({
+      next: (event) => {
+        console.log("retour get avatar. fileInfoId: "+  event);
+        this.file = event;
+        this.avatarInputFile = event;
+        //avatarInputFile
+      },
+      error: (err) => {
+        this.displayErrorSnackBar(err.error.message);
+      }});
+  }
+
   onFileChange(event: any) {
     const files = event.target.files as FileList;
 
@@ -87,6 +103,8 @@ export class AvatarComponent implements OnInit, ControlValueAccessor {
 
   resetInput(){
     const input = document.getElementById('avatar-input-file') as HTMLInputElement;
+    console.log("INPUT: ", input);
+    console.log("INPUT VALUE: ", input.value);
     if(input){
       input.value = "";
     }
