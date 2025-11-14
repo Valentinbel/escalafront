@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog'
 import { ImageCropperComponent } from './image-cropper/image-cropper.component';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AvatarService } from '../../shared/avatar/avatar.service';
 import { TranslateService } from '@ngx-translate/core';
 import { SnackBarService } from '../snack-bar/snack-bar.service';
+import { DomSanitizer, SafeStyle, SafeUrl } from '@angular/platform-browser';
 
 
 @Component({
@@ -22,40 +23,45 @@ import { SnackBarService } from '../snack-bar/snack-bar.service';
       }
     ]
 })
-export class AvatarComponent implements OnInit, ControlValueAccessor {
-  
+export class AvatarComponent implements OnInit, OnDestroy, ControlValueAccessor {
+
   // TODO Icon vient de https://phosphoricons.com/. Banque importée dans index.html
-  // On peut lui mettre une color. + size.+ 
+  // On peut lui mettre une color. + size.+
+
+  avatarUrl: SafeUrl | null = null;
+  // Pour background-image, il faut un SafeStyle
+  avatarBackgroundStyle: SafeStyle | null = null;
 
   private userId: number;
   private fileConverted: File;
   private avatarId: number;
-  private avatarInputFile?: Observable<any>;
+  private destroy$ = new Subject<void>();
+  objectUrl: string | null = null;
 
   constructor(
-    public dialog: MatDialog, 
+    public dialog: MatDialog,
     private readonly avatarService: AvatarService,
     private readonly snackBarService: SnackBarService,
-    private readonly translateService: TranslateService
+    private readonly translateService: TranslateService,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
-   // console.log('AvatarComponent');
-   // TODO get avatar si existe. Appel API.
-   console.log("history.state avatar: ", history.state);
    if (history.state.userId) {
     this.userId = history.state.userId;
-    this.getFile(this.userId);
-    console.log("avatarInputFile: ", this.avatarInputFile);
+
+    // if(avatarId est présent) {
+    this.loadAvatar(this.userId);
+    console.log("avatarUrl: ", this.avatarUrl);
    }
   }
 
   onChange = (fileInfoId: number) => {}; // TODO avatarId ?????
 
   onTouched = () => {};
-  
+
  /* disabled: boolean = false;*/
-  
+
   writeValue(_avatarId: number): void {
     this.avatarId = _avatarId;
   }
@@ -68,18 +74,28 @@ export class AvatarComponent implements OnInit, ControlValueAccessor {
   /*setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }*/
-  
-  file: string = '';
 
-  getFile(userId: number) {
-    this.avatarService.getFile(this.userId).subscribe({
-      next: (event) => {
-        console.log("retour get avatar. fileInfoId: "+  event);
-        this.file = event;
-        this.avatarInputFile = event;
-        //avatarInputFile
+
+  loadAvatar(userId: number): void {
+    this.avatarService.getFile(this.userId)
+    .pipe(takeUntil(this.destroy$)).subscribe({
+      next: (url) => {
+        console.log("retour getFile: " + url);
+
+        // Nettoyer l'ancienne URL si elle existe
+        if (this.objectUrl) {
+          URL.revokeObjectURL(this.objectUrl);
+        }
+
+        // Stocker l'URL brute
+        this.avatarUrl = url;
+
+        // Sanitizer pour background-image
+        const backgroundImageValue = `url(${url})`;
+        this.avatarBackgroundStyle = this.sanitizer.bypassSecurityTrustStyle(backgroundImageValue);
       },
       error: (err) => {
+        console.log("Error on retrieving avatar from server");
         this.displayErrorSnackBar(err.error.message);
       }});
   }
@@ -93,11 +109,11 @@ export class AvatarComponent implements OnInit, ControlValueAccessor {
       this.resetInput();
       this.openAvatarEditor(_file).subscribe((result) => { // TODO un next: error ici
         if(result){
-          this.file = result;
+          this.objectUrl = result; //////////////////////////
           this.fileConverted = this.convertToFile(result, fileName);
-          this.saveFile(this.fileConverted); 
+          this.saveFile(this.fileConverted);
         }
-      }); 
+      });
     }
   }
 
@@ -111,7 +127,7 @@ export class AvatarComponent implements OnInit, ControlValueAccessor {
   }
 
   openAvatarEditor(image: string): Observable<any> {
-    const dialogRef = this.dialog.open(ImageCropperComponent, { 
+    const dialogRef = this.dialog.open(ImageCropperComponent, {
       maxWidth: '80vw',
       maxHeight: '80vh',
       data: image
@@ -136,7 +152,6 @@ export class AvatarComponent implements OnInit, ControlValueAccessor {
       // Créer un Blob puis un File
     const blob = new Blob([int8Array], { type: mime });
     return new File([blob], originalFileName, { type: mime });
-    
   }
 
   saveFile(fileConverted: File) {
@@ -144,7 +159,11 @@ export class AvatarComponent implements OnInit, ControlValueAccessor {
       next: (event) => {
         console.log("retour upload avatar. fileInfoId: "+  event);
         this.avatarId = event;
-        this.onChange(this.avatarId); 
+        this.onChange(this.avatarId);
+
+        //TODO: mettre l'avatar dasn un storage (?) 
+        // appeler load() ici?
+        // ou seulement certains éléments de la methode?
       },
       error: (err) => {
         this.displayErrorSnackBar(err.error.message);
@@ -163,6 +182,16 @@ export class AvatarComponent implements OnInit, ControlValueAccessor {
     this.snackBarService.add(saveError, 8000, 'error');
   }
 
+  ngOnDestroy(): void {
+    // Nettoyage de la subscription
+    this.destroy$.next();
+    this.destroy$.complete();
+
+    // Libération de la mémoire de l'URL objet
+    if (this.avatarUrl && typeof this.avatarUrl === 'string') {
+      URL.revokeObjectURL(this.avatarUrl);
+    }
+  }
 }
 
 //TODO : check

@@ -1,8 +1,8 @@
 <div class="avatar-container">
-
-    <div class="image-container" *ngIf="file; else placeholder"
-        [ngClass]="{'box-shadow-avatar': !!file}"
-        [ngStyle]="{backgroundImage: 'url(' + file + ')'}">
+  <!---TODO remplacer par @if--> 
+    <div class="image-container" *ngIf="avatarBackgroundStyle; else placeholder"
+        [ngClass]="{'box-shadow-avatar': !!avatarBackgroundStyle}"
+        [style.background-image]="avatarBackgroundStyle">        
     </div>
 
     <ng-template #placeholder>
@@ -10,7 +10,7 @@
         </div>
     </ng-template>
 
-    <label for="avatarInputFile">
+    <label for="avatar-input-file">
         <div class="icon-wrapper">
             <input type="file" id="avatar-input-file" accept="image/*" (change)="onFileChange($event)">
             <i class="icon ph-bold ph-pencil-simple"></i> <!--TODO d'où viennent ces classes ? -->
