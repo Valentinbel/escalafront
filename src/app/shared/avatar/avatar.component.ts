@@ -52,7 +52,6 @@ export class AvatarComponent implements OnInit, OnDestroy, ControlValueAccessor 
 
     // if(avatarId est présent) {
     this.loadAvatar(this.userId);
-    console.log("avatarUrl: ", this.avatarUrl);
    }
   }
 
@@ -161,9 +160,7 @@ export class AvatarComponent implements OnInit, OnDestroy, ControlValueAccessor 
         this.avatarId = event;
         this.onChange(this.avatarId);
 
-        //TODO: mettre l'avatar dasn un storage (?) 
-        // appeler load() ici?
-        // ou seulement certains éléments de la methode?
+        this.loadAvatar(this.userId);
       },
       error: (err) => {
         this.displayErrorSnackBar(err.error.message);
