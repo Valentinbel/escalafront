@@ -5,7 +5,7 @@ import { ClimberProfile } from '../model/climberprofile.model';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthStorageService } from '../auth/auth-storage.service';
-import { ProfileStorageServiceService } from './profile-storage-service.service';
+import { ProfileStorageService } from './profile-storage.service';
 
 @Component({
     selector: 'app-climberprofile',
@@ -21,7 +21,7 @@ export class ClimberprofileComponent implements OnInit{
   constructor(
     private readonly climberprofileService: ClimberprofileService,
     private readonly authStorageService: AuthStorageService,
-    private readonly profileStorageService: ProfileStorageServiceService,
+    private readonly profileStorageService: ProfileStorageService,
     private readonly router: Router
   ) {}
 

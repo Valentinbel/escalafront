@@ -4,7 +4,7 @@ import { ClimberProfile } from '../model/climberprofile.model';
 @Injectable({
   providedIn: 'root'
 })
-export class ProfileStorageServiceService {
+export class ProfileStorageService {
 
   constructor() { }
 

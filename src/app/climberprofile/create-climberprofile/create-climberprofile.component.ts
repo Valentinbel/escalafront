@@ -8,7 +8,7 @@ import { SnackBarService } from '../../shared/snack-bar/snack-bar.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LanguageEnum } from '../../model/enum/language.enum';
 import { ClimberuserService } from '../../shared/climberuser.service';
-import { ProfileStorageServiceService } from '../profile-storage-service.service';
+import { ProfileStorageService } from '../profile-storage.service';
 import { AuthStorageService } from '../../auth/auth-storage.service';
 import { AvatarComponent } from "../../shared/avatar/avatar.component";
 
@@ -53,7 +53,7 @@ export class CreateClimberprofileComponent implements OnInit{
     private readonly climberprofileService: ClimberprofileService,
     private readonly climberUserService: ClimberuserService,
     private readonly authStorageService: AuthStorageService,
-    private readonly profileStorageService: ProfileStorageServiceService,
+    private readonly profileStorageService: ProfileStorageService,
     private readonly snackBarService: SnackBarService,
     private readonly translateService: TranslateService
   ) {}
