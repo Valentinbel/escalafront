@@ -92,6 +92,7 @@
         }
     },
     "avatar": {
-        "saveError": "Error on uploading your profile avatar"
+        "saveError": "Error on uploading your profile avatar",
+        "getError": "Error on retrieving your avatar"
     }
 }

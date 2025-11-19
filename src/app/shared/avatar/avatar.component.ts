@@ -8,6 +8,7 @@ import { AvatarService } from '../../shared/avatar/avatar.service';
 import { TranslateService } from '@ngx-translate/core';
 import { SnackBarService } from '../snack-bar/snack-bar.service';
 import { DomSanitizer, SafeStyle, SafeUrl } from '@angular/platform-browser';
+import { AvatarStorageService } from './avatar-storage.service';
 
 
 @Component({
@@ -43,15 +44,15 @@ export class AvatarComponent implements OnInit, OnDestroy, ControlValueAccessor 
     private readonly avatarService: AvatarService,
     private readonly snackBarService: SnackBarService,
     private readonly translateService: TranslateService,
+    private readonly avatarStorageService: AvatarStorageService,
     private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
-   if (history.state.userId) {
-    this.userId = history.state.userId;
-
-    // if(avatarId est présent) {
-    this.loadAvatar(this.userId);
+    if (history.state.userId) {
+      this.userId = history.state.userId;
+    if (this.avatarStorageService.getAvatarId())
+      this.loadAvatar(this.userId);
    }
   }
 
@@ -79,8 +80,6 @@ export class AvatarComponent implements OnInit, OnDestroy, ControlValueAccessor 
     this.avatarService.getFile(this.userId)
     .pipe(takeUntil(this.destroy$)).subscribe({
       next: (url) => {
-        console.log("retour getFile: " + url);
-
         // Nettoyer l'ancienne URL si elle existe
         if (this.objectUrl) {
           URL.revokeObjectURL(this.objectUrl);
@@ -118,8 +117,6 @@ export class AvatarComponent implements OnInit, OnDestroy, ControlValueAccessor 
 
   resetInput(){
     const input = document.getElementById('avatar-input-file') as HTMLInputElement;
-    console.log("INPUT: ", input);
-    console.log("INPUT VALUE: ", input.value);
     if(input){
       input.value = "";
     }
@@ -156,21 +153,14 @@ export class AvatarComponent implements OnInit, OnDestroy, ControlValueAccessor 
   saveFile(fileConverted: File) {
     this.avatarService.upload(fileConverted, this.userId).subscribe({
       next: (event) => {
-        console.log("retour upload avatar. fileInfoId: "+  event);
         this.avatarId = event;
         this.onChange(this.avatarId);
-
+        this.avatarStorageService.setAvatarId(this.avatarId);
         this.loadAvatar(this.userId);
       },
       error: (err) => {
         this.displayErrorSnackBar(err.error.message);
       }});
-
-      // TODO finir ca
-    /*const formData: FormData = new FormData();
-    formData.append("userId", this.userId.toString());
-    formData.append("avatar", this.field['avatar'].value);*/
-
   }
 
   displayErrorSnackBar(errorMessage: string): void {

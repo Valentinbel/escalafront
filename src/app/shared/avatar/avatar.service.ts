@@ -15,15 +15,8 @@ export class AvatarService {
     private sanitizer: DomSanitizer
   ) { }
 
-  
-  upload(fileConverted: File, userId: number): Observable<any> {
-    // Créer le FormData
-    const formData: FormData = new FormData();
-    formData.append('file', fileConverted);
-    formData.append("userId", userId.toString());
-    //this.httpOptions is contained in the formData
-
-    return this.httpClient.post<string>(this.urlAvatar, formData);
+  getAvatarId(userId: number): Observable<number> {
+    return this.httpClient.get<number>(this.urlAvatar + userId + '/id' );
   }
 
   getFile(userId: number): Observable<SafeUrl> {
@@ -35,12 +28,16 @@ export class AvatarService {
           const blob = response.body as Blob;
           return URL.createObjectURL(blob);
         })
-        /*map(response => {
-          const blob = response.body as Blob;
-          const objectUrl = URL.createObjectURL(blob);
-          // Sanitize l'URL pour éviter les problèmes de sécurité Angular. (Pour passer à <img [src]>)
-          return this.sanitizer.bypassSecurityTrustUrl(objectUrl);
-        })*/
       );
+  }
+
+  upload(fileConverted: File, userId: number): Observable<any> {
+    // Créer le FormData
+    const formData: FormData = new FormData();
+    formData.append('file', fileConverted);
+    formData.append("userId", userId.toString());
+    //httpOptions is contained in the formData
+
+    return this.httpClient.post<string>(this.urlAvatar, formData);
   }
 }

@@ -92,6 +92,7 @@
         }
     },
     "avatar": {
-        "saveError": "Erreur lors du chargement de votre image de profil"
+        "saveError": "Erreur lors du chargement de votre image de profil",
+        "getError": "Erreur lors de la récupération de votre avatar"
     }
 }
