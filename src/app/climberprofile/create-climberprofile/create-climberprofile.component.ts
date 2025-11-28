@@ -60,7 +60,6 @@ export class CreateClimberprofileComponent implements OnInit{
 
   // TODO Renommer composant en : add-edit-climberprofile.component.ts
   ngOnInit(): void {
-    console.log("history.state: ", history.state);
     if (history.state.userId) {
       this.userId = history.state.userId;
       this.userName = history.state.userName;
@@ -180,7 +179,7 @@ export class CreateClimberprofileComponent implements OnInit{
     
   }
 
-  private saveUserName(): void {
+  private saveUserName(): void { /// TODO supprimer ça ? 
     let userName  = this.field['userName'].value;
     console.log(typeof(this.field['userName'].value));
 

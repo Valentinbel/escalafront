@@ -27,7 +27,7 @@ export class ImageCropperComponent implements OnInit {
     this.initCropper();
   }
 
-  initCropper() {
+  private initCropper() {
     const image = document.getElementById('image') as HTMLImageElement;
     this.cropper = new Cropper(image, {
       aspectRatio: 1,
@@ -36,7 +36,7 @@ export class ImageCropperComponent implements OnInit {
     });
   }
 
-  getRoundedCanvas(sourceCanvas: any) {
+  private getRoundedCanvas(sourceCanvas: any) {
     let canvas = document.createElement('canvas');
     let context: any = canvas.getContext('2d');
     let width = sourceCanvas.width;
