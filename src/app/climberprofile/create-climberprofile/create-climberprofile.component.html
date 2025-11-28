@@ -1,4 +1,5 @@
 <div class="centeredComponent">
+  <!---TODO remplacer par @if--> 
   <h1 *ngIf="isAddMode">{{ 'profile.title.createProfile'| translate }}</h1>
   <h1 *ngIf="!isAddMode">{{ 'profile.title.editProfile'| translate }}</h1>
 
@@ -43,8 +44,8 @@
     </div>
     
     <div>
-      <label class="label" for="notified">{{ 'profile.txt.notifications'| translate }}</label>
-      <input id="notified" type="checkbox" formControlName="notified" />
+      <label class="label" for="isNotified">{{ 'profile.txt.notifications'| translate }}</label>
+      <input id="isNotified" type="checkbox" formControlName="isNotified" />
     </div>
 
     <div>

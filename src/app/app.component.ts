@@ -8,6 +8,9 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import defaultLanguage from '../../public/i18n/en.json';
 import { MessageResponse } from './model/message-response.model';
 import { ContactComponent } from "./contact/contact.component";
+import { AvatarService } from './shared/avatar/avatar.service';
+import { AvatarStorageService } from './shared/avatar/avatar-storage.service';
+import { SnackBarService } from './shared/snack-bar/snack-bar.service';
 
 @Component({
     selector: 'app-root',
@@ -26,7 +29,10 @@ export class AppComponent implements OnInit {
 
   constructor(
     private readonly authService: AuthService, 
+    private readonly avatarService: AvatarService,
     private readonly authStorageService: AuthStorageService, 
+    private readonly avatarStorageService: AvatarStorageService,
+    private readonly snackBarService: SnackBarService,
     private readonly translate: TranslateService){
       this.translate.addLangs(['fr', 'en']);
       this.translate.setTranslation('en', defaultLanguage); // defaultLanguage as static to avoid loading glitches
@@ -44,13 +50,27 @@ export class AppComponent implements OnInit {
       const user = this.authStorageService.getClimberUser();
       this.userId = user.id; 
       this.roles = user.roles;
-      console.log(" user from Storage : ", user);
 
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
 
       this.username = user.username;
-    } else console.log("NOT LOGGED IN")
+      this.getAvatarId();
+    } 
+    else console.log("NOT LOGGED IN")
+  }
+
+  private getAvatarId(): void {
+    this.avatarService.getAvatarId(this.userId).subscribe( {
+        next: (avatarId: number) => {
+          this.avatarStorageService.setAvatarId(avatarId);
+        },
+        error: (err) => {
+          let message = this.translate.instant('avatar.getError');
+          this.snackBarService.add(message, 8000, 'error');
+          console.log("Erreur les boys" + message + err);
+        }
+    });
   }
 
   logout(): void {

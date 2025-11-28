@@ -27,7 +27,7 @@
             "createAccount": "Create Account"
 
         },
-        "registrationSuccessfull": "Vous avez bien créé votre compte",
+        "registrationSuccessfull": "Account successfully created",
         "login": {
             "username": "Username: ",
             "password": "Password: ",
@@ -63,7 +63,7 @@
         "avatar": "Avatar: ",
         "language": "Language: ",
         "gender": "Gender: ",
-        "notified": "Notifications actived: ",
+        "isNotified": "Notifications actived: ",
         "climberProfileDescription": "Description: ",
         "yes": "Yes",
         "no": "No",
@@ -90,5 +90,9 @@
             
             "saveError": "Error during the profile creation"
         }
+    },
+    "avatar": {
+        "saveError": "Error on uploading your profile avatar",
+        "getError": "Error on retrieving your avatar"
     }
 }

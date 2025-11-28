@@ -15,7 +15,7 @@
       </ul>
       <a routerLink="home" class="logo">Pinya</a>
       @if(isLoggedIn) {
-        <span>{{ 'navbar.hello'| translate }}{{this.userName}}</span>
+        <span>{{ 'navbar.hello'| translate }}{{ userNameSignal() }}</span>
       }
     </div>
   </nav>

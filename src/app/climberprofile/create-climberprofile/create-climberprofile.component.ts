@@ -8,7 +8,7 @@ import { SnackBarService } from '../../shared/snack-bar/snack-bar.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LanguageEnum } from '../../model/enum/language.enum';
 import { ClimberuserService } from '../../shared/climberuser.service';
-import { ProfileStorageServiceService } from '../profile-storage-service.service';
+import { ProfileStorageService } from '../profile-storage.service';
 import { AuthStorageService } from '../../auth/auth-storage.service';
 import { AvatarComponent } from "../../shared/avatar/avatar.component";
 
@@ -31,7 +31,7 @@ export class CreateClimberprofileComponent implements OnInit{
     languageId: new FormControl(''),
     genderId: new FormControl(''),
     avatar: new FormControl(''),
-    notified: new FormControl(''),
+    isNotified: new FormControl(''),
   });
 
   climberProfile: ClimberProfile;
@@ -53,14 +53,13 @@ export class CreateClimberprofileComponent implements OnInit{
     private readonly climberprofileService: ClimberprofileService,
     private readonly climberUserService: ClimberuserService,
     private readonly authStorageService: AuthStorageService,
-    private readonly profileStorageService: ProfileStorageServiceService,
+    private readonly profileStorageService: ProfileStorageService,
     private readonly snackBarService: SnackBarService,
     private readonly translateService: TranslateService
   ) {}
 
   // TODO Renommer composant en : add-edit-climberprofile.component.ts
   ngOnInit(): void {
-    console.log("history.state: ", history.state);
     if (history.state.userId) {
       this.userId = history.state.userId;
       this.userName = history.state.userName;
@@ -69,16 +68,12 @@ export class CreateClimberprofileComponent implements OnInit{
         this.climberProfile = history.state.profile;
         this.profileId = this.climberProfile.id!;
       }
-      //TODO quel est l'état de climberProfile? 
-      console.log("history.state.profile: "+  history.state.profile);
     }
 
     /* TODO this.id = this.route.snapshot.params['id'];
         this.isAddMode = !this.id;*/
 
     this.isAddMode = this.climberProfile === undefined;
-   
-    console.log('climberProfile: ' + JSON.stringify(this.climberProfile));
 
     this.profileForm = this.formBuilder.group({
       userName: ['',
@@ -91,7 +86,7 @@ export class CreateClimberprofileComponent implements OnInit{
       climberProfileDescription: [],
       language: [],
       genderId: [],
-      notified: [],
+      isNotified: [],
       avatar: [],
     });
   
@@ -105,9 +100,8 @@ export class CreateClimberprofileComponent implements OnInit{
       this.profileForm.get('climberProfileDescription')?.patchValue(profileToUpdate.climberProfileDescription);
       this.profileForm.get('languageId')?.patchValue(profileToUpdate.languageId);
       this.languageId = profileToUpdate.languageId!;
-      this.profileForm.get('genderId')?.patchValue(profileToUpdate.genderId); 
-      this.profileForm.get('avatar')?.patchValue(profileToUpdate.avatar);
-      this.profileForm.get('notified')?.patchValue(profileToUpdate.notified);
+      this.profileForm.get('genderId')?.patchValue(profileToUpdate.genderId);
+      this.profileForm.get('isNotified')?.patchValue(profileToUpdate.isNotified);
 
      /* if (!this.isAddMode) {
         this.userService.getById(this.id)
@@ -180,12 +174,12 @@ export class CreateClimberprofileComponent implements OnInit{
 
   private saveForm(): void {
     this.saveProfile();
-    this.saveUserName();
+    //this.saveUserName();
     // TODO: nest l'un dans l'autre ?
     
   }
 
-  private saveUserName(): void {
+  private saveUserName(): void { /// TODO supprimer ça ? 
     let userName  = this.field['userName'].value;
     console.log(typeof(this.field['userName'].value));
 
@@ -204,18 +198,22 @@ export class CreateClimberprofileComponent implements OnInit{
     console.log('avatar', this.field['avatar'].value);
     this.climberProfile = {
       id: this.profileId,
-      avatar: this.field['avatar'].value,
+      userName: this.field['userName'].value,
       genderId: this.field['genderId'].value,
       languageId: this.languageId,
-      notified: this.field['notified'].value ?? false,
+      isNotified: this.field['isNotified'].value ?? false,
       climberProfileDescription: this.field['climberProfileDescription'].value,
       climberUserId: this.userId,
     };
+    console.log(this.climberProfile);
 
     this.climberprofileService.saveClimberProfile(this.climberProfile).subscribe({
       next: (profile: ClimberProfile) => {
         if (profile) {
-          console.log(profile);
+          console.log("retour du back saveClimberProfile: " + JSON.stringify(profile));
+          if (profile.userName) 
+            this.authStorageService.setUserName(profile.userName);
+        
           this.router.navigate(['../climber-profile'], {relativeTo: this.route}); // TODO: mettre create en enfant de ClimberProfile pour mettre ca: ['../'], {relativeTo: this.route}
         }
       },

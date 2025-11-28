@@ -63,7 +63,7 @@
         "avatar": "Avatar : ",
         "language": "Langue : ",
         "gender": "Genre : ",
-        "notified": "Notifications actives : ",
+        "isNotified": "Notifications actives : ",
         "climberProfileDescription": "Description : ",
         "yes": "Oui",
         "no": "Non",
@@ -88,7 +88,11 @@
             "nameMinLength": "Le nom doit contenir au moins 4 caractères",
             "nameMaxLength": "Le nom ne doit pas dépasser 20 caractères",
             
-            "saveError": "Erreur lors de la création du profile"
+            "saveError": "Erreur lors de la création du profil"
         }
+    },
+    "avatar": {
+        "saveError": "Erreur lors du chargement de votre image de profil",
+        "getError": "Erreur lors de la récupération de votre avatar"
     }
 }

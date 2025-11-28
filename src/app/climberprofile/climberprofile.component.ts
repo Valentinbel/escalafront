@@ -5,7 +5,7 @@ import { ClimberProfile } from '../model/climberprofile.model';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthStorageService } from '../auth/auth-storage.service';
-import { ProfileStorageServiceService } from './profile-storage-service.service';
+import { ProfileStorageService } from './profile-storage.service';
 
 @Component({
     selector: 'app-climberprofile',
@@ -21,13 +21,12 @@ export class ClimberprofileComponent implements OnInit{
   constructor(
     private readonly climberprofileService: ClimberprofileService,
     private readonly authStorageService: AuthStorageService,
-    private readonly profileStorageService: ProfileStorageServiceService,
+    private readonly profileStorageService: ProfileStorageService,
     private readonly router: Router
   ) {}
 
   ngOnInit() {
     this.userId = this.authStorageService.getClimberUser().id;
-    console.log("this.userId: ", this.userId);
     this.userName = this.authStorageService.getUserName();
     if (this.userId) { //TODO : and ... ? && this.profileId === 0 pour éviter l'erreur  error: (err) => console.log('There is no profile related to your account.
       this.getProfileByUserId(this.userId);
@@ -39,7 +38,6 @@ export class ClimberprofileComponent implements OnInit{
       next: (climberProfile: ClimberProfile) => {
         this.climberProfile = climberProfile;
         this.profileStorageService.setProfile(climberProfile);
-        console.log(this.climberProfile);
       },
       error: (err) => console.log('There is no profile related to your account. Please create one.',err)
     });
@@ -50,7 +48,7 @@ export class ClimberprofileComponent implements OnInit{
     const profile = this.climberProfile;
       //TODO Vérifier ce qu'on envoie ici. Avatar Service #1 dit :
       // const profile = this.climberProfile ?? null;
-    console.log("profile envoyé à Create: " + profile);
+    console.log("profile envoyé à Create: " + JSON.stringify(profile));
     const userName = this.userName;
     this.router.navigate(['/add-climber-profile'], { state: { userId, userName, profile } });
   }
