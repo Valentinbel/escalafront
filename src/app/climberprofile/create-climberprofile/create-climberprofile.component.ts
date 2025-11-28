@@ -159,7 +159,7 @@ export class CreateClimberprofileComponent implements OnInit{
 
   submitProfile(): void {
     this.submitted = true;
-    this.profileForm.invalid ? this.showErrors() : this.saveForm();
+    this.profileForm.invalid ? this.showErrors() : this.saveProfile(); 
     console.log('Profile: ' + JSON.stringify(this.profileForm.value, null, 2));
   }
 
@@ -170,27 +170,6 @@ export class CreateClimberprofileComponent implements OnInit{
         this.snackBarService.add(fieldError + value, 8000, 'error');
       }
     }
-  }
-
-  private saveForm(): void {
-    this.saveProfile();
-    //this.saveUserName();
-    // TODO: nest l'un dans l'autre ?
-    
-  }
-
-  private saveUserName(): void { /// TODO supprimer ça ? 
-    let userName  = this.field['userName'].value;
-    console.log(typeof(this.field['userName'].value));
-
-    this.climberUserService.updateClimberUserNameById(this.userId, userName).subscribe({
-      next: () => {
-        this.authStorageService.setUserName(userName);
-      },
-      error: (err) => {
-        this.displayErrorSnackBar(err.error.message);
-      },
-    });
   }
 
   private saveProfile(): void {
@@ -214,7 +193,7 @@ export class CreateClimberprofileComponent implements OnInit{
           if (profile.userName) 
             this.authStorageService.setUserName(profile.userName);
         
-          this.router.navigate(['../climber-profile'], {relativeTo: this.route}); // TODO: mettre create en enfant de ClimberProfile pour mettre ca: ['../'], {relativeTo: this.route}
+          this.router.navigate(['../climber-profile'], {relativeTo: this.route});
         }
       },
       error: (err) => {

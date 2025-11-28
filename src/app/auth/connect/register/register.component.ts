@@ -27,7 +27,6 @@ export class RegisterComponent implements OnInit{
   submitted = false;
 
   isSuccessful = false;
-  isSignUpFailed = false; // TODO Supprimer ??????????
   errorMessage = '';
 
 
@@ -102,12 +101,10 @@ export class RegisterComponent implements OnInit{
       next: (response: MessageResponse) => {
         console.log(response.message);
         this.isSuccessful = true;
-        this.isSignUpFailed = false;
       },
       error: (err) => {
         this.errorMessage = err.error.message;
         console.log(this.errorMessage);
-        this.isSignUpFailed = true;
         let messageRegister = this.translateService.instant('connect.register.error.registerFailed');
         this.snackBarService.add(messageRegister, 8000, 'error');
       }
