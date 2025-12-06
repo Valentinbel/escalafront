@@ -25,10 +25,8 @@ export class RegisterComponent implements OnInit{
 
   registerModel: Register;
   submitted = false;
-
   isSuccessful = false;
   errorMessage = '';
-
 
   constructor(private readonly authService: AuthService,
     private readonly formBuilder: FormBuilder,
