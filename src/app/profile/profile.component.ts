@@ -10,8 +10,8 @@ import { ProfileStorageService } from './profile-storage.service';
 @Component({
     selector: 'app-profile',
     imports: [RouterModule, CommonModule, TranslateModule],
-    templateUrl: './profile.html',
-    styleUrl: './profile.css'
+    templateUrl: './profile.component.html',
+    styleUrl: './profile.component.css'
 })
 export class ProfileComponent implements OnInit{
   profile: Profile;

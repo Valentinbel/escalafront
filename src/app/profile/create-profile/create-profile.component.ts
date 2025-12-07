@@ -15,8 +15,8 @@ import { AvatarComponent } from "../../shared/avatar/avatar.component";
 @Component({
     selector: 'app-create-profile',
     imports: [ReactiveFormsModule, CommonModule, TranslateModule, FormsModule, AvatarComponent],
-    templateUrl: './create-profile.html',
-    styleUrl: './create-profile.css'
+    templateUrl: './create-profile.component.html',
+    styleUrl: './create-profile.component.css'
 })
 
 export class CreateProfileComponent implements OnInit{
