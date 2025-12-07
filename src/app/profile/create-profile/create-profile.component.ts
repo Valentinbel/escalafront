@@ -7,7 +7,6 @@ import { Profile } from '../../model/profile.model';
 import { SnackBarService } from '../../shared/snack-bar/snack-bar.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LanguageEnum } from '../../model/enum/language.enum';
-import { UserService } from '../../shared/user.service';
 import { ProfileStorageService } from '../profile-storage.service';
 import { AuthStorageService } from '../../auth/auth-storage.service';
 import { AvatarComponent } from "../../shared/avatar/avatar.component";
@@ -51,7 +50,6 @@ export class CreateProfileComponent implements OnInit{
     private readonly route: ActivatedRoute,
     private readonly formBuilder: FormBuilder,
     private readonly profileService: ProfileService,
-    private readonly userService: UserService,
     private readonly authStorageService: AuthStorageService,
     private readonly profileStorageService: ProfileStorageService,
     private readonly snackBarService: SnackBarService,
@@ -102,12 +100,6 @@ export class CreateProfileComponent implements OnInit{
       this.languageId = profileToUpdate.languageId!;
       this.profileForm.get('genderId')?.patchValue(profileToUpdate.genderId);
       this.profileForm.get('isNotified')?.patchValue(profileToUpdate.isNotified);
-
-     /* if (!this.isAddMode) {
-        this.userService.getById(this.id)
-            .pipe(first())
-            .subscribe(x => this.form.patchValue(x));
-      }*/
     }
 
     // TODO : on dira dans la fonction: si !addmode et profile.languageId, alors on utilise ça
