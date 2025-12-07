@@ -78,5 +78,6 @@ export class ImageCropperComponent implements OnInit {
   reset(){
     this.cropper.clear();
     this.cropper.crop();
+    this.dialogRef.close(null);
   }
 }
