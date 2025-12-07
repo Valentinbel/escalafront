@@ -64,7 +64,7 @@
         "language": "Language: ",
         "gender": "Gender: ",
         "isNotified": "Notifications actived: ",
-        "climberProfileDescription": "Description: ",
+        "profileDescription": "Description: ",
         "yes": "Yes",
         "no": "No",
         "btn": {

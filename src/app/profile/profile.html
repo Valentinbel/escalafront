@@ -1,0 +1,16 @@
+<div class="centeredComponent">
+    @if (this.profile) {
+        <div >
+            <p><strong>{{ 'profile.name'| translate }}</strong> {{this.userName}}</p>
+            <p><strong>{{ 'profile.gender'| translate }}</strong>{{this.profile.genderId}}</p>
+            <p><strong>{{ 'profile.language'| translate }}</strong>{{this.profile.languageId}}</p>
+            <p><strong>{{ 'profile.isNotified'| translate }}</strong>{{ (this.profile.isNotified? 'profile.yes' : 'profile.no') | translate }}</p>
+            <p><strong>{{ 'profile.profileDescription'| translate }}</strong>{{this.profile.profileDescription}}</p>
+        </div>
+        <button class="button" (click)="openAddProfile()" >{{ 'profile.btn.editProfile'| translate }}</button> <br/>
+    }
+    @else{
+        <div >{{ 'profile.txt.createProfile'| translate }}</div>
+        <button class="button" (click)="openAddProfile()" >{{ 'profile.btn.createProfile'| translate }}</button> <br/>
+    }
+</div>

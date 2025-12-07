@@ -27,13 +27,13 @@ export class ConnectComponent implements OnInit {
   ngOnInit(): void{
     if (this.authStorageService.isLoggedIn()) {
       this.isLoggedIn = true;
-      this.router.navigate(['/climber-profile']);
+      this.router.navigate(['/profile']);
       this.displayWelcomeSnackBar();
     }
   }
 
   displayWelcomeSnackBar(): void {
-    let userName = this.authStorageService.getClimberUser().userName;
+    let userName = this.authStorageService.getUser().userName;
     let message = this.translateService.instant('connect.login.success');
     this.snackBarService.add(message + userName, 4000, 'success');
   }

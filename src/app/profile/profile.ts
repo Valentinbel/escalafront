@@ -1,32 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { ClimberprofileService } from './../climberprofile/climberprofile.service';
+import { ProfileService } from './profile.service';
 import { RouterModule, Router } from '@angular/router';
-import { ClimberProfile } from '../model/climberprofile.model';
+import { Profile } from '../model/profile.model';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthStorageService } from '../auth/auth-storage.service';
 import { ProfileStorageService } from './profile-storage.service';
 
 @Component({
-    selector: 'app-climberprofile',
+    selector: 'app-profile',
     imports: [RouterModule, CommonModule, TranslateModule],
-    templateUrl: './climberprofile.component.html',
-    styleUrl: './climberprofile.component.css'
+    templateUrl: './profile.html',
+    styleUrl: './profile.css'
 })
-export class ClimberprofileComponent implements OnInit{
-  climberProfile: ClimberProfile;
+export class ProfileComponent implements OnInit{
+  profile: Profile;
   userName: string;
   private userId: number;
 
   constructor(
-    private readonly climberprofileService: ClimberprofileService,
+    private readonly profileService: ProfileService,
     private readonly authStorageService: AuthStorageService,
     private readonly profileStorageService: ProfileStorageService,
     private readonly router: Router
   ) {}
 
   ngOnInit() {
-    this.userId = this.authStorageService.getClimberUser().id;
+    this.userId = this.authStorageService.getUser().id;
     this.userName = this.authStorageService.getUserName();
     if (this.userId) {
       this.getProfileByUserId(this.userId);
@@ -34,10 +34,10 @@ export class ClimberprofileComponent implements OnInit{
   }
 
   getProfileByUserId(userId: number): void {
-    this.climberprofileService.getProfileByUserId(userId).subscribe({
-      next: (climberProfile: ClimberProfile) => {
-        this.climberProfile = climberProfile;
-        this.profileStorageService.setProfile(climberProfile);
+    this.profileService.getProfileByUserId(userId).subscribe({
+      next: (profile: Profile) => {
+        this.profile = profile;
+        this.profileStorageService.setProfile(profile);
       },
       error: (err) => console.log('There is no profile related to your account. Please create one.',err)
     });
@@ -45,9 +45,9 @@ export class ClimberprofileComponent implements OnInit{
 
   openAddProfile() {
     const userId = this.userId;
-    const profile = this.climberProfile;
+    const profile = this.profile;
     console.log("profile envoyé à Create: " + JSON.stringify(profile));
     const userName = this.userName;
-    this.router.navigate(['/add-climber-profile'], { state: { userId, userName, profile } });
+    this.router.navigate(['/add-profile'], { state: { userId, userName, profile } });
   }
 }

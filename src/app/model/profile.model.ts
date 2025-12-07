@@ -1,11 +1,11 @@
-export class ClimberProfile {
+export class Profile {
     constructor(
         public id?: number,
         public userName?: string,
         public genderId?: number,
         public languageId?:number,
         public isNotified?: boolean,
-        public climberProfileDescription?: string, /// text
-        public climberUserId?: number
+        public profileDescription?: string, /// text
+        public userId?: number
     ) {}
 }

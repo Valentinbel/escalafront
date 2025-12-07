@@ -25,43 +25,43 @@ export class AuthStorageService {
     sessionStorage.clear();
   }
 
-  public getClimberUser(): any { // TODO Model
-    const climberUser = sessionStorage.getItem(USER_KEY);
-    if (climberUser) {
-      return JSON.parse(climberUser);
+  public getUser(): any { // TODO Model
+    const user = sessionStorage.getItem(USER_KEY);
+    if (user) {
+      return JSON.parse(user);
     }
     return {};
   }
   
-  public setClimberUser(climberUser: LoginResponse): void {
+  public setUser(user: LoginResponse): void {
     sessionStorage.removeItem(USER_KEY);
-    sessionStorage.setItem(USER_KEY, JSON.stringify(climberUser));
-    sessionStorage.setItem('climberUserId', JSON.stringify(climberUser.id));
+    sessionStorage.setItem(USER_KEY, JSON.stringify(user));
+    sessionStorage.setItem('userId', JSON.stringify(user.id));
 
-    this.usernameSignal.set(climberUser.userName);
+    this.usernameSignal.set(user.userName);
   }
 
   public getUserName(): string {
-    const climberUser = this.getClimberUser();
-    return climberUser.userName;
+    const user = this.getUser();
+    return user.userName;
   }
 
   public setUserName( userName: string): void {
-    const climberUser = this.getClimberUser();
-    climberUser.userName = userName;
-    sessionStorage.setItem(USER_KEY, JSON.stringify(climberUser));
+    const user = this.getUser();
+    user.userName = userName;
+    sessionStorage.setItem(USER_KEY, JSON.stringify(user));
 
-    this.usernameSignal.set(climberUser.userName);
+    this.usernameSignal.set(user.userName);
   }
 
-  public getClimberUserId(): number {
-    const climberUserId = sessionStorage.getItem('climberUserId');
-    return climberUserId ? JSON.parse(climberUserId) : 0;
+  public getUserId(): number {
+    const userId = sessionStorage.getItem('userId');
+    return userId ? JSON.parse(userId) : 0;
   }
 
   public isLoggedIn(): boolean {
-    const climberUser = window.sessionStorage.getItem(USER_KEY);
-    if (climberUser) {
+    const user = window.sessionStorage.getItem(USER_KEY);
+    if (user) {
       return true;
     }
     return false;

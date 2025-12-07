@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ProfileStorageService } from './profile-storage.service';
+import { ProfileStorageService } from '../profile/profile-storage.service';
 
 describe('ProfileStorageService', () => {
   let service: ProfileStorageService;

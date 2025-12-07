@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { ClimberprofileComponent } from './climberprofile/climberprofile.component';
+import { ProfileComponent } from './profile/profile';
 import { SearchComponent } from './search/search.component';
 import { ContactComponent } from './contact/contact.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { CreateClimberprofileComponent } from './climberprofile/create-climberprofile/create-climberprofile.component';
+import { CreateProfileComponent } from './profile/create-profile/create-profile';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './auth/connect/register/register.component';
 import { LoginComponent } from './auth/connect/login/login.component';
@@ -21,14 +21,14 @@ export const routes: Routes = [
         component: HomeComponent
     },
     {
-        path: 'climber-profile',
+        path: 'profile',
         title: 'Profile', 
-        component: ClimberprofileComponent
+        component: ProfileComponent
     },
     {
-        path: 'add-climber-profile',
+        path: 'add-profile',
         title: 'Add profile', 
-        component: CreateClimberprofileComponent
+        component: CreateProfileComponent
     },
     {
         path: 'searches', 

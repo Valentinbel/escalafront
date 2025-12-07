@@ -43,7 +43,7 @@ export class NavbarComponent implements OnInit {
 
   logout(): void {
     if (this.isLoggedIn) {
-      let userId = this.authStorageService.getClimberUserId();
+      let userId = this.authStorageService.getUserId();
       this.authService.logout(userId).subscribe({
         next: (response: MessageResponse) => {
           console.log(response.message);
