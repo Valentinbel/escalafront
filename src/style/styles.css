@@ -1,20 +1,19 @@
 :root {
 	/* colors */
-	--pinya-color-violetBg: #D953DB;
-	--pinya-color-orangeBackGround:  #DBBD53;
-	--btn-color-greyBackGround: #608680;
+	--pinya-color-violetBg:#FFCA3A;
+	--pinya-color-orangeBackGround:  #F6F3EE;
+	--btn-color-greyBackGround: #887BA6;/*#608680;*/
 	--btn-color-greyBorder: #18ab29;
 	--btn-color-greenTxtShadow: #2f6627;
 	--btn-color-greenHover: #5cbf2a;
-	--white: white;
+	--white: #F6F3EE;
 	--black: black;
 	--red-error: red;
 
 	/* Border radius */
-	--borderRadius-default: 28px;
+	--borderRadius-default: 10px;
 	/* Font Sizes */
 	--btn-fontSize: 17px;
-	/* Font weights */
 	/* Durations */
 	/* Shadows */
 }
