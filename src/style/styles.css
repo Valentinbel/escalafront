@@ -92,7 +92,7 @@ input, select, textarea {
 
 /********************/
 .centeredComponent{
-    margin-inline: 3rem;
+	margin: 2rem 20%;
 	background-color: var(--pinya-color-violetBg);
 	padding: 1.5rem 4rem;
 	/*border: 1px solid var(--black);*/
@@ -101,7 +101,7 @@ input, select, textarea {
 /* Forms*/
 
 .label {
-    margin-left: 0.3rem;
+    margin-left: 5px;
 }
 
 .invalid-form {
