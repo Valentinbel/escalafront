@@ -3,7 +3,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { SearchComponent } from './search/search.component';
 import { ContactComponent } from './contact/contact.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { CreateProfileComponent } from './profile/create-profile/create-profile.component';
+import { AddEditProfileComponent } from './profile/add-edit-profile/add-edit-profile.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './auth/connect/register/register.component';
 import { LoginComponent } from './auth/connect/login/login.component';
@@ -26,9 +26,9 @@ export const routes: Routes = [
         component: ProfileComponent
     },
     {
-        path: 'add-profile',
-        title: 'Add profile', 
-        component: CreateProfileComponent
+        path: 'add-edit-profile',
+        title: 'Add or edit profile', 
+        component: AddEditProfileComponent
     },
     {
         path: 'searches', 

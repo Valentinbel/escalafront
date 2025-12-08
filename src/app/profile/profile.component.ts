@@ -48,6 +48,6 @@ export class ProfileComponent implements OnInit{
     const profile = this.profile;
     console.log("profile envoyé à Create: " + JSON.stringify(profile));
     const userName = this.userName;
-    this.router.navigate(['/add-profile'], { state: { userId, userName, profile } });
+    this.router.navigate(['/add-edit-profile'], { state: { userId, userName, profile } });
   }
 }

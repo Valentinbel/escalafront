@@ -12,16 +12,14 @@ import { AuthStorageService } from '../../auth/auth-storage.service';
 import { AvatarComponent } from "../../shared/avatar/avatar.component";
 
 @Component({
-    selector: 'app-create-profile',
+    selector: 'app-add-edit-profile',
     imports: [ReactiveFormsModule, CommonModule, TranslateModule, FormsModule, AvatarComponent],
-    templateUrl: './create-profile.component.html',
-    styleUrl: './create-profile.component.css'
+    templateUrl: './add-edit-profile.component.html',
+    styleUrl: './add-edit-profile.component.css'
 })
 
-export class CreateProfileComponent implements OnInit{
-// FINIR LE PATCH POUR LE RESTE DU PROFILE 
+export class AddEditProfileComponent implements OnInit{
 // TODO isLoading
-// Changer nom component => Modifier routing comme dans tuto 
 // https://jasonwatmore.com/post/2020/09/02/angular-combined-add-edit-create-update-form-example
 
   profileForm: FormGroup = new FormGroup({
@@ -56,7 +54,6 @@ export class CreateProfileComponent implements OnInit{
     private readonly translateService: TranslateService
   ) {}
 
-  // TODO Renommer composant en : add-edit-profile.component.ts
   ngOnInit(): void {
     if (history.state.userId) {
       this.userId = history.state.userId;
@@ -68,7 +65,7 @@ export class CreateProfileComponent implements OnInit{
       }
     }
 
-    /* TODO this.id = this.route.snapshot.params['id'];
+    /* TODO this.id = this.route.snapshot.params['id']; (???)
         this.isAddMode = !this.id;*/
 
     this.isAddMode = this.profile === undefined;
