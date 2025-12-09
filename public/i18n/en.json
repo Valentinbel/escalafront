@@ -14,7 +14,8 @@
         "fr": "French"
     },
     "home": {
-        "welcomeMessage": "Hello", 
+        "punchline": "Find a climbing partner",
+        "subtitle": "... just to climb!",
         "toSearches": "Searches"
     }, 
     "form":{
@@ -59,6 +60,7 @@
         }
     },
     "profile": {
+        "titleProfile": "Profile",
         "name": "Name: ",
         "avatar": "Avatar: ",
         "language": "Language: ",
@@ -94,5 +96,8 @@
     "avatar": {
         "saveError": "Error on uploading your profile avatar",
         "getError": "Error on retrieving your avatar"
+    },
+    "search": {
+        "titleSearch": "Searches"
     }
 }

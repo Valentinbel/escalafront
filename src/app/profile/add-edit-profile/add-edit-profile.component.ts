@@ -182,7 +182,7 @@ export class AddEditProfileComponent implements OnInit{
           if (profile.userName) 
             this.authStorageService.setUserName(profile.userName);
         
-          this.router.navigate(['../profile'], {relativeTo: this.route});
+          this.router.navigate(['../searches'], {relativeTo: this.route});
         }
       },
       error: (err) => {
