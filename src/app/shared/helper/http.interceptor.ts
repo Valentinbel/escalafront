@@ -37,7 +37,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
       }
 
       private buildRequest(req: HttpRequest<any>): HttpRequest<any> {
-        let user = this.authStorageService.getClimberUser();
+        let user = this.authStorageService.getUser();
         let token = user.accessToken;
         
         if(token){
@@ -71,7 +71,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
                   console.log("403 Forbidden, You are authenticated but can't access this one");
                 }
                 if (error.status === 401) {
-                  const userId = this.authStorageService.getClimberUserId();
+                  const userId = this.authStorageService.getUserId();
                   this.authStorageService.clean();
                   this.eventBusService.emit(new EventData('logout', null));
                   this.authService.logout(userId).subscribe({

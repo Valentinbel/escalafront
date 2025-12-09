@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit{
   ngOnInit(): void{
     if (this.authStorageService.isLoggedIn()) {
       this.isLoggedIn = true;
-      this.userName = this.authStorageService.getClimberUser().userName;
+      this.userName = this.authStorageService.getUser().userName;
     }
 
     this.loginForm = this.formBuilder.group({
@@ -79,9 +79,9 @@ export class LoginComponent implements OnInit{
 
     this.authService.login(this.loginModel).subscribe({
       next: (response: LoginResponse) => {
-        this.authStorageService.setClimberUser(response);
+        this.authStorageService.setUser(response);
         this.isLoggedIn = true;
-        this.userName = this.authStorageService.getClimberUser().userName;
+        this.userName = this.authStorageService.getUser().userName;
         this.reloadPage();
       },
       error: (err) => {

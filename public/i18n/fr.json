@@ -14,7 +14,8 @@
         "fr": "Français"
     },
     "home": {
-        "welcomeMessage": "Salut ! ", 
+        "punchline": "Trouves un binôme pour grimper", 
+        "subtitle": "... juste pour grimper !",
         "toSearches": "Recherches"
     }, 
     "form":{
@@ -59,12 +60,13 @@
         }
     },
     "profile": {
+        "titleProfile": "Profil",
         "name": "Nom : ",
         "avatar": "Avatar : ",
         "language": "Langue : ",
         "gender": "Genre : ",
         "isNotified": "Notifications actives : ",
-        "climberProfileDescription": "Description : ",
+        "profileDescription": "Description : ",
         "yes": "Oui",
         "no": "Non",
         "btn": {
@@ -94,5 +96,8 @@
     "avatar": {
         "saveError": "Erreur lors du chargement de votre image de profil",
         "getError": "Erreur lors de la récupération de votre avatar"
+    },
+        "search": {
+        "titleSearch": "Recherches"
     }
 }

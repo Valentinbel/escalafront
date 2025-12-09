@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
     this.isLoggedIn = this.authStorageService.isLoggedIn();
 
     if (this.isLoggedIn) {
-      const user = this.authStorageService.getClimberUser();
+      const user = this.authStorageService.getUser();
       this.userId = user.id; 
       this.roles = user.roles;
 
