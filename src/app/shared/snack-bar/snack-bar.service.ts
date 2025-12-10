@@ -11,7 +11,7 @@ export class SnackBarService {
     setTimeout(() => this.remove(0), duration);
   }
 
-  remove(index: number) {
+  remove(index: number): void {
     this.snackBar.splice(index,1);
   }
 }

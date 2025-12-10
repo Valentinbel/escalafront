@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 export class SnackBarComponent { //implements onInit
   constructor(public snackBarService: SnackBarService){}
 
-  removeSnackBar(i: number) {
+  removeSnackBar(i: number): void {
     this.snackBarService.remove(i);
   }
 }

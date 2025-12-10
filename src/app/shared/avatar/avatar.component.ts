@@ -101,7 +101,7 @@ export class AvatarComponent implements OnInit, OnDestroy, ControlValueAccessor 
       }});
   }
 
-  onFileChange(event: any) {
+  onFileChange(event: any): void {
     const files = event.target.files as FileList;
 
     if (files.length > 0) {
@@ -139,9 +139,9 @@ export class AvatarComponent implements OnInit, OnDestroy, ControlValueAccessor 
     }
   }
 
-  private resetInput(){
+  private resetInput(): void {
     const input = document.getElementById('avatar-input-file') as HTMLInputElement;
-    if(input){
+    if(input) {
       input.value = "";
     }
   }
@@ -174,7 +174,7 @@ export class AvatarComponent implements OnInit, OnDestroy, ControlValueAccessor 
     return new File([blob], originalFileName, { type: mime });
   }
 
-  private saveFile(fileConverted: File) {
+  private saveFile(fileConverted: File): void {
     console.log('Uploading avatar file...');
     this.avatarService.upload(fileConverted, this.userId).subscribe({
       next: (event) => {

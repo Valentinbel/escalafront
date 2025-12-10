@@ -107,7 +107,7 @@ export class AddEditProfileComponent implements OnInit{
     return this.profileForm.controls;
   }
 
-  private setLanguageList() {
+  private setLanguageList(): void {
     this.languageList = [];
     this.languageMap.clear();
 
