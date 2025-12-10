@@ -70,7 +70,7 @@
         "yes": "Oui",
         "no": "Non",
         "btn": {
-            "createProfile": "Créer Profil",
+            "createProfile": "Créer profil",
             "editProfile": "Modifier profil",
             "cancel": "Annuler"
         },
@@ -97,7 +97,12 @@
         "saveError": "Erreur lors du chargement de votre image de profil",
         "getError": "Erreur lors de la récupération de votre avatar"
     },
-        "search": {
-        "titleSearch": "Recherches"
+    "search": {
+        "titleSearch": "Recherches",
+        "btn": {
+            "createSearch": "Créer recherche",
+            "editSearch": "Modifier recherche",
+            "cancel": "Annuler"
+        }        
     }
 }

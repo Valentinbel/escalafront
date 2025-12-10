@@ -1,63 +1,63 @@
 <div class="centeredComponent">
-  @if (isAddMode) {
-    <h1>{{ 'profile.title.createProfile'| translate }}</h1>
-  }
-  @else {
-    <h1>{{ 'profile.title.editProfile'| translate }}</h1>
-  }
+	@if (isAddMode) {
+	<h1>{{ 'profile.title.createProfile'| translate }}</h1>
+	}
+	@else {
+	<h1>{{ 'profile.title.editProfile'| translate }}</h1>
+	}
 
-  <form [formGroup]="profileForm" id="profileForm" (ngSubmit)="submitProfile()">
-    <avatar formControlName="avatar"></avatar>
-    <div>
-      <label class="label" for="userName">{{ 'profile.name'| translate }}</label>
-      <input id="userName" type="text" formControlName="userName" 
-        [ngClass]="{ 'is-invalid': submitted && field['userName'].errors }"/> 
+	<form [formGroup]="profileForm" id="profileForm" (ngSubmit)="submitProfile()">
+		<avatar formControlName="avatar"></avatar>
+		<div>
+			<label class="label" for="userName">{{ 'profile.name'| translate }}</label>
+			<input id="userName" type="text" formControlName="userName"
+				[ngClass]="{ 'is-invalid': submitted && field['userName'].errors }" />
 
-      @if (submitted && field['userName'].errors) {
-        <div class="invalid-form">
-          @if (field['userName'].errors['required']) {
-            <span>{{ 'profile.edit.nameRequired'| translate }}</span>
-            }
-          @if (field['userName'].errors['minlength']) {
-            <span>{{ 'profile.edit.nameMinLength'| translate }}</span>
-            }
-          @if (field['userName'].errors['maxlength']) {
-            <span>{{ 'profile.edit.nameMaxLength'| translate }}</span>
-            }
-        </div>
-      }
-    </div>
+			@if (submitted && field['userName'].errors) {
+			<div class="invalid-form">
+				@if (field['userName'].errors['required']) {
+				<span>{{ 'profile.edit.nameRequired'| translate }}</span>
+				}
+				@if (field['userName'].errors['minlength']) {
+				<span>{{ 'profile.edit.nameMinLength'| translate }}</span>
+				}
+				@if (field['userName'].errors['maxlength']) {
+				<span>{{ 'profile.edit.nameMaxLength'| translate }}</span>
+				}
+			</div>
+			}
+		</div>
 
-    <div>
-      <label class="label" for="profileDescription">{{ 'profile.profileDescription'| translate }}</label>
-      <textarea id="profileDescription" rows="4" formControlName="profileDescription"></textarea>
-    </div>
+		<div>
+			<label class="label" for="profileDescription">{{ 'profile.profileDescription'| translate }}</label>
+			<textarea id="profileDescription" rows="4" formControlName="profileDescription"></textarea>
+		</div>
 
-    <div>
-      <label class="label" for="language">{{ 'profile.language'| translate }}</label>
-      <select formControlName="language" name="language" id="language" (ngModelChange)="useLanguage($event)">
-        <option [ngValue]="null" disabled selected hidden>{{selectedLang}}</option>
-        @for (i of languageList; track $index) {
-          <option [ngValue]="i">{{i}}</option>
-        }
-      </select>
-    </div>
+		<div>
+			<label class="label" for="language">{{ 'profile.language'| translate }}</label>
+			<select formControlName="language" name="language" id="language" (ngModelChange)="useLanguage($event)">
+				<option [ngValue]="null" disabled selected hidden>{{selectedLang}}</option>
+				@for (i of languageList; track $index) {
+				<option [ngValue]="i">{{i}}</option>
+				}
+			</select>
+		</div>
 
-    <div>
-      <label class="label" for="genderId">{{ 'profile.gender'| translate }}</label>
-      <input id="genderId" type="number" formControlName="genderId"/>
-    </div>
-    
-    <div>
-      <label class="label" for="isNotified">{{ 'profile.txt.notifications'| translate }}</label>
-      <input id="isNotified" type="checkbox" formControlName="isNotified" />
-    </div>
+		<div>
+			<label class="label" for="genderId">{{ 'profile.gender'| translate }}</label>
+			<input id="genderId" type="number" formControlName="genderId" />
+		</div>
 
-    <div>
-      <button type="submit" class="button"> 
-        {{ (isAddMode ? 'profile.btn.createProfile' : 'profile.btn.editProfile') | translate }}
-      </button>
-      <button type="button" class="button" (click)="cancelProfile()">{{ 'profile.btn.cancel'| translate }}</button>
-    </div>
-  </form>
+		<div>
+			<label class="label" for="isNotified">{{ 'profile.txt.notifications'| translate }}</label>
+			<input id="isNotified" type="checkbox" formControlName="isNotified" />
+		</div>
+
+		<div>
+			<button type="submit" class="button">
+				{{ (isAddMode ? 'profile.btn.createProfile' : 'profile.btn.editProfile') | translate }}
+			</button>
+			<button type="button" class="button" (click)="cancelProfile()">{{ 'profile.btn.cancel'| translate }}</button>
+		</div>
+	</form>
 </div>

@@ -70,8 +70,8 @@
         "yes": "Yes",
         "no": "No",
         "btn": {
-            "createProfile": "Create Profile",
-            "editProfile": "Edit Profile",
+            "createProfile": "Create profile",
+            "editProfile": "Edit profile",
             "cancel": "Cancel"
         },
         "title": {
@@ -98,6 +98,11 @@
         "getError": "Error on retrieving your avatar"
     },
     "search": {
-        "titleSearch": "Searches"
+        "titleSearch": "Searches",
+        "btn": {
+            "createSearch": "Create search",
+            "editSearch": "Edit search",
+            "cancel": "Cancel"
+        }
     }
 }

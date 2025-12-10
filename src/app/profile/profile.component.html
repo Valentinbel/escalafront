@@ -9,10 +9,10 @@
             <p><strong>{{ 'profile.isNotified'| translate }}</strong>{{ (this.profile.isNotified? 'profile.yes' : 'profile.no') | translate }}</p>
             <p><strong>{{ 'profile.profileDescription'| translate }}</strong>{{this.profile.profileDescription}}</p>
         </div>
-        <button class="button" (click)="openAddProfile()" >{{ 'profile.btn.editProfile'| translate }}</button> <br/>
+        <button class="button" (click)="openAddEditProfile()" >{{ 'profile.btn.editProfile'| translate }}</button> <br/>
     }
     @else{
         <div >{{ 'profile.txt.createProfile'| translate }}</div>
-        <button class="button" (click)="openAddProfile()" >{{ 'profile.btn.createProfile'| translate }}</button> <br/>
+        <button class="button" (click)="openAddEditProfile()" >{{ 'profile.btn.createProfile'| translate }}</button> <br/>
     }
 </div>

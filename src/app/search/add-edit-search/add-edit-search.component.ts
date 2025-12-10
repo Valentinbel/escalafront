@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-edit-search',
@@ -8,6 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddEditSearchComponent implements OnInit {
 
+  isAddMode: boolean;
+
+  constructor() {}
 
   ngOnInit(): void {
     
