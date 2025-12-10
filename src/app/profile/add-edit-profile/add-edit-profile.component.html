@@ -1,7 +1,10 @@
 <div class="centeredComponent">
-  <!---TODO remplacer par @if--> 
-  <h1 *ngIf="isAddMode">{{ 'profile.title.createProfile'| translate }}</h1>
-  <h1 *ngIf="!isAddMode">{{ 'profile.title.editProfile'| translate }}</h1>
+  @if (isAddMode) {
+    <h1>{{ 'profile.title.createProfile'| translate }}</h1>
+  }
+  @else {
+    <h1>{{ 'profile.title.editProfile'| translate }}</h1>
+  }
 
   <form [formGroup]="profileForm" id="profileForm" (ngSubmit)="submitProfile()">
     <avatar formControlName="avatar"></avatar>
@@ -19,7 +22,7 @@
             <span>{{ 'profile.edit.nameMinLength'| translate }}</span>
             }
           @if (field['userName'].errors['maxlength']) {
-            <span>{{ 'profile.edit.nameMaxLength'| translate }}</span> <!-- TODO changer dans les translate-->
+            <span>{{ 'profile.edit.nameMaxLength'| translate }}</span>
             }
         </div>
       }
@@ -34,7 +37,9 @@
       <label class="label" for="language">{{ 'profile.language'| translate }}</label>
       <select formControlName="language" name="language" id="language" (ngModelChange)="useLanguage($event)">
         <option [ngValue]="null" disabled selected hidden>{{selectedLang}}</option>
-        <option [ngValue]="i" *ngFor="let i of languageList">{{i}}</option> 
+        @for (i of languageList; track $index) {
+          <option [ngValue]="i">{{i}}</option>
+        }
       </select>
     </div>
 
