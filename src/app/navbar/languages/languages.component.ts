@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import {MatFormField, MatLabel} from "@angular/material/input";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {Language, SUPPORTED_LANGUAGES} from "../../model/language";
+import {AuthStorageService} from "../../auth/auth-storage.service";
 
 @Component({
   selector: 'app-languages',
@@ -17,8 +18,10 @@ export class LanguagesComponent implements OnInit {
 
   selectedLang: string;
   languageList: Language[] = [];
+  isLoggedIn = false;
 
   constructor(
+    private readonly authStorageService: AuthStorageService,
     private readonly translate: TranslateService
   ) {
     this.translate.addLangs(['fr', 'en']);
@@ -36,8 +39,26 @@ export class LanguagesComponent implements OnInit {
     this.languageList = [...SUPPORTED_LANGUAGES];
     console.log(this.languageList);
 
-    console.log("this.selectedLang", this.selectedLang);
-    this.translate.use(this.selectedLang);
+    this.isLoggedIn = this.authStorageService.isLoggedIn();
+    if (this.isLoggedIn) {
+      console.log("logged in language component");
+
+      let languageId: number = this.authStorageService.getUser().getLanguageId();
+      if (!languageId) {
+        console.log("no language id found");
+        let userId: number = this.authStorageService.getUser().getId();
+        this.languageList.forEach( language => {
+          if (this.selectedLang === language.code) {
+            //userService.updateLanguageId du user(language.id);
+          }
+        })
+      }
+
+
+    } else {
+      console.log("this.selectedLang (not logged in)", this.selectedLang);
+      this.translate.use(this.selectedLang);
+    }
   }
 
   onLanguageChange(langCode: string): void {
