@@ -3,6 +3,7 @@
     <div class="navbar-container container">
       <ul class="menu-items">
         @if(!isLoggedIn) {
+          <li><app-languages> </app-languages></li>
           <li><a routerLink="home" routerLinkActive="active-link" ariaCurrentWhenActive="page">{{ 'navbar.home'| translate }}</a></li>
           <!--<li><a routerLink="contact" routerLinkActive="active-link" ariaCurrentWhenActive="page">{{ 'navbar.contact'| translate }}</a></li> -->
           <li><a routerLink="connect" routerLinkActive="active" ariaCurrentWhenActive="page">{{ 'navbar.connect'| translate }}</a></li>

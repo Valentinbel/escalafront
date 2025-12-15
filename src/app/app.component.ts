@@ -33,13 +33,16 @@ export class AppComponent implements OnInit {
     private readonly authStorageService: AuthStorageService, 
     private readonly avatarStorageService: AvatarStorageService,
     private readonly snackBarService: SnackBarService,
-    private readonly translate: TranslateService){
+    private readonly translate: TranslateService) {
+      // mettre ça dans une methode a part
+      // mettre la langue choisie dans le local storage
       this.translate.addLangs(['fr', 'en']);
       this.translate.setTranslation('en', defaultLanguage); // defaultLanguage as static to avoid loading glitches
       this.translate.setDefaultLang('en'); // fall-back language, that is used if a translation can not be found.
     
       // gives you the language set in the user's browser or english by default
       let navLang: string = navigator.language.split('-')[0];
+      console.log("Browser language: " + navLang);
       this.translate.getLangs().includes(navLang) ? this.translate.use(navLang) : this.translate.use('en');
     }
 

@@ -7,10 +7,11 @@ import { EventBusService } from '../shared/event-bus.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { SnackBarService } from '../shared/snack-bar/snack-bar.service';
 import { MessageResponse } from '../model/message-response.model';
+import { LanguagesComponent } from './languages/languages.component';
 
 @Component({
     selector: 'navbar',
-    imports: [RouterModule, TranslateModule],
+    imports: [RouterModule, TranslateModule, LanguagesComponent],
     templateUrl: './navbar.component.html',
     styleUrl: './navbar.component.css'
 })

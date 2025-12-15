@@ -1,0 +1,13 @@
+.language-selector {
+  width: 63px;
+
+  .language-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .flag {
+      font-size: 1.2em;
+    }
+  }
+}
