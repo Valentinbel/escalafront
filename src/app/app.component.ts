@@ -5,7 +5,6 @@ import { SnackBarComponent } from './shared/snack-bar/snack-bar.component';
 import { AuthStorageService } from './auth/auth-storage.service';
 import { AuthService } from './auth/auth.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import defaultLanguage from '../../public/i18n/en.json';
 import { MessageResponse } from './model/message-response.model';
 import { ContactComponent } from "./contact/contact.component";
 import { AvatarService } from './shared/avatar/avatar.service';
