@@ -49,7 +49,7 @@ export class LanguagesComponent implements OnInit {
         let userId: number = this.authStorageService.getUser().getId();
         this.languageList.forEach( language => {
           if (this.selectedLang === language.code) {
-            //userService.updateLanguageId du user(language.id);
+            //userService.updateLanguageId du user(language.id); + userId
           }
         })
       }
@@ -64,8 +64,9 @@ export class LanguagesComponent implements OnInit {
   onLanguageChange(langCode: string): void {
     this.selectedLang = langCode;
     this.translate.use(langCode);
+    //userService.updateLanguageId du user(language.id); + userId
 
     // Optionnel : sauvegarder la préférence
-    //localStorage.setItem('selectedLanguage', langCode);
+    //localStorage.setItem('selectedLanguage', langCode); ??
   }
 }
