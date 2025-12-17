@@ -28,22 +28,13 @@ export class AppComponent implements OnInit {
   userId: number;
 
   constructor(
-    private readonly authService: AuthService, 
+    private readonly authService: AuthService,
     private readonly avatarService: AvatarService,
-    private readonly authStorageService: AuthStorageService, 
+    private readonly authStorageService: AuthStorageService,
     private readonly avatarStorageService: AvatarStorageService,
     private readonly snackBarService: SnackBarService,
     private readonly translate: TranslateService) {
-      // mettre ça dans une methode a part
-      // mettre la langue choisie dans le local storage
-      this.translate.addLangs(['fr', 'en']);
-      this.translate.setTranslation('en', defaultLanguage); // defaultLanguage as static to avoid loading glitches
-      this.translate.setDefaultLang('en'); // fall-back language, that is used if a translation can not be found.
-    
-      // gives you the language set in the user's browser or english by default
-      let navLang: string = navigator.language.split('-')[0];
-      console.log("Browser language: " + navLang);
-      this.translate.getLangs().includes(navLang) ? this.translate.use(navLang) : this.translate.use('en');
+      // See translate info in navabar.languages.component
     }
 
   ngOnInit(): void {
@@ -51,7 +42,7 @@ export class AppComponent implements OnInit {
 
     if (this.isLoggedIn) {
       const user = this.authStorageService.getUser();
-      this.userId = user.id; 
+      this.userId = user.id;
       this.roles = user.roles;
 
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
@@ -59,7 +50,7 @@ export class AppComponent implements OnInit {
 
       this.username = user.username;
       this.getAvatarId();
-    } 
+    }
     else console.log("NOT LOGGED IN")
   }
 
@@ -88,5 +79,5 @@ export class AppComponent implements OnInit {
         }
       });
     }
-  }   
+  }
 }

@@ -1,23 +1,26 @@
-{    
+{
     "navbar":{
-        "home": "Accueil", 
+        "home": "Accueil",
         "profile": "Profil",
         "searches": "Recherches",
-        "contact": "Contact", 
-        "connect": "Connexion", 
+        "contact": "Contact",
+        "connect": "Connexion",
         "logout": "Déconnexion",
         "logoutMessage": "Tu t'es déconnecté !",
-        "hello": "Salut "
+        "hello": "Salut ",
+        "languages": {
+          "error": "Error trying to put this language on your account"
+        }
     },
     "lang": {
         "en": "Anglais",
         "fr": "Français"
     },
     "home": {
-        "punchline": "Trouves un binôme pour grimper", 
+        "punchline": "Trouves un binôme pour grimper",
         "subtitle": "... juste pour grimper !",
         "toSearches": "Recherches"
-    }, 
+    },
     "form":{
         "fieldError": "Erreur sur le champ suivant : "
     },
@@ -40,7 +43,7 @@
                 "passwordMaxLength": "Le mot de passe ne doit pas dépasser 40 caractères",
                 "loginFailed": "Échec de l'authentification : "
             }
-        }, 
+        },
         "register": {
             "---------------": "username & password things are in login------------",
             "email": "Email : ",
@@ -84,12 +87,12 @@
         },
         "link": {
             "contact": "Contactez-nous"
-        }, 
+        },
         "edit": {
             "nameRequired":"Veuillez indiquer votre nom",
             "nameMinLength": "Le nom doit contenir au moins 4 caractères",
             "nameMaxLength": "Le nom ne doit pas dépasser 20 caractères",
-            
+
             "saveError": "Erreur lors de la création du profil"
         }
     },
@@ -103,6 +106,6 @@
             "createSearch": "Créer recherche",
             "editSearch": "Modifier recherche",
             "cancel": "Annuler"
-        }        
+        }
     }
 }

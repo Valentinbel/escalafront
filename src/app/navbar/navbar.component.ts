@@ -26,7 +26,7 @@ export class NavbarComponent implements OnInit {
   eventBusService = inject(EventBusService);
   translateService = inject(TranslateService)
   snackBarService = inject(SnackBarService);
-  
+
   // Accès au signal username (lecture seule)
   readonly userNameSignal = this.authStorageService.username;
 
@@ -44,7 +44,7 @@ export class NavbarComponent implements OnInit {
 
   logout(): void {
     if (this.isLoggedIn) {
-      let userId = this.authStorageService.getUserId();
+      let userId: number = this.authStorageService.getUserId();
       this.authService.logout(userId).subscribe({
         next: (response: MessageResponse) => {
           console.log(response.message);

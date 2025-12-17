@@ -7,6 +7,8 @@ import {MatFormField, MatLabel} from "@angular/material/input";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {Language, SUPPORTED_LANGUAGES} from "../../model/language";
 import {AuthStorageService} from "../../auth/auth-storage.service";
+import {UserService} from "../user.service";
+import {SnackBarService} from "../../shared/snack-bar/snack-bar.service";
 
 @Component({
   selector: 'app-languages',
@@ -19,9 +21,12 @@ export class LanguagesComponent implements OnInit {
   selectedLang: string;
   languageList: Language[] = [];
   isLoggedIn = false;
+  languageId: number;
 
   constructor(
     private readonly authStorageService: AuthStorageService,
+    private readonly userService: UserService,
+    private readonly snackBarService: SnackBarService,
     private readonly translate: TranslateService
   ) {
     this.translate.addLangs(['fr', 'en']);
@@ -42,14 +47,35 @@ export class LanguagesComponent implements OnInit {
     this.isLoggedIn = this.authStorageService.isLoggedIn();
     if (this.isLoggedIn) {
       console.log("logged in language component");
+      let userId: number = this.authStorageService.getUserId();
+      this.userService.getLanguageId(userId).subscribe({
+        next: responseLanguageId => {
+          console.log("responseLanguageId: " + responseLanguageId);
+          if (responseLanguageId !== null) {
+            this.languageId = responseLanguageId;
+          }
 
-      let languageId: number = this.authStorageService.getUser().getLanguageId();
-      if (!languageId) {
-        console.log("no language id found");
-        let userId: number = this.authStorageService.getUser().getId();
+        }
+      })
+
+      console.log("languageId: " + this.languageId);
+      if (!this.languageId) {
+        console.log("no language id found, first log, for sure");
+
         this.languageList.forEach( language => {
           if (this.selectedLang === language.code) {
-            //userService.updateLanguageId du user(language.id); + userId
+            this.userService.updateUserLanguage(userId, language.id).subscribe({
+              next: () => {
+                let message = this.translate.instant('navbar.languages.error');
+                console.log("Le message d'erreur: " + message);
+                console.log("userLanguage updated");
+              },
+              error: (err) => {
+                let message = this.translate.instant('navbar.languages.error');
+                this.snackBarService.add(message, 8000, 'error');
+                console.log("Erreur les boys" + message + err);
+              },
+            });
           }
         })
       }
