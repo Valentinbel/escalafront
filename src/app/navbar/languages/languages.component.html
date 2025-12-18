@@ -1,6 +1,5 @@
 <div>
    <mat-form-field appearance="outline" class="language-selector">
-     <mat-label>Langue</mat-label>
      <mat-select [(value)]="selectedLang" (selectionChange)="onLanguageChange($event.value)">
       @for (language of languageList; track language.code) {
         <mat-option [value]="language.code">

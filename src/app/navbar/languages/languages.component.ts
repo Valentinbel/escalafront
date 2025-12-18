@@ -3,7 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import defaultLanguage from '../../../../public/i18n/en.json';
 import { CommonModule } from '@angular/common';
-import {MatFormField, MatLabel} from "@angular/material/input";
+import {MatFormField} from "@angular/material/input";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {Language, SUPPORTED_LANGUAGES} from "../../model/language";
 import {AuthStorageService} from "../../auth/auth-storage.service";
@@ -12,7 +12,7 @@ import {SnackBarService} from "../../shared/snack-bar/snack-bar.service";
 
 @Component({
   selector: 'app-languages',
-  imports: [ReactiveFormsModule, CommonModule, TranslateModule, MatFormField, MatLabel, MatSelect, MatOption ],
+  imports: [ReactiveFormsModule, CommonModule, TranslateModule, MatFormField, MatSelect, MatOption ],
   templateUrl: './languages.component.html',
   styleUrl: './languages.component.css',
 })

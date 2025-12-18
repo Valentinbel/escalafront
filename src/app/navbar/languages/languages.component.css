@@ -1,13 +1,26 @@
+::ng-deep .mdc-notched-outline {
+  height: 65% !important;
+  top: 10px !important;
+  left: 5px !important;
+}
+
 .language-selector {
-  width: 63px;
+  width: 65px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 30px;
+}
 
-  .language-option {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+.language-option {
+  display: flex;
+  align-items: center;
+}
 
-    .flag {
-      font-size: 1.2em;
-    }
-  }
+.flag, .mat-mdc-select {
+  font-size: 17px;
+}
+
+::ng-deep  .mat-mdc-option .mat-pseudo-checkbox-minimal {
+  margin-left: 9px!important;
 }
