@@ -9,6 +9,7 @@ import {Language, SUPPORTED_LANGUAGES} from "../../model/language";
 import {AuthStorageService} from "../../auth/auth-storage.service";
 import {UserService} from "../user.service";
 import {SnackBarService} from "../../shared/snack-bar/snack-bar.service";
+import {LanguagesStorageService} from "./languages-storage.service";
 
 @Component({
   selector: 'app-languages',
@@ -27,26 +28,32 @@ export class LanguagesComponent implements OnInit {
     private readonly authStorageService: AuthStorageService,
     private readonly userService: UserService,
     private readonly snackBarService: SnackBarService,
+    private readonly languageStorageService: LanguagesStorageService,
     private readonly translate: TranslateService
   ) {
     this.translate.addLangs(['fr', 'en']);
     this.translate.setTranslation('en', defaultLanguage); // defaultLanguage as static to avoid loading glitches
     this.translate.setDefaultLang('en'); // fall-back language, that is used if a translation can not be found.
-    this.selectedLang = this.translate.currentLang || this.translate.defaultLang || 'en';
 
     // gives you the language set in the user's browser or english by default
     let navLang: string = navigator.language.split('-')[0];
     console.log("Browser language: " + navLang);
     this.translate.getLangs().includes(navLang) ? this.translate.use(navLang) : this.translate.use('en');
+    this.selectedLang = this.translate.currentLang;
   }
 
   ngOnInit(): void {
     this.languageList = [...SUPPORTED_LANGUAGES];
-    console.log(this.languageList);
 
     this.isLoggedIn = this.authStorageService.isLoggedIn();
-    if (this.isLoggedIn) {
+    if (!this.isLoggedIn) {
+      this.languageStorageService.setLanguage(this.translate.currentLang);
+
+      console.log("this.selectedLang (not logged in)", this.translate.currentLang);
+    }
+    else { // isLoggedIn
       console.log("logged in language component");
+
       let userId: number = this.authStorageService.getUserId();
       this.userService.getLanguageId(userId).subscribe({
         next: responseLanguageId => {
@@ -63,7 +70,7 @@ export class LanguagesComponent implements OnInit {
         console.log("no language id found, first log, for sure");
 
         this.languageList.forEach( language => {
-          if (this.selectedLang === language.code) {
+          if (language.code === this.selectedLang) {
             this.userService.updateUserLanguage(userId, language.id).subscribe({
               next: () => {
                 let message = this.translate.instant('navbar.languages.error');
@@ -79,11 +86,6 @@ export class LanguagesComponent implements OnInit {
           }
         })
       }
-
-
-    } else {
-      console.log("this.selectedLang (not logged in)", this.selectedLang);
-      this.translate.use(this.selectedLang);
     }
   }
 
@@ -91,8 +93,6 @@ export class LanguagesComponent implements OnInit {
     this.selectedLang = langCode;
     this.translate.use(langCode);
     //userService.updateLanguageId du user(language.id); + userId
-
-    // Optionnel : sauvegarder la préférence
-    //localStorage.setItem('selectedLanguage', langCode); ??
+    this.languageStorageService.setLanguage(langCode);
   }
 }

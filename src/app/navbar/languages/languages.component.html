@@ -1,6 +1,7 @@
 <div>
    <mat-form-field appearance="outline" class="language-selector">
      <mat-select [(value)]="selectedLang" (selectionChange)="onLanguageChange($event.value)">
+       <option [ngValue]="null" disabled selected hidden>{{selectedLang}}</option>
       @for (language of languageList; track language.code) {
         <mat-option [value]="language.code">
       <span class="language-option">
