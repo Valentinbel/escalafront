@@ -46,12 +46,7 @@ export class LanguagesComponent implements OnInit {
     this.languageList = [...SUPPORTED_LANGUAGES];
 
     this.isLoggedIn = this.authStorageService.isLoggedIn();
-    if (!this.isLoggedIn) {
-      this.languageStorageService.setLanguage(this.translate.currentLang);
-
-      console.log("this.selectedLang (not logged in)", this.translate.currentLang);
-    }
-    else { // isLoggedIn
+    if (this.isLoggedIn) {
       console.log("logged in language component");
 
       let userId: number = this.authStorageService.getUserId();
@@ -61,7 +56,6 @@ export class LanguagesComponent implements OnInit {
           if (responseLanguageId !== null) {
             this.languageId = responseLanguageId;
           }
-
         }
       })
 
@@ -86,6 +80,9 @@ export class LanguagesComponent implements OnInit {
           }
         })
       }
+    } else { // !isLoggedIn
+      this.languageStorageService.setLanguage(this.translate.currentLang);
+      console.log("this.selectedLang (not logged in)", this.translate.currentLang);
     }
   }
 
@@ -94,5 +91,6 @@ export class LanguagesComponent implements OnInit {
     this.translate.use(langCode);
     //userService.updateLanguageId du user(language.id); + userId
     this.languageStorageService.setLanguage(langCode);
+    console.log("language changed to " + this.selectedLang);
   }
 }

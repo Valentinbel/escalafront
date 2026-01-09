@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth.service';
-import { AbstractControl, ValidationErrors, ValidatorFn ,FormBuilder, FormControl, 
+import { AbstractControl, ValidationErrors, ValidatorFn ,FormBuilder, FormControl,
   FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { SnackBarService } from '../../../shared/snack-bar/snack-bar.service';
 import { Register } from '../../../model/register.model';
 import { MessageResponse } from '../../../model/message-response.model';
+import {LanguagesStorageService} from "../../../navbar/languages/languages-storage.service";
+import {Language, SUPPORTED_LANGUAGES} from "../../../model/language";
 
 @Component({
     selector: 'app-register',
@@ -32,33 +34,34 @@ export class RegisterComponent implements OnInit{
     private readonly formBuilder: FormBuilder,
     private readonly translateService: TranslateService,
     private readonly snackBarService: SnackBarService,
+    private readonly languageStorageService: LanguagesStorageService
   ) {}
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
-      userName:['', [ 
-        Validators.required, 
+      userName:['', [
+        Validators.required,
         Validators.minLength(4),
         Validators.maxLength(20)]],
-      email:['', [  
+      email:['', [
         Validators.required,
         Validators.email,
         Validators.maxLength(50)]],
-      password:['',[  
+      password:['',[
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(40)]],
-      passwordConfirm:['',[ 
+      passwordConfirm:['',[
         Validators.required,
         Validators.minLength(8),
-        Validators.maxLength(40)]],              
+        Validators.maxLength(40)]],
     },{ validators: this.passwordMatchValidator })
   }
 
   passwordMatchValidator: ValidatorFn = (group: AbstractControl<FormGroup>): ValidationErrors | null => {
     const password = group.get('password');
     const passwordConfirm = group.get('passwordConfirm');
-  
+
     if (password && passwordConfirm && (password.value !== passwordConfirm.value)) {
       console.log("Password and passwordConfirm doesn't match");
       return { passwordMismatch: true };
@@ -66,7 +69,7 @@ export class RegisterComponent implements OnInit{
     return null;
   };
 
-  get f(): { [key: string]: AbstractControl } { // using field.name instead of form.controls.name 
+  get f(): { [key: string]: AbstractControl } { // using field.name instead of form.controls.name
     return this.registerForm.controls;
   }
 
@@ -80,7 +83,7 @@ export class RegisterComponent implements OnInit{
       if (this.f[value].errors) {
         let fieldError = this.translateService.instant('form.fieldError');
         this.snackBarService.add(fieldError + value, 8000, 'error');
-      } 
+      }
     }
     if (this.registerForm.hasError('passwordMismatch')) {
       let passwordMismatch = this.translateService.instant('connect.register.error.passwordMismatch'); //
@@ -89,10 +92,12 @@ export class RegisterComponent implements OnInit{
   }
 
   private saveRegister(): void {
+    let languageId: number = this.getLanguageId();
     this.registerModel = {
       userName: this.f['userName'].value,
       email: this.f['email'].value,
-      password: this.f['password'].value
+      password: this.f['password'].value,
+      languageId: languageId
     };
 
     this.authService.register(this.registerModel).subscribe({
@@ -107,5 +112,12 @@ export class RegisterComponent implements OnInit{
         this.snackBarService.add(messageRegister, 8000, 'error');
       }
     });
+  }
+
+  private getLanguageId(): number {
+    let languageCode: string|null = this.languageStorageService.getLanguage();
+    let languageList: Language[] = [...SUPPORTED_LANGUAGES];
+    const foundLanguage = languageList.find((lang: Language) => lang.code === languageCode);
+    return foundLanguage ? foundLanguage.id : 0;
   }
 }

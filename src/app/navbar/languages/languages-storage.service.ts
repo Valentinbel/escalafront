@@ -7,7 +7,7 @@ export class LanguagesStorageService {
 
   public setLanguage(language: string): void {
     sessionStorage.removeItem('language');
-    sessionStorage.setItem('language', JSON.stringify(language));
+    sessionStorage.setItem('language', language);
   }
 
   public getLanguage(): string | null {
