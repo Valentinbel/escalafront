@@ -6,18 +6,12 @@ import { Profile } from '../model/profile.model';
 })
 export class ProfileStorageService {
 
-  constructor() { }
-
-  clean(): void {
-    sessionStorage.clear();
-  }
-
   public setProfile(profile: Profile): void {
     sessionStorage.removeItem('profile');
     sessionStorage.setItem('profile', JSON.stringify(profile));
   }
 
-  public getProfile(): any { //TODO Profile
+  public getProfile(): Profile { //TODO Profile
     const profile = sessionStorage.getItem('profile');
     if (profile) {
       return JSON.parse(profile);

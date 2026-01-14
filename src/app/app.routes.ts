@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './auth/connect/register/register.component';
 import { LoginComponent } from './auth/connect/login/login.component';
 import { ConnectComponent } from './auth/connect/connect.component';
+import { AddEditSearchComponent } from './search/add-edit-search/add-edit-search.component';
 
 export const routes: Routes = [
     {
@@ -35,6 +36,11 @@ export const routes: Routes = [
         title: 'Searches', 
         component: SearchComponent 
     }, 
+        {
+        path: 'add-edit-search',
+        title: 'Add or edit search', 
+        component: AddEditSearchComponent
+    },
     // create search by profile
     {
         path: 'contact', 

@@ -1,13 +1,16 @@
 {
     "navbar":{
-        "home": "Home", 
+        "home": "Home",
         "profile": "Profile",
         "searches": "Searches",
         "contact": "Contact",
-        "connect": "Connect", 
+        "connect": "Connect",
         "logout": "Logout",
         "logoutMessage": "You logged out!",
-        "hello": "Hello "
+        "hello": "Hello ",
+      "languages": {
+        "error": "Error pour associer la langue à votre compte"
+      }
     },
     "lang": {
         "en": "English",
@@ -17,7 +20,7 @@
         "punchline": "Find a climbing partner",
         "subtitle": "... just to climb!",
         "toSearches": "Searches"
-    }, 
+    },
     "form":{
         "fieldError": "Error on the following field: "
     },
@@ -41,7 +44,7 @@
                 "passwordMaxLength": "Passwordne must not exceed 40 characters",
                 "loginFailed": "Login failed: "
             }
-        }, 
+        },
         "register": {
             "---------------": "username & password things are in login------------",
             "email": "Email: ",
@@ -70,8 +73,8 @@
         "yes": "Yes",
         "no": "No",
         "btn": {
-            "createProfile": "Create Profile",
-            "editProfile": "Edit Profile",
+            "createProfile": "Create profile",
+            "editProfile": "Edit profile",
             "cancel": "Cancel"
         },
         "title": {
@@ -89,7 +92,7 @@
             "nameRequired":"Name is required",
             "nameMinLength": "Name must be at least 4 characters",
             "nameMaxLength": "Name must not exceed 20 characters",
-            
+
             "saveError": "Error during the profile creation"
         }
     },
@@ -98,6 +101,11 @@
         "getError": "Error on retrieving your avatar"
     },
     "search": {
-        "titleSearch": "Searches"
+        "titleSearch": "Searches",
+        "btn": {
+            "createSearch": "Create search",
+            "editSearch": "Edit search",
+            "cancel": "Cancel"
+        }
     }
 }

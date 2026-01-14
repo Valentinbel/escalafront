@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit{
     private readonly router: Router
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.userId = this.authStorageService.getUser().id;
     this.userName = this.authStorageService.getUserName();
     if (this.userId) {
@@ -43,7 +43,7 @@ export class ProfileComponent implements OnInit{
     });
   }
 
-  openAddProfile() {
+  openAddEditProfile(): void {
     const userId = this.userId;
     const profile = this.profile;
     console.log("profile envoyé à Create: " + JSON.stringify(profile));

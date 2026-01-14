@@ -40,7 +40,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
         let user = this.authStorageService.getUser();
         let token = user.accessToken;
         
-        if(token){
+        if(token) {
           return req.clone({ 
             withCredentials: true, 
             setHeaders: { 'Authorization': 'Bearer ' + token 
@@ -52,7 +52,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
         }
       }
     
-      private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
+      private handle401Error(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (!this.isRefreshing) {
           this.isRefreshing = true;
           

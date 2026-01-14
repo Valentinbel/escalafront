@@ -10,11 +10,11 @@ export class AuthStorageService {
 
   // Signal pour le username (juste dans le service)
   private readonly usernameSignal = signal<string>(this.getUserName());
-  
+
   // Lecture seule pour les composants
   readonly username = this.usernameSignal.asReadonly();
 
-  constructor() { 
+  constructor() {
     // Effect pour synchroniser automatiquement avec localStorage
     effect(() => {
        this.usernameSignal();
@@ -32,7 +32,7 @@ export class AuthStorageService {
     }
     return {};
   }
-  
+
   public setUser(user: LoginResponse): void {
     sessionStorage.removeItem(USER_KEY);
     sessionStorage.setItem(USER_KEY, JSON.stringify(user));
@@ -60,10 +60,8 @@ export class AuthStorageService {
   }
 
   public isLoggedIn(): boolean {
-    const user = window.sessionStorage.getItem(USER_KEY);
-    if (user) {
-      return true;
-    }
-    return false;
+    const user = globalThis.sessionStorage.getItem(USER_KEY);
+    return !!user;
+
   }
 }

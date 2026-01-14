@@ -4,7 +4,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog'
 import { ImageCropperComponent } from './image-cropper/image-cropper.component';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { AvatarService } from '../../shared/avatar/avatar.service';
+import { AvatarService } from './avatar.service';
 import { TranslateService } from '@ngx-translate/core';
 import { SnackBarService } from '../snack-bar/snack-bar.service';
 import { DomSanitizer, SafeStyle, SafeUrl } from '@angular/platform-browser';
@@ -32,13 +32,12 @@ export class AvatarComponent implements OnInit, OnDestroy, ControlValueAccessor 
   // On peut lui mettre une color. + size.+
 
   avatarUrl: SafeUrl | null = null;
-  // Pour background-image, il faut un SafeStyle TODO quoi faire de ce commentaire ?
   avatarBackgroundStyle: SafeStyle | null = null;
 
   private userId: number;
   private fileConverted: File;
   private avatarId: number;
-  private destroy$ = new Subject<void>();
+  private readonly destroy$ = new Subject<void>();
   objectUrl: string | null = null;
 
   constructor(
@@ -47,19 +46,19 @@ export class AvatarComponent implements OnInit, OnDestroy, ControlValueAccessor 
     private readonly snackBarService: SnackBarService,
     private readonly translateService: TranslateService,
     private readonly avatarStorageService: AvatarStorageService,
-    private sanitizer: DomSanitizer,
-    private imageCompress: NgxImageCompressService
+    private readonly sanitizer: DomSanitizer,
+    private readonly imageCompress: NgxImageCompressService
   ) {}
 
   ngOnInit(): void {
     if (history.state.userId) {
       this.userId = history.state.userId;
     if (this.avatarStorageService.getAvatarId())
-      this.loadAvatar(this.userId);
+      this.loadAvatar();
    }
   }
 
-  onChange = (fileInfoId: number) => {}; // TODO avatarId ?????
+  onChange = (avatarId: number) => {};
 
   onTouched = () => {};
 
@@ -79,7 +78,7 @@ export class AvatarComponent implements OnInit, OnDestroy, ControlValueAccessor 
   }*/
 
 
-  private loadAvatar(userId: number): void {
+  private loadAvatar(): void {
     this.avatarService.getFile(this.userId)
     .pipe(takeUntil(this.destroy$)).subscribe({
       next: (url) => {
@@ -101,7 +100,7 @@ export class AvatarComponent implements OnInit, OnDestroy, ControlValueAccessor 
       }});
   }
 
-  onFileChange(event: any) {
+  onFileChange(event: any): void {
     const files = event.target.files as FileList;
 
     if (files.length > 0) {
@@ -110,11 +109,11 @@ export class AvatarComponent implements OnInit, OnDestroy, ControlValueAccessor 
       const fileName = files[0].name;
 
       this.resetInput();
-      this.openAvatarEditor(_file).subscribe({ 
-        next: (result) => { 
+      this.openAvatarEditor(_file).subscribe({
+        next: (result) => {
           this.compressAndUploadfile(result, fileName);
-        }, 
-        error: (err) => { 
+        },
+        error: (err) => {
           console.log("Error on avatar editor dialog");
           this.displayErrorSnackBar(err.error.message);
         }
@@ -127,21 +126,21 @@ export class AvatarComponent implements OnInit, OnDestroy, ControlValueAccessor 
 
     this.fileConverted = this.convertToFile(fileBase64, fileName);
     console.log('Converted file size:', this.fileConverted.size);
-    
+
     if (this.fileConverted.size > 512000 ) { // 500 KB
-      console.log('File too big, compressing...');  
-      this.imageCompress.compressFile(fileBase64, -1, 50, 50).then((compressedImage) => {              
+      console.log('File too big, compressing...');
+      this.imageCompress.compressFile(fileBase64, -1, 50, 50).then((compressedImage) => {
         return this.compressAndUploadfile(compressedImage, fileName);
       });
-    } 
+    }
     else {
       this.saveFile(this.fileConverted);
     }
   }
 
-  private resetInput(){
+  private resetInput(): void {
     const input = document.getElementById('avatar-input-file') as HTMLInputElement;
-    if(input){
+    if(input) {
       input.value = "";
     }
   }
@@ -158,7 +157,7 @@ export class AvatarComponent implements OnInit, OnDestroy, ControlValueAccessor 
   private convertToFile(fileBase64: string, originalFileName: string): File {
     // Convertir le base64 en Blob
     const base64Data = fileBase64.split(',')[1]; // Supprime le préfixe "data:image/png;base64,"
-    const byteString = window.atob(base64Data);
+    const byteString = globalThis.atob(base64Data);
     const arrayBuffer = new ArrayBuffer(byteString.length);
     const int8Array = new Uint8Array(arrayBuffer);
 
@@ -174,14 +173,14 @@ export class AvatarComponent implements OnInit, OnDestroy, ControlValueAccessor 
     return new File([blob], originalFileName, { type: mime });
   }
 
-  private saveFile(fileConverted: File) {
+  private saveFile(fileConverted: File): void {
     console.log('Uploading avatar file...');
     this.avatarService.upload(fileConverted, this.userId).subscribe({
       next: (event) => {
         this.avatarId = event;
         this.onChange(this.avatarId);
         this.avatarStorageService.setAvatarId(this.avatarId);
-        this.loadAvatar(this.userId);
+        this.loadAvatar();
       },
       error: (err) => {
         this.displayErrorSnackBar(err.error.message);
@@ -200,8 +199,8 @@ export class AvatarComponent implements OnInit, OnDestroy, ControlValueAccessor 
     this.destroy$.complete();
 
     // Libération de la mémoire de l'URL objet
-    if (this.avatarUrl && typeof this.avatarUrl === 'string') {
-      URL.revokeObjectURL(this.avatarUrl);
+    if (this.avatarUrl) {
+      URL.revokeObjectURL(this.avatarUrl.toString());
     }
   }
 }

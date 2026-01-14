@@ -23,11 +23,11 @@ export class ImageCropperComponent implements OnInit {
     this.sanitizedUrl = this.sanitizer.bypassSecurityTrustUrl(this.image);
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.initCropper();
   }
 
-  private initCropper() {
+  private initCropper(): void {
     const image = document.getElementById('image') as HTMLImageElement;
     this.cropper = new Cropper(image, {
       aspectRatio: 1,
@@ -36,7 +36,7 @@ export class ImageCropperComponent implements OnInit {
     });
   }
 
-  private getRoundedCanvas(sourceCanvas: any) {
+  private getRoundedCanvas(sourceCanvas: any): HTMLCanvasElement {
     let canvas = document.createElement('canvas');
     let context: any = canvas.getContext('2d');
     let width = sourceCanvas.width;
@@ -62,7 +62,7 @@ export class ImageCropperComponent implements OnInit {
   
   //get the cropped image and closes the dialog 
   //returning an url or null if no image
-  crop() {
+  crop(): void {
     const croppedCanvas = this.cropper.getCroppedCanvas();
     const roundedCanvas = this.getRoundedCanvas(croppedCanvas);
 
@@ -75,7 +75,7 @@ export class ImageCropperComponent implements OnInit {
     }
   }
 
-  reset(){
+  reset(): void{
     this.cropper.clear();
     this.cropper.crop();
     this.dialogRef.close(null);

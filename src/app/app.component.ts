@@ -5,7 +5,6 @@ import { SnackBarComponent } from './shared/snack-bar/snack-bar.component';
 import { AuthStorageService } from './auth/auth-storage.service';
 import { AuthService } from './auth/auth.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import defaultLanguage from '../../public/i18n/en.json';
 import { MessageResponse } from './model/message-response.model';
 import { ContactComponent } from "./contact/contact.component";
 import { AvatarService } from './shared/avatar/avatar.service';
@@ -28,19 +27,13 @@ export class AppComponent implements OnInit {
   userId: number;
 
   constructor(
-    private readonly authService: AuthService, 
+    private readonly authService: AuthService,
     private readonly avatarService: AvatarService,
-    private readonly authStorageService: AuthStorageService, 
+    private readonly authStorageService: AuthStorageService,
     private readonly avatarStorageService: AvatarStorageService,
     private readonly snackBarService: SnackBarService,
-    private readonly translate: TranslateService){
-      this.translate.addLangs(['fr', 'en']);
-      this.translate.setTranslation('en', defaultLanguage); // defaultLanguage as static to avoid loading glitches
-      this.translate.setDefaultLang('en'); // fall-back language, that is used if a translation can not be found.
-    
-      // gives you the language set in the user's browser or english by default
-      let navLang: string = navigator.language.split('-')[0];
-      this.translate.getLangs().includes(navLang) ? this.translate.use(navLang) : this.translate.use('en');
+    private readonly translate: TranslateService) {
+      // See translate info in navabar.languages.component
     }
 
   ngOnInit(): void {
@@ -48,7 +41,7 @@ export class AppComponent implements OnInit {
 
     if (this.isLoggedIn) {
       const user = this.authStorageService.getUser();
-      this.userId = user.id; 
+      this.userId = user.id;
       this.roles = user.roles;
 
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
@@ -56,7 +49,7 @@ export class AppComponent implements OnInit {
 
       this.username = user.username;
       this.getAvatarId();
-    } 
+    }
     else console.log("NOT LOGGED IN")
   }
 
@@ -85,5 +78,5 @@ export class AppComponent implements OnInit {
         }
       });
     }
-  }   
+  }
 }
