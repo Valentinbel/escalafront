@@ -34,16 +34,6 @@
 		</div>
 
 		<div>
-			<label class="label" for="language">{{ 'profile.language'| translate }}</label>
-			<select formControlName="language" name="language" id="language" (ngModelChange)="useLanguage($event)">
-				<option [ngValue]="null" disabled selected hidden>{{selectedLang}}</option>
-				@for (i of languageList; track $index) {
-				<option [ngValue]="i">{{i}}</option>
-				}
-			</select>
-		</div>
-
-		<div>
 			<label class="label" for="genderId">{{ 'profile.gender'| translate }}</label>
 			<input id="genderId" type="number" formControlName="genderId" />
 		</div>
