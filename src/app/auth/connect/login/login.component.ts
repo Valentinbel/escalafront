@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit{
   userName: string = '';
 
   constructor(
-    private readonly authService: AuthService, 
+    private readonly authService: AuthService,
     private readonly authStorageService: AuthStorageService,
     private readonly formBuilder: FormBuilder,
     private readonly translateService: TranslateService,
@@ -42,18 +42,18 @@ export class LoginComponent implements OnInit{
     }
 
     this.loginForm = this.formBuilder.group({
-      email: ['', [ 
-        Validators.required, 
+      email: ['', [
+        Validators.required,
         Validators.email,
         Validators.maxLength(50)]],
-      password: ['', [ 
+      password: ['', [
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(40)]]
     });
   }
 
-  get f(): { [key: string]: AbstractControl } { // using field.name instead of form.controls.name 
+  get f(): { [key: string]: AbstractControl } { // using field.name instead of form.controls.name
     return this.loginForm.controls;
   }
 
@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit{
       if (this.f[value].errors) {
         let fieldError = this.translateService.instant('form.fieldError');
         this.snackBarService.add(fieldError + value, 8000, 'error');
-      } 
+      }
     }
   }
 
@@ -93,6 +93,6 @@ export class LoginComponent implements OnInit{
   }
 
   reloadPage(): void {
-    window.location.reload();
+    globalThis.location.reload();
   }
 }
