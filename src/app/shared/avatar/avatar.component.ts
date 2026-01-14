@@ -110,11 +110,11 @@ export class AvatarComponent implements OnInit, OnDestroy, ControlValueAccessor 
       const fileName = files[0].name;
 
       this.resetInput();
-      this.openAvatarEditor(_file).subscribe({ 
-        next: (result) => { 
+      this.openAvatarEditor(_file).subscribe({
+        next: (result) => {
           this.compressAndUploadfile(result, fileName);
-        }, 
-        error: (err) => { 
+        },
+        error: (err) => {
           console.log("Error on avatar editor dialog");
           this.displayErrorSnackBar(err.error.message);
         }
@@ -127,13 +127,13 @@ export class AvatarComponent implements OnInit, OnDestroy, ControlValueAccessor 
 
     this.fileConverted = this.convertToFile(fileBase64, fileName);
     console.log('Converted file size:', this.fileConverted.size);
-    
+
     if (this.fileConverted.size > 512000 ) { // 500 KB
-      console.log('File too big, compressing...');  
-      this.imageCompress.compressFile(fileBase64, -1, 50, 50).then((compressedImage) => {              
+      console.log('File too big, compressing...');
+      this.imageCompress.compressFile(fileBase64, -1, 50, 50).then((compressedImage) => {
         return this.compressAndUploadfile(compressedImage, fileName);
       });
-    } 
+    }
     else {
       this.saveFile(this.fileConverted);
     }

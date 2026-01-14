@@ -2,12 +2,12 @@
     @if (avatarBackgroundStyle) {
         <div class="image-container"
             [ngClass]="{'box-shadow-avatar': !!avatarBackgroundStyle}"
-            [style.background-image]="avatarBackgroundStyle">        
+            [style.background-image]="avatarBackgroundStyle">
         </div>
     } @else  {
-        <ng-template #placeholder>
+        <div>
             <div class="image-container avatar-placeholder"></div>
-        </ng-template>
+        </div>
     }
 
 
@@ -16,5 +16,5 @@
             <input type="file" id="avatar-input-file" accept="image/*" (change)="onFileChange($event)">
             <i class="icon ph-bold ph-pencil-simple"></i> <!--TODO d'où viennent ces classes ? -->
         </div>
-    </label>    
+    </label>
 </div>
