@@ -13,7 +13,7 @@ export class UserService {
 
   constructor(private readonly httpClient: HttpClient) { }
 
-  getLanguageId(userId: number): Observable<any> {
+  getLanguageId(userId: number): Observable<number> {
     return this.httpClient.get<number>(this.urlUser + userId + '/language');
   }
 
