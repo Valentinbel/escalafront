@@ -17,6 +17,12 @@
       <a routerLink="home" class="logo">Pinya</a>
       @if(isLoggedIn) {
         <span>{{ 'navbar.hello'| translate }}{{ userNameSignal() }}</span>
+        @if (avatarBackgroundStyle) {
+          <div class="image-container"
+               [ngClass]="{'box-shadow-avatar': !!avatarBackgroundStyle}"
+               [style.background-image]="avatarBackgroundStyle">
+          </div>
+        }
       }
     </div>
   </nav>
