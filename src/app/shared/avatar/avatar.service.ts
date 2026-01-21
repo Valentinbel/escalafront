@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { SafeUrl } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +11,7 @@ export class AvatarService {
   private readonly urlAvatar = this.baseUrl + 'avatar/';
 
   constructor(
-    private readonly httpClient: HttpClient, 
-    private sanitizer: DomSanitizer
+    private readonly httpClient: HttpClient
   ) { }
 
   getAvatarId(userId: number): Observable<number> {

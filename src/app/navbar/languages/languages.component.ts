@@ -48,13 +48,10 @@ export class LanguagesComponent implements OnInit {
 
     this.isLoggedIn = this.authStorageService.isLoggedIn();
     if (this.isLoggedIn) {
-      console.log("logged in language component");
-
       this.userId = this.authStorageService.getUserId();
       this.userService.getLanguageId(this.userId)
         .pipe(
           switchMap((responseLanguageId):Observable<any> => {
-            console.log("responseLanguageId: " + responseLanguageId);
             if (responseLanguageId === null) {
               let message: string = this.translate.instant('navbar.languages.error');
               this.snackBarService.add(message, 8000, 'error');
@@ -63,7 +60,6 @@ export class LanguagesComponent implements OnInit {
             }
             else {
               const foundLanguage: Language|undefined = this.languageList.find((lang: Language) => lang.id ===  responseLanguageId);
-              console.log("foundLanguage: ", foundLanguage?.label);
               if (foundLanguage !== undefined)
                 this.changeLanguage(foundLanguage.code);
               return of(responseLanguageId);
@@ -76,13 +72,12 @@ export class LanguagesComponent implements OnInit {
           })
         )
         .subscribe({
-          next: (result) => {
-            console.log("result du next", result);
+          next: () => {
           },
           error: (err) => {
             let message: string = this.translate.instant('navbar.languages.error');
             this.snackBarService.add(message, 8000, 'error');
-            console.log("Erreur les boys" + message + err);
+            console.log("Error retrieving language " + message + err);
           }
       });
     } else { // !isLoggedIn
@@ -93,8 +88,6 @@ export class LanguagesComponent implements OnInit {
 
   onLanguageChange(langCode: string): void {
     this.changeLanguage(langCode);
-
-    console.log(this.userId);
     const foundLanguage: Language|undefined = this.languageList.find((lang: Language) => lang.code ===  this.selectedLang);
     console.log("foundLanguage: ", foundLanguage?.label);
     if (foundLanguage !== undefined)
@@ -110,6 +103,5 @@ export class LanguagesComponent implements OnInit {
     this.selectedLang = langCode;
     this.translate.use(langCode);
     this.languageStorageService.setLanguage(langCode);
-    console.log("language changed to " + this.selectedLang);
   }
 }

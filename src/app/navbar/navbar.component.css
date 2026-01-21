@@ -52,3 +52,20 @@
 a.active-link {
     color: darkred;
 }
+
+.image-container {
+  height: 40px;
+  width: 40px;
+  z-index: 1;
+  border-radius: 50%;     /*TODO variable*/
+  background-position: center;
+  background-size: cover;
+}
+
+.user-navbar {
+  display: flex;
+  align-items: center;
+}
+.user-navbar span {
+  margin-right: 0.5rem;
+}

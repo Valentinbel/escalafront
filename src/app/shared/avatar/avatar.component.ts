@@ -77,10 +77,8 @@ export class AvatarComponent implements OnInit, OnDestroy, ControlValueAccessor 
     this.disabled = isDisabled;
   }*/
 
-
   private loadAvatar(): void {
-    this.avatarService.getFile(this.userId)
-    .pipe(takeUntil(this.destroy$)).subscribe({
+    this.avatarService.getFile(this.userId).pipe(takeUntil(this.destroy$)).subscribe({
       next: (url) => {
         // Nettoyer l'ancienne URL si elle existe
         if (this.objectUrl) {
@@ -93,6 +91,7 @@ export class AvatarComponent implements OnInit, OnDestroy, ControlValueAccessor 
         // Sanitizer pour background-image
         const backgroundImageValue = `url(${url})`;
         this.avatarBackgroundStyle = this.sanitizer.bypassSecurityTrustStyle(backgroundImageValue);
+        this.avatarStorageService.setAvatarUrl(`url(${this.avatarUrl.toString()})`);
       },
       error: (err) => {
         console.log("Error on retrieving avatar from server");
