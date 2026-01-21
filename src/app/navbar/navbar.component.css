@@ -61,3 +61,11 @@ a.active-link {
   background-position: center;
   background-size: cover;
 }
+
+.user-navbar {
+  display: flex;
+  align-items: center;
+}
+.user-navbar span {
+  margin-right: 0.5rem;
+}

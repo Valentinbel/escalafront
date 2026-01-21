@@ -16,13 +16,15 @@
       </ul>
       <a routerLink="home" class="logo">Pinya</a>
       @if(isLoggedIn) {
-        <span>{{ 'navbar.hello'| translate }}{{ userNameSignal() }}</span>
-        @if (avatarBackgroundStyle) {
-          <div class="image-container"
-               [ngClass]="{'box-shadow-avatar': !!avatarBackgroundStyle}"
-               [style.background-image]="avatarBackgroundStyle">
-          </div>
-        }
+        <div class="user-navbar">
+          <span>{{ 'navbar.hello'| translate }}{{ userNameSignal() }}</span>
+          @if (avatarBackgroundStyleSignal()) {
+            <div class="image-container"
+                 [ngClass]="{'box-shadow-avatar': !!avatarBackgroundStyleSignal()}"
+                 [style.background-image]="avatarBackgroundStyleSignal()">
+            </div>
+          }
+        </div>
       }
     </div>
   </nav>
