@@ -3,9 +3,9 @@
 	--pinya-color-violetBg:#FFCA3A;
 	--pinya-color-orangeBackGround:  #F6F3EE;
 	--btn-color-greyBackGround: #887BA6;/*#608680;*/
+  --btn-color-darken: color-mix(in oklab, var(--btn-color-greyBackGround), black 15%);
 	--btn-color-greyBorder: #18ab29;
 	--btn-color-greenTxtShadow: #2f6627;
-	--btn-color-greenHover: #5cbf2a;
 	--white: #F6F3EE;
 	--black: black;
 	--red-error: red;
@@ -132,7 +132,7 @@ input, select, textarea {
 	text-shadow:0 1px 0 var(--btn-color-greenTxtShadow);
 }
 .button:hover {
-	background-color:var(--btn-color-greenHover);
+	background-color: var(--btn-color-darken);
 }
 .button:active {
 	position:relative;
