@@ -89,7 +89,8 @@ input, select, textarea {
 	margin: 5px;
 	background-color: var(--white);
 	border: none;
-    border-radius: var(--borderRadius-light);
+  border-radius: var(--borderRadius-light);
+  font-family: Figtree, sans-serif;
 }
 
 /********************/

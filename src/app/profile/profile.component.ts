@@ -44,10 +44,10 @@ export class ProfileComponent implements OnInit{
   }
 
   openAddEditProfile(): void {
-    const userId = this.userId;
-    const profile = this.profile;
+    const userId: number = this.userId;
+    const profile: Profile = this.profile;
     console.log("profile envoyé à Create: " + JSON.stringify(profile));
-    const userName = this.userName;
+    const userName: string = this.userName;
     this.router.navigate(['/add-edit-profile'], { state: { userId, userName, profile } });
   }
 }
