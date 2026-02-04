@@ -1,0 +1,7 @@
+.date-time { // TODO T'es sur?
+  display: block;
+}
+
+.date-time mat-form-field {
+  margin-right: 1.5rem;
+}

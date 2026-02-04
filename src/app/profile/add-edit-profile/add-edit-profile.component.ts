@@ -125,9 +125,9 @@ export class AddEditProfileComponent implements OnInit{
       next: (profile: Profile) => {
         if (profile) {
           console.log("retour du back saveProfile: " + JSON.stringify(profile));
+          this.profileStorageService.setProfile(profile);
           if (profile.userName)
             this.authStorageService.setUserName(profile.userName);
-
           this.router.navigate(['../searches'], {relativeTo: this.route});
         }
       },

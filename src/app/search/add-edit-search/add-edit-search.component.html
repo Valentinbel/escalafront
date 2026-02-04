@@ -1,10 +1,65 @@
 <div class="centeredComponent">
   <!--@if (isAddMode) {
-    <h1>{{ 'profile.title.createProfile'| translate }}</h1>
+    <h1>{{ 'search.title.addSearch'| translate }}</h1>
   }
   @else {
-    <h1>{{ 'profile.title.editProfile'| translate }}</h1>
+    <h1>{{ 'search.title.editSearch'| translate }}</h1>
   }-->
+  <h1>{{ 'search.title.addSearch'| translate }}</h1>
+
+
+  <form [formGroup]="searchForm" id="searchForm" (ngSubmit)="submitSearch()">
+
+    <div>
+      <label class="label" for="userName">{{ 'profile.name'| translate }}</label>
+      <div class="date-time">
+        <mat-form-field>
+          <mat-label>Meeting date</mat-label>
+          <input matInput [matDatepicker]="datepicker"  formControlName="datePicker">
+          <mat-datepicker #datepicker/>
+          <mat-datepicker-toggle [for]="datepicker" matSuffix/>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Meeting time</mat-label>
+          <input matInput [matTimepicker]="timepicker" formControlName="timePicker">
+          <!--        [ngModelOptions]="{updateOn: 'blur'}"-->
+          <mat-timepicker #timepicker/>
+          <mat-timepicker-toggle [for]="timepicker" matSuffix/>
+        </mat-form-field>
+
+      </div>
+<!--      Combiner datePicker et timePicker en LocalDateTime multilingue-->
+<!--      https://claude.ai/chat/82ae37f2-f39b-4e77-9e07-6f4657da03d6-->
+    </div>
+
+
+
+    <div>
+      <label class="label" for="placeId">{{ 'profile.gender'| translate }}</label>
+      <input id="placeId" type="number" formControlName="placeId" />
+    </div>
+
+      <div>
+        <label class="label" for="comment">{{ 'profile.profileDescription'| translate }}</label>
+        <textarea id="comment" rows="4" formControlName="comment"></textarea>
+      </div>
+
+    <div>
+      <button type="submit" class="button">
+        {{ (isAddMode ? 'profile.btn.createProfile' : 'profile.btn.editProfile') | translate }}
+      </button>
+      <button type="button" class="button" (click)="cancelSearch()">{{ 'profile.btn.cancel'| translate }}</button>
+    </div>
+  </form>
+
 </div>
 
-<!--https://dbushell.com/2025/11/10/pikaday/?ref=dailydev-->
+<!--TODO https://dbushell.com/2025/11/10/pikaday/?ref=dailydev
+    https://jhongomezm.medium.com/angular-material-datepicker-24ce2ed7f260
+    https://material.angular.dev/components/timepicker/examples
+-->
+
+
+
+

@@ -50,15 +50,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.eventBusSub = this.eventBusService.on('logout', () => {
       this.logout();
     });
-    console.log("avatarBackgroundStyleSignal: " + this.avatarBackgroundStyleSignal());
     if (this.authStorageService.isLoggedIn()) {
       this.isLoggedIn = true;
       this.userId = this.authStorageService.getUserId();
-      console.log("is logged in et userId = ", this.userId);
       console.log("getAvatarId ", this.avatarStorageService.getAvatarId());
       //if (this.avatarStorageService.getAvatarId()) {
       // TODO pour éviter d'avoir des erreurs, et fluidifier: if profile (qui sera un signal)
-        console.log("si on a l'avatarId");
         this.avatarService.getFile(this.userId).pipe(takeUntil(this.destroy$)).subscribe({
             next: (url) => {
               // Nettoyer l'ancienne URL si elle existe
@@ -68,7 +65,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
               // Stocker l'URL brute
               this.avatarUrl = url;
-              console.log("ca rentre ici navbarComponent");
               // Sanitizer pour background-image
               // TODO setAvatar sanitized pour avoir un Signal SafeUrl
               const backgroundImageValue = `url(${url})`;

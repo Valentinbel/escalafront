@@ -102,6 +102,10 @@
     },
     "search": {
         "titleSearch": "Searches",
+      "title": {
+        "addSearch": "Create a new search",
+        "editSearch": "Edit your search"
+      },
         "btn": {
             "createSearch": "Create search",
             "editSearch": "Edit search",

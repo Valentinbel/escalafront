@@ -1,0 +1,35 @@
+export interface ClimbLevel {
+  id:number,
+  code_fr: string,
+}
+
+export const CLIMBLEVELS: ReadonlyArray<ClimbLevel> = [
+  { id: 1, code_fr: '4'},
+  { id: 2, code_fr: '4+'},
+  { id: 3, code_fr: '5A'},
+  { id: 4, code_fr: '5B'},
+  { id: 5, code_fr: '5C'},
+  { id: 6, code_fr: '6A'},
+  { id: 7, code_fr: '6A+'},
+  { id: 8, code_fr: '6B'},
+  { id: 9, code_fr: '6B+'},
+  { id: 10, code_fr: '6C'},
+  { id: 11, code_fr: '6C+'},
+  { id: 12, code_fr: '7A'},
+  { id: 13, code_fr: '7A+'},
+  { id: 14, code_fr: '7B'},
+  { id: 15, code_fr: '7B+'},
+  { id: 16, code_fr: '7C'},
+  { id: 17, code_fr: '7C+'},
+  { id: 18, code_fr: '8A'},
+  { id: 19, code_fr: '8A+'},
+  { id: 20, code_fr: '8B'},
+  { id: 21, code_fr: '8B+'},
+  { id: 22, code_fr: '8C'},
+  { id: 23, code_fr: '8C+'},
+  { id: 24, code_fr: '9A'},
+  { id: 25, code_fr: '9A+'},
+  { id: 26, code_fr: '9B'},
+  { id: 27, code_fr: '9B+'},
+  { id: 28, code_fr: '9C'}
+]
