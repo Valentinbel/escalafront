@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -7,7 +6,7 @@ import {AuthStorageService} from "../auth/auth-storage.service";
 
 @Component({
 	selector: 'app-search',
-	imports: [RouterModule, CommonModule, TranslateModule],
+	imports: [RouterModule, TranslateModule],
 	templateUrl: './search.component.html',
 	styleUrl: './search.component.css'
 })

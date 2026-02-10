@@ -13,7 +13,6 @@ import {SnackBarService} from "../../shared/snack-bar/snack-bar.service";
 import {Search} from "../../model/search.model";
 import {Profile} from "../../model/profile.model";
 import {ActivatedRoute, Router} from "@angular/router";
-import {CommonModule} from "@angular/common";
 import {MatTimepicker, MatTimepickerInput, MatTimepickerToggle} from "@angular/material/timepicker";
 import {MatFormField, MatInputModule, MatLabel} from "@angular/material/input";
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
@@ -26,7 +25,6 @@ import {MatFormFieldModule} from "@angular/material/form-field";
   imports: [
     ReactiveFormsModule,
     TranslateModule,
-    CommonModule,
     MatTimepickerInput,
     MatFormField,
     MatLabel,
@@ -38,7 +36,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
     MatDatepickerInput,
     MatDatepickerToggle,
     MatDatepicker
-  ],
+],
   templateUrl: './add-edit-search.component.html',
   styleUrl: './add-edit-search.component.css',
 })
