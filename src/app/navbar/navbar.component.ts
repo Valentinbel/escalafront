@@ -9,7 +9,7 @@ import { SnackBarService } from '../shared/snack-bar/snack-bar.service';
 import { MessageResponse } from '../model/message-response.model';
 import { LanguagesComponent } from './languages/languages.component';
 import {AvatarStorageService} from "../shared/avatar/avatar-storage.service";
-import {DomSanitizer, SafeStyle, SafeUrl} from "@angular/platform-browser";
+import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 import {AvatarService} from "../shared/avatar/avatar.service";
 import {NgClass} from "@angular/common";
 
@@ -33,7 +33,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   eventBusSub?: Subscription;
   isLoggedIn = false;
-  //avatarBackgroundStyle: SafeStyle | null = null;
   objectUrl: string | null = null;
   avatarUrl: SafeUrl | null = null;
 

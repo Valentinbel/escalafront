@@ -1,4 +1,7 @@
 {
+  "btn": {
+    "cancel": "Cancel"
+  },
     "navbar":{
         "home": "Home",
         "profile": "Profile",
@@ -74,8 +77,7 @@
         "no": "No",
         "btn": {
             "createProfile": "Create profile",
-            "editProfile": "Edit profile",
-            "cancel": "Cancel"
+            "editProfile": "Edit profile"
         },
         "title": {
             "createProfile": "Create your profile",
@@ -102,14 +104,16 @@
     },
     "search": {
         "titleSearch": "Searches",
+        "sessionDateTime": "When do you want to climb?",
+        "sessionDate": "Session date",
+        "sessionTime": "Begin time",
       "title": {
         "addSearch": "Create a new search",
         "editSearch": "Edit your search"
       },
         "btn": {
             "createSearch": "Create search",
-            "editSearch": "Edit search",
-            "cancel": "Cancel"
+            "editSearch": "Edit search"
         }
     }
 }

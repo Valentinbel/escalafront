@@ -11,19 +11,21 @@
   <form [formGroup]="searchForm" id="searchForm" (ngSubmit)="submitSearch()">
 
     <div>
-      <label class="label" for="userName">{{ 'profile.name'| translate }}</label>
+      <label class="label" for="userName">{{ 'search.sessionDateTime'| translate }}</label>
       <div class="date-time">
         <mat-form-field>
-          <mat-label>Meeting date</mat-label>
+          <mat-label>{{ 'search.sessionDate'| translate }}</mat-label>
           <input matInput [matDatepicker]="datepicker"  formControlName="datePicker">
           <mat-datepicker #datepicker/>
           <mat-datepicker-toggle [for]="datepicker" matSuffix/>
         </mat-form-field>
 
         <mat-form-field>
-          <mat-label>Meeting time</mat-label>
-          <input matInput [matTimepicker]="timepicker" formControlName="timePicker">
-          <!--        [ngModelOptions]="{updateOn: 'blur'}"-->
+          <mat-label>{{ 'search.sessionTime'| translate }}</mat-label>
+          <input matInput [matTimepicker]="timepicker" formControlName="timePicker"
+                 matTimepickerMin="7:00"
+                 matTimepickerMax="20:00">
+          <!-- TODO min max ne semble plus marcher... -->
           <mat-timepicker #timepicker/>
           <mat-timepicker-toggle [for]="timepicker" matSuffix/>
         </mat-form-field>
@@ -47,9 +49,9 @@
 
     <div>
       <button type="submit" class="button">
-        {{ (isAddMode ? 'profile.btn.createProfile' : 'profile.btn.editProfile') | translate }}
+        {{ (isAddMode ? 'search.btn.createSearch' : 'search.btn.editSearch') | translate }}
       </button>
-      <button type="button" class="button" (click)="cancelSearch()">{{ 'profile.btn.cancel'| translate }}</button>
+      <button type="button" class="button" (click)="cancelSearch()">{{ 'btn.cancel'| translate }}</button>
     </div>
   </form>
 
