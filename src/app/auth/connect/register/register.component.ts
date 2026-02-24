@@ -115,7 +115,7 @@ export class RegisterComponent implements OnInit{
   }
 
   private getLanguageId(): number {
-    let languageCode: string|null = this.languageStorageService.getLanguage();
+    let languageCode = this.languageStorageService.getLanguage();
     let languageList: Language[] = [...SUPPORTED_LANGUAGES];
     const foundLanguage: Language|undefined = languageList.find((lang: Language) => lang.code === languageCode);
     return foundLanguage ? foundLanguage.id : 0;
