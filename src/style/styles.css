@@ -1,6 +1,6 @@
 :root {
 	/* colors */
-	--pinya-color-violetBg:#FFCA3A;
+	--pinya-color-sunglow:#FFCA3A;
 	--pinya-color-orangeBackGround:  #F6F3EE;
 	--btn-color-greyBackGround: #887BA6;/*#608680;*/
   --btn-color-darken: color-mix(in oklab, var(--btn-color-greyBackGround), black 15%);
@@ -96,7 +96,7 @@ input, select, textarea {
 /********************/
 .centeredComponent{
 	margin: 2rem 20%;
-	background-color: var(--pinya-color-violetBg);
+	background-color: var(--pinya-color-sunglow);
 	padding: 1.5rem 4rem;
   border-radius: var(--borderRadius-big);
 }

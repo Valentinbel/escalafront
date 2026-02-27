@@ -21,6 +21,6 @@
   font-size: 17px;
 }
 
-::ng-deep  .mat-mdc-option .mat-pseudo-checkbox-minimal {
+::ng-deep .mat-mdc-option .mat-pseudo-checkbox-minimal {
   margin-left: 9px!important;
 }
