@@ -52,7 +52,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     if (this.authStorageService.isLoggedIn()) {
       this.isLoggedIn = true;
       this.userId = this.authStorageService.getUserId();
-      console.log("getAvatarId ", this.avatarStorageService.getAvatarId());
       //if (this.avatarStorageService.getAvatarId()) {
       // TODO pour éviter d'avoir des erreurs, et fluidifier: if profile (qui sera un signal)
         this.avatarService.getFile(this.userId).pipe(takeUntil(this.destroy$)).subscribe({

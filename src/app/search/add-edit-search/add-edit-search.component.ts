@@ -1,13 +1,7 @@
 import {Component, effect, inject, OnDestroy, OnInit} from '@angular/core';
 import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-  FormBuilder,
-  AbstractControl,
-  FormsModule
-} from "@angular/forms";
+  FormControl, FormGroup, ReactiveFormsModule, Validators,
+  FormBuilder, AbstractControl, FormsModule} from "@angular/forms";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {SnackBarService} from "../../shared/snack-bar/snack-bar.service";
 import {Search} from "../../model/search.model";
@@ -20,14 +14,11 @@ import {DateAdapter} from "@angular/material/core";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {LocaleService} from "../../shared/locale.service";
 import {SearchService} from "../search.service";
-import {DateTime} from "luxon";
-import {provideLuxonDateAdapter} from "@angular/material-luxon-adapter";
 import {Subject} from "rxjs";
 import {LanguagesStorageService} from "../../navbar/languages/languages-storage.service";
 
 @Component({
   selector: 'app-add-edit-search',
-  providers: [provideLuxonDateAdapter(),],
   imports: [
     ReactiveFormsModule,
     TranslateModule,
@@ -58,15 +49,13 @@ export class AddEditSearchComponent implements OnInit, OnDestroy {
   dateAdapter = inject(DateAdapter);
   languageStorageService = inject(LanguagesStorageService);
 
-  searchForm: FormGroup = new FormGroup({ // TODO....................
-
+  searchForm: FormGroup = new FormGroup({
     datePicker: new FormControl(''),
     timePicker: new FormControl(''),
-    timeSlots: new FormControl(''),
     climbLevelMin: new FormControl(''),
     climbLevelMax: new FormControl(''),
     placeId: new FormControl(''),
-    comment: new FormControl(''),
+    comment: new FormControl(''), // TODO title (?)
   });
 
   search: Search;
@@ -75,9 +64,6 @@ export class AddEditSearchComponent implements OnInit, OnDestroy {
   profileId: number;
   isAddMode: boolean;
   submitted = false;
-
-  //TODO https://claude.ai/chat/ecf72cd5-a1ee-4c4d-81d0-9ad0324862a4
-
 
   constructor() {}
 
@@ -107,10 +93,9 @@ export class AddEditSearchComponent implements OnInit, OnDestroy {
       placeId: [],
       comment: [],
     });
-    console.log("ngOninit AddEditSearch dateAdapter set to: ", this.localeService.getCurrentLocale());
     // Applique la locale au démarrage du component
     // TODO Necessaire ?
-    this.localeService.setLocale(this.localeService.getCurrentLocale());
+    this.localeService.setLocale(this.languageSignal());
   }
 
   get field(): { [key: string]: AbstractControl } { // using field.name instead of form.controls.name
@@ -134,73 +119,41 @@ export class AddEditSearchComponent implements OnInit, OnDestroy {
   }
 
   private saveSearch(): void {
-
-    console.log("DATE PICKER: "+ this.field['datePicker'].value); //Thu Feb 19 2026 00:00:00 GMT+0100 (hora estándar de Europa central)
-    console.log("TIME PICKER: "+ this.field['timePicker'].value); //Wed Feb 18 2026 08:30:00 GMT+0100 (hora estándar de Europa central)
-    // console.log("placeId: "+ this.field['placeId'].value);
-    // console.log("comment: "+ this.field['comment'].value);
-
-    console.log("formatted dateTime: ", this.getFormattedDateTime());
-
     const formValue = this.searchForm.value;
+    const convertedTimeSlot:Date = this.convertTodateTime(formValue.datePicker, formValue.timePicker);
+    console.log("convertedTimeSlot: ", convertedTimeSlot);
+    let dates: Date[] = [];
+    dates.push(convertedTimeSlot);
 
-    const timeSlot = this.convertTodateTime(formValue.datePicker, formValue.timePicker);
-    console.log("timeSlot: ", timeSlot);
-
-    // TODO monter le ClimbLevel[]
-    /*this.search = {
+    this.search = {
       id: this.searchId,
-      timeSlots: new Date(),//this.field['timeSlots'].value,
-      climbLevels: this.field['climbLevels'].value,////////
+      timeSlots: dates,
+      climbLevels: [{id:6,codeFr:'6A'}, {id:10,codeFr:'6C'}],//this.field['climbLevels'].value,////////
       placeId: this.field['placeId'].value,
       comment: this.field['comment'].value,
       profileId: this.profileId,
-    };*/
-
-    //console.log("search to Save: ", JSON.stringify(this.search))
-
-    // this.searchService.createSearch(this.search).subscribe({
-    //   next: (search) => {
-    //     console.log("retour du back saveSearch: " + JSON.stringify(search));
-    //     // other logic.
-    //   },
-    //   error: (err) => {
-    //     this.snackBarService.add(err.error.message, 8000, 'error');
-    //   }
-    //   });
-  }
-
-  private convertTodateTime(date: Date, time: Date) : any { // retourne un timeSlotDTO
-
-    // TODO : Combiner le time sur l'objet.
-    // TODO Verifier qu'avec getFormattedDateTime, on aura pas un decalage sur toISOString
-    // TODO voir les fontions du localeService qui sont appelées
-
-    const dateTime = DateTime.fromISO(date.toISOString());
-    const timeDateTime = DateTime.fromISO(time.toISOString());
-
-
-
-    ////
-
-    const combinedDate = new Date(date);
-    console.log("combinedDate sans time toLocaleString", combinedDate.toLocaleString());
-    console.log("combinedDate toISOString", combinedDate.toISOString());
-
-    //combinedDate.setHours(parseInt(hours), parseInt(minutes), 0, 0);
-
-    // Format ISO 8601 pour le backend
-    return {
-      meetingDateTime: combinedDate.toISOString()
     };
+    console.log("search to Save: ", JSON.stringify(this.search)) // /!\ JSON.stringify() will put Date in UTC (should be a wrong value)
 
+    this.searchService.createSearch(this.search).subscribe({
+      next: (search) => {
+        console.log("retour du back saveSearch: " + JSON.stringify(search)); // /!\ JSON.stringify() will put Date in UTC (should be a wrong value)
+        this.router.navigate(['../searches'], {relativeTo: this.route});
+      },
+      error: (err) => {
+        this.snackBarService.add(err.error.message, 8000, 'error');
+      }
+      });
   }
 
-  // Afficher le format prévisualisé selon la locale //// a implémenter dnas le html pour voir apparaître la date selon la langue choisie
-  getFormattedDateTime(): string {
-    const date = this.searchForm.get('datePicker')?.value;
-    const time = this.searchForm.get('timePicker')?.value;
-    return this.localeService.formatDateTime(date, time);
+  private convertTodateTime(date: Date, time: Date) : Date { // retourne un timeSlotDTO
+    let myTime = new Date(time);
+    const combinedDate = new Date(date);
+    combinedDate.setHours(myTime.getHours());
+    combinedDate.setMinutes(myTime.getMinutes());
+    console.log("combinedDate ", combinedDate);
+
+    return combinedDate;
   }
 
   cancelSearch(): void {

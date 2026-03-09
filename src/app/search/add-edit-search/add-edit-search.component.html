@@ -9,9 +9,9 @@
 
 
   <form [formGroup]="searchForm" id="searchForm" (ngSubmit)="submitSearch()">
-
+    <!-- TODO Hover du month reste en anglais-->
     <div>
-      <label class="label" for="userName">{{ 'search.sessionDateTime'| translate }}</label>
+      <label class="label">{{ 'search.sessionDateTime'| translate }}</label>
       <div class="date-time">
         <mat-form-field>
           <mat-label>{{ 'search.sessionDate'| translate }}</mat-label>
@@ -19,23 +19,33 @@
           <mat-datepicker #datepicker/>
           <mat-datepicker-toggle [for]="datepicker" matSuffix/>
         </mat-form-field>
+        <!-- TODO: seulement date future sélectionnable + erreur si date passée. -->
+        <!-- TODO: Police et colors des pickers. + Bordure -->
 
         <mat-form-field>
           <mat-label>{{ 'search.sessionTime'| translate }}</mat-label>
           <input matInput [matTimepicker]="timepicker" formControlName="timePicker"
-                 matTimepickerMin="7:00"
-                 matTimepickerMax="20:00">
-          <!-- TODO min max ne semble plus marcher... -->
+                 matTimepickerMin="06:00"
+                 matTimepickerMax="22:00">
           <mat-timepicker #timepicker/>
           <mat-timepicker-toggle [for]="timepicker" matSuffix/>
         </mat-form-field>
+<!--        TODO Finir erreurs plus tard. Manque Required-->
+        <!--          @if (searchForm.errors?.['matTimepickerParse']) {-->
+        <!--            <mat-error>Value isn't a valid time</mat-error>-->
+        <!--          }-->
+        @if (submitted && field['timePicker'].errors) {
+          <div class="invalid-form">
+          @if (field['timePicker'].errors['matTimepickerMin']) {
+            <span>Value is too early</span>
+          }@if (field['timePicker'].errors['matTimepickerMax']) {
+            <span>Value is too late</span>
+          }
+          </div>
+        }
 
       </div>
-<!--      Combiner datePicker et timePicker en LocalDateTime multilingue-->
-<!--      https://claude.ai/chat/82ae37f2-f39b-4e77-9e07-6f4657da03d6-->
     </div>
-
-
 
     <div>
       <label class="label" for="placeId">{{ 'profile.gender'| translate }}</label>
@@ -49,19 +59,10 @@
 
     <div>
       <button type="submit" class="button">
-        {{ (isAddMode ? 'search.btn.createSearch' : 'search.btn.editSearch') | translate }}
+        {{ (isAddMode ? 'search.btn.createSearch' : 'search.btn.createSearch') | translate }}
       </button>
       <button type="button" class="button" (click)="cancelSearch()">{{ 'btn.cancel'| translate }}</button>
     </div>
   </form>
 
 </div>
-
-<!--TODO https://dbushell.com/2025/11/10/pikaday/?ref=dailydev
-    https://jhongomezm.medium.com/angular-material-datepicker-24ce2ed7f260
-    https://material.angular.dev/components/timepicker/examples
--->
-
-
-
-

@@ -1,14 +1,13 @@
 :root {
 	/* colors */
 	--pinya-color-sunglow:#FFCA3A;
-	--pinya-color-orangeBackGround:  #F6F3EE;
-	--btn-color-greyBackGround: #887BA6;/*#608680;*/
+	--btn-color-greyBackGround: #887BA6;
   --btn-color-darken: color-mix(in oklab, var(--btn-color-greyBackGround), black 15%);
 	--btn-color-greyBorder: #18ab29;
 	--btn-color-greenTxtShadow: #2f6627;
 	--white: #F6F3EE;
-	--black: black;
-	--red-error: red;
+	--black: black; /* TODO trouver mieux*/
+	--red-error: red;  /*trouver mieux*/
 
 	/* Border radius */
 	--borderRadius-big: 10px;
@@ -69,7 +68,7 @@ body {
 	margin: 0;
 	font-family: Figtree, sans-serif;
 	font-weight: 300; /* ou light */
-	background-color: var(--pinya-color-orangeBackGround);
+	background-color: var(--white);
 }
 
 h1, h2, h3, h4, h5, h6 {
