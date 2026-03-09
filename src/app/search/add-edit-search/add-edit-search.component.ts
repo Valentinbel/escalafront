@@ -93,9 +93,6 @@ export class AddEditSearchComponent implements OnInit, OnDestroy {
       placeId: [],
       comment: [],
     });
-    // Applique la locale au démarrage du component
-    // TODO Necessaire ?
-    this.localeService.setLocale(this.languageSignal());
   }
 
   get field(): { [key: string]: AbstractControl } { // using field.name instead of form.controls.name
