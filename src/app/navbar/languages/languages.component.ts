@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import defaultLanguage from '../../../../public/i18n/en.json';
-import { CommonModule } from '@angular/common';
 import {MatFormField} from "@angular/material/input";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {Language, SUPPORTED_LANGUAGES} from "../../model/language";
@@ -14,7 +13,7 @@ import {catchError, Observable, of, switchMap} from "rxjs";
 
 @Component({
   selector: 'app-languages',
-  imports: [ReactiveFormsModule, CommonModule, TranslateModule, MatFormField, MatSelect, MatOption ],
+  imports: [ReactiveFormsModule, TranslateModule, MatFormField, MatSelect, MatOption],
   templateUrl: './languages.component.html',
   styleUrl: './languages.component.css',
 })

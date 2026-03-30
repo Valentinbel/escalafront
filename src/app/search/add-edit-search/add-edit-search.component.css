@@ -1,0 +1,14 @@
+.date-time { /* TODO T'es sur?*/
+  display: block;
+}
+
+.date-time mat-form-field {
+  margin-right: 1.5rem;
+}
+
+mat-form-field {
+  margin-top: 5px;
+}
+::ng-deep .mat-mdc-form-field-icon-suffix {
+  padding-right: 0.3rem;
+}

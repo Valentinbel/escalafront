@@ -1,5 +1,14 @@
 <div class="centeredComponent">
     <h1 >{{ 'search.titleSearch'| translate }}</h1>
 
+  @if (this.profileId ) {
     <button class="button" (click)="openAddEditSearch()" >{{ 'search.btn.createSearch'| translate }}</button>
+  } @else {
+    <p> Crée un profil avant de pouvoir lancer ta première recherche</p>
+    <button class="button" (click)="createProfile()" >{{ 'profile.btn.createProfile'| translate }}</button> <br/>
+  }
+
+
+  <p>À creer: Liste: toutes les recherches</p>
+  <p>À creer: Liste: mes recherches</p>
 </div>

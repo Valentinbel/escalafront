@@ -1,10 +1,68 @@
 <div class="centeredComponent">
   <!--@if (isAddMode) {
-    <h1>{{ 'profile.title.createProfile'| translate }}</h1>
+    <h1>{{ 'search.title.addSearch'| translate }}</h1>
   }
   @else {
-    <h1>{{ 'profile.title.editProfile'| translate }}</h1>
+    <h1>{{ 'search.title.editSearch'| translate }}</h1>
   }-->
-</div>
+  <h1>{{ 'search.title.addSearch'| translate }}</h1>
 
-<!--https://dbushell.com/2025/11/10/pikaday/?ref=dailydev-->
+
+  <form [formGroup]="searchForm" id="searchForm" (ngSubmit)="submitSearch()">
+    <!-- TODO Hover du month reste en anglais-->
+    <div>
+      <label class="label">{{ 'search.sessionDateTime'| translate }}</label>
+      <div class="date-time">
+        <mat-form-field>
+          <mat-label>{{ 'search.sessionDate'| translate }}</mat-label>
+          <input matInput [matDatepicker]="datepicker"  formControlName="datePicker">
+          <mat-datepicker #datepicker/>
+          <mat-datepicker-toggle [for]="datepicker" matSuffix/>
+        </mat-form-field>
+        <!-- TODO: seulement date future sélectionnable + erreur si date passée. -->
+        <!-- TODO: Police et colors des pickers. + Bordure -->
+
+        <mat-form-field>
+          <mat-label>{{ 'search.sessionTime'| translate }}</mat-label>
+          <input matInput [matTimepicker]="timepicker" formControlName="timePicker"
+                 matTimepickerMin="06:00"
+                 matTimepickerMax="22:00">
+          <mat-timepicker #timepicker/>
+          <mat-timepicker-toggle [for]="timepicker" matSuffix/>
+        </mat-form-field>
+<!--        TODO Finir erreurs plus tard. Manque Required-->
+        <!--          @if (searchForm.errors?.['matTimepickerParse']) {-->
+        <!--            <mat-error>Value isn't a valid time</mat-error>-->
+        <!--          }-->
+        @if (submitted && field['timePicker'].errors) {
+          <div class="invalid-form">
+          @if (field['timePicker'].errors['matTimepickerMin']) {
+            <span>Value is too early</span>
+          }@if (field['timePicker'].errors['matTimepickerMax']) {
+            <span>Value is too late</span>
+          }
+          </div>
+        }
+
+      </div>
+    </div>
+
+    <div>
+      <label class="label" for="placeId">{{ 'search.place'| translate }}</label>
+      <input id="placeId" type="number" formControlName="placeId" />
+    </div>
+
+      <div>
+        <label class="label" for="searchTitle">{{ 'search.searchTitle'| translate }}</label>
+        <input id="searchTitle" type="text" formControlName="searchTitle">
+      </div>
+
+    <div>
+      <button type="submit" class="button">
+        {{ (isAddMode ? 'search.btn.createSearch' : 'search.btn.createSearch') | translate }}
+      </button>
+      <button type="button" class="button" (click)="cancelSearch()">{{ 'btn.cancel'| translate }}</button>
+    </div>
+  </form>
+
+</div>

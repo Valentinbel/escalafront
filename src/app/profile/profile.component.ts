@@ -2,14 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileService } from './profile.service';
 import { RouterModule, Router } from '@angular/router';
 import { Profile } from '../model/profile.model';
-import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthStorageService } from '../auth/auth-storage.service';
 import { ProfileStorageService } from './profile-storage.service';
 
 @Component({
     selector: 'app-profile',
-    imports: [RouterModule, CommonModule, TranslateModule],
+    imports: [RouterModule, TranslateModule],
     templateUrl: './profile.component.html',
     styleUrl: './profile.component.css'
 })

@@ -1,4 +1,7 @@
 {
+    "btn":{
+      "cancel": "Annuler"
+    },
     "navbar":{
         "home": "Accueil",
         "profile": "Profil",
@@ -74,8 +77,7 @@
         "no": "Non",
         "btn": {
             "createProfile": "Créer profil",
-            "editProfile": "Modifier profil",
-            "cancel": "Annuler"
+            "editProfile": "Modifier profil"
         },
         "title": {
             "createProfile": "Crée ton profil",
@@ -102,10 +104,18 @@
     },
     "search": {
         "titleSearch": "Recherches",
+        "sessionDateTime": "Quand grimper?",
+        "sessionDate": "Date de la session",
+        "sessionTime": "Heure de début",
+        "place":"Lieu",
+        "searchTitle": "Titre",
+      "title": {
+        "addSearch": "Crée une nouvelle recherche",
+        "editSearch": "Modifie ta recherche"
+      },
         "btn": {
             "createSearch": "Créer recherche",
-            "editSearch": "Modifier recherche",
-            "cancel": "Annuler"
+            "editSearch": "Modifier recherche"
         }
     }
 }

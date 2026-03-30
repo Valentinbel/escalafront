@@ -5,26 +5,53 @@ import { HttpRequestInterceptor } from './shared/helper/http.interceptor';
 import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {LuxonDateAdapter, MAT_LUXON_DATE_ADAPTER_OPTIONS} from "@angular/material-luxon-adapter";
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from "@angular/material/core";
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (http: HttpClient) =>
   new TranslateHttpLoader(http, './i18n/', '.json');
 
+// Format de date personnalisé
+export const CUSTOM_DATE_FORMATS = {
+  parse: {
+    dateInput: 'D',           // Parse la date saisie manuellement
+    timeInput: 'HH:mm',       // Parse l'heure saisie manuellement
+    datetimeInput: 'D HH:mm', // Parse date + heure ensemble
+  },
+  display: {
+    dateInput: 'D',                // Affichage dans le champ date
+    timeInput: 'HH:mm',           // Affichage dans le champ heure
+    datetimeInput: 'D HH:mm',     // Affichage dans le champ datetime
+    monthYearLabel: 'LLL yyyy',   // Header du calendrier (ex: Feb 2026)
+    dateA11yLabel: 'DD',          // Label accessibilité date
+    monthYearA11yLabel: 'LLLL yyyy', // Label accessibilité mois/année
+    timeOptionLabel: 'HH:mm',     // Options dans la liste du timepicker
+  },
+};
+
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }), 
+    provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient(withInterceptorsFromDi()), 
+    provideHttpClient(withInterceptorsFromDi()),
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpRequestInterceptor,
       multi: true,
-    },    
+    },
     importProvidersFrom([TranslateModule.forRoot({
       loader: {
-        provide: TranslateLoader, 
-        useFactory: httpLoaderFactory, 
+        provide: TranslateLoader,
+        useFactory: httpLoaderFactory,
         deps: [HttpClient],
       },
-    })])
+    })]),
+    {
+      provide: DateAdapter,
+      useClass: LuxonDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_LUXON_DATE_ADAPTER_OPTIONS]
+    },
+    { provide: MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS },
+    { provide: MAT_LUXON_DATE_ADAPTER_OPTIONS, useValue: { useUtc: false } },
   ],
 };
