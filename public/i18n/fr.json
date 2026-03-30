@@ -107,6 +107,8 @@
         "sessionDateTime": "Quand grimper?",
         "sessionDate": "Date de la session",
         "sessionTime": "Heure de début",
+        "place":"Lieu",
+        "searchTitle": "Titre",
       "title": {
         "addSearch": "Crée une nouvelle recherche",
         "editSearch": "Modifie ta recherche"

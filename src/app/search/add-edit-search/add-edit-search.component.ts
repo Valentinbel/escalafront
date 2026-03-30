@@ -12,10 +12,10 @@ import {MatFormField, MatInputModule, MatLabel} from "@angular/material/input";
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
 import {DateAdapter} from "@angular/material/core";
 import {MatFormFieldModule} from "@angular/material/form-field";
-import {LocaleService} from "../../shared/locale.service";
 import {SearchService} from "../search.service";
 import {Subject} from "rxjs";
 import {LanguagesStorageService} from "../../navbar/languages/languages-storage.service";
+import {MatchService} from "../match/match.service";
 
 @Component({
   selector: 'app-add-edit-search',
@@ -45,9 +45,9 @@ export class AddEditSearchComponent implements OnInit, OnDestroy {
   searchService = inject(SearchService);
   snackBarService = inject(SnackBarService);
   translateService = inject(TranslateService);
-  localeService = inject(LocaleService);
   dateAdapter = inject(DateAdapter);
   languageStorageService = inject(LanguagesStorageService);
+  matchService = inject(MatchService);
 
   searchForm: FormGroup = new FormGroup({
     datePicker: new FormControl(''),
@@ -55,7 +55,7 @@ export class AddEditSearchComponent implements OnInit, OnDestroy {
     climbLevelMin: new FormControl(''),
     climbLevelMax: new FormControl(''),
     placeId: new FormControl(''),
-    comment: new FormControl(''), // TODO title (?)
+    searchTitle: new FormControl(''),
   });
 
   search: Search;
@@ -91,7 +91,7 @@ export class AddEditSearchComponent implements OnInit, OnDestroy {
       climbLevelMin: [],
       climbLevelMax: [],
       placeId: [],
-      comment: [],
+      searchTitle: [],
     });
   }
 
@@ -103,7 +103,6 @@ export class AddEditSearchComponent implements OnInit, OnDestroy {
     this.submitted = true;
 
     this.searchForm.invalid ? this.showErrors() : this.saveSearch();
-    // console.log('Search: ' + JSON.stringify(this.searchForm.value, null, 2));
   }
 
   private showErrors(): void {
@@ -127,17 +126,19 @@ export class AddEditSearchComponent implements OnInit, OnDestroy {
       timeSlots: dates,
       climbLevels: [{id:6,codeFr:'6A'}, {id:10,codeFr:'6C'}],//this.field['climbLevels'].value,////////
       placeId: this.field['placeId'].value,
-      comment: this.field['comment'].value,
+      title: this.field['searchTitle'].value,
       profileId: this.profileId,
     };
     console.log("search to Save: ", JSON.stringify(this.search)) // /!\ JSON.stringify() will put Date in UTC (should be a wrong value)
 
     this.searchService.createSearch(this.search).subscribe({
-      next: (search) => {
-        console.log("retour du back saveSearch: " + JSON.stringify(search)); // /!\ JSON.stringify() will put Date in UTC (should be a wrong value)
+      next: (newsearch) => {
+        console.log("retour du back saveSearch: " + JSON.stringify(newsearch)); // /!\ JSON.stringify() will put Date in UTC (should be a wrong value)
+        this.createMatchIfExist(newsearch.id);// TODO Passer en chained
         this.router.navigate(['../searches'], {relativeTo: this.route});
       },
       error: (err) => {
+        console.log("Error trying to save Search: ", err)
         this.snackBarService.add(err.error.message, 8000, 'error');
       }
       });
@@ -151,6 +152,14 @@ export class AddEditSearchComponent implements OnInit, OnDestroy {
     console.log("combinedDate ", combinedDate);
 
     return combinedDate;
+  }
+
+  createMatchIfExist(searchId: number) {
+    this.matchService.createMatchBySearchId(searchId).subscribe({
+      next: (match) => {
+        console.log(match);
+      }
+    });
   }
 
   cancelSearch(): void {

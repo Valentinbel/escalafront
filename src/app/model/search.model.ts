@@ -5,7 +5,7 @@ export class Search {
     public timeSlots: Date[],
     public climbLevels: ClimbLevel[],
     public placeId: number,
-    public comment: string,
+    public title: string,
     public profileId: number,
     public id?: number
   ) {

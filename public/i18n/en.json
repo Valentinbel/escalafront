@@ -107,6 +107,8 @@
         "sessionDateTime": "When do you want to climb?",
         "sessionDate": "Session date",
         "sessionTime": "Begin time",
+        "place":"Place",
+        "searchTitle": "Title",
       "title": {
         "addSearch": "Create a new search",
         "editSearch": "Edit your search"
