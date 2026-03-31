@@ -137,7 +137,7 @@ export class AddEditProfileComponent implements OnInit{
     });
   }
 
-  displayErrorSnackBar(errorMessage: string): void {
+  private displayErrorSnackBar(errorMessage: string): void {
     console.log(errorMessage);
     let messageLogin = this.translateService.instant('connect.login.error.loginFailed');
     let messageSave = this.translateService.instant('profile.edit.saveError');

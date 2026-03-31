@@ -61,7 +61,7 @@ export class AppComponent implements OnInit {
         error: (err) => {
           let message = this.translate.instant('avatar.getError');
           this.snackBarService.add(message, 8000, 'error');
-          console.log("Erreur les boys" + message + err);
+          console.log("Error retreiving avatarId: " + message + err);
         }
     });
   }

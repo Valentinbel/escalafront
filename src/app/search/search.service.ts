@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import {Search} from "../model/search.model";
 
 @Injectable({
     providedIn: 'root',
@@ -11,8 +12,8 @@ export class SearchService {
 
     constructor(private readonly httpClient: HttpClient) { }
 
-    getAllSearches() {
-        return this.httpClient.get(this.urlSearches);
+    getAllSearches(): Observable<Search[]> {
+        return this.httpClient.get<Search[]>(this.urlSearches);
     }
 
     createSearch(search: any): Observable<any> { // TODO Search model
