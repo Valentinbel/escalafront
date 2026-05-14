@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Router, RouterLink, RouterModule} from '@angular/router';
+import {Router, RouterModule} from '@angular/router';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {ProfileStorageService} from "../profile/profile-storage.service";
 import {AuthStorageService} from "../auth/auth-storage.service";
@@ -16,7 +16,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 	selector: 'app-search',
 	imports: [RouterModule, TranslateModule,
     MatTableModule, MatSortModule, MatPaginatorModule,
-    MatInputModule, MatFormFieldModule, RouterLink],
+    MatInputModule, MatFormFieldModule],
 	templateUrl: './search.component.html',
 	styleUrl: './search.component.css'
 })
